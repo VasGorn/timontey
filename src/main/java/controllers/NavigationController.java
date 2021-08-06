@@ -30,7 +30,7 @@ public class NavigationController {
 		list.add(navLink4);
 		list.add(navLink5);
 
-        ModelAndView model = new ModelAndView("index");
+        ModelAndView model = new ModelAndView("main");
 		model.addObject("navList", list);
 
         return model;
