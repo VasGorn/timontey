@@ -64,6 +64,6 @@
 
 </head>
 <body>
-	<h2>Hello World!</h2>
+	<jsp:include page="top-menu.jsp" flush="true" />
 </body>
 </html>
