@@ -78,7 +78,8 @@
 		<script id="new_script" type="text/javascript"></script>
 	</div>
 
-
+	<script src="static/js/main.js">
+	</script>
 
 </body>
 </html>
