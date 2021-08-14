@@ -74,5 +74,11 @@
 		</div>
 	</div>
 
+	<div id="div_script">
+		<script id="new_script" type="text/javascript"></script>
+	</div>
+
+
+
 </body>
 </html>
