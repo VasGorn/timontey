@@ -23,4 +23,13 @@
 	<p>"${message}"</p>
 </c:if>
 
-
+<table id="table" data-toggle="table" data-height="600"
+	data-click-to-select="true" data-search="true">
+	<thead>
+		<tr>
+			<th data-field="state" data-checkbox="true"></th>
+			<th data-field="id">ID</th>
+			<th data-field="name">NAME</th>
+		</tr>
+	</thead>
+</table>
