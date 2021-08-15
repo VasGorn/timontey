@@ -19,3 +19,8 @@
 	</fieldset>
 </form>
 
+<c:if test="${not empty message}">
+	<p>"${message}"</p>
+</c:if>
+
+
