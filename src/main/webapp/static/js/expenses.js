@@ -3,3 +3,4 @@ var btnUpdate = document.getElementById("update");
 var btnDelete = document.getElementById("delete");
 var textName = document.getElementById("name");
 
+var URL_REST = "/timontey/rest/expenses/";
