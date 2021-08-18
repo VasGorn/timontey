@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import domain.Expenses;
+import service.ExpensesService;
 
 @RestController
 @RequestMapping(path = "/rest/expenses", produces = "application/json")
