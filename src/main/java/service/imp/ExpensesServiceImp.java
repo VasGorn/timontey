@@ -3,39 +3,50 @@ package service.imp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import domain.Expenses;
 import service.ExpensesService;
 
+@Service
+@Transactional
 public class ExpensesServiceImp implements ExpensesService {
+	@Autowired
+	private ExpensesRepository expensesRepository;
 
 	@Override
 	public List<Expenses> getAll() {
-		// TODO Auto-generated method stub
+		return expensesRepository.getAll();
 		return null;
 	}
 
 	@Override
 	public Expenses save(Expenses expenses) {
-		// TODO Auto-generated method stub
-		return null;
+		long id = expensesRepository.save(expenses);
+		expenses.setId(id);
+		return expenses;
 	}
 
 	@Override
 	public Expenses update(Expenses expenses) {
-		// TODO Auto-generated method stub
-		return null;
+		expensesRepository.update(expenses);
+		return expenses;
 	}
 
 	@Override
 	public Optional<Expenses> getExpensesById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return expensesRepository.findById(id);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		try {
+			expensesRepository.delete(id);
+		} catch (EmptyResultDataAccessException ex) {
+			System.out.println("Delete failing" + ex.getMessage());
+		}
 	}
 
 }
