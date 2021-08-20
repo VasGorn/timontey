@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import domain.Expenses;
+import repository.ExpensesRepository;
 import service.ExpensesService;
 
 @Service
@@ -19,7 +20,6 @@ public class ExpensesServiceImp implements ExpensesService {
 	@Override
 	public List<Expenses> getAll() {
 		return expensesRepository.getAll();
-		return null;
 	}
 
 	@Override
