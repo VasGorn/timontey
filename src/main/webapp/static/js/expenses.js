@@ -8,3 +8,6 @@ var URL_REST = "/timontey/rest/expenses/";
 var $table = $('#table');
 var checkedRows = [];
 
+btnUpdate.disabled = true;
+btnDelete.disabled = true;
+
