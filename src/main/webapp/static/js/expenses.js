@@ -11,3 +11,15 @@ var checkedRows = [];
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
+getDataForTable();
+
+function getDataForTable() {
+	$.ajax({
+		type: "GET",
+		url: URL_REST + "all",
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+		}
+	});
+}
