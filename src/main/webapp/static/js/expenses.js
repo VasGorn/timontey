@@ -20,6 +20,11 @@ function getDataForTable() {
 		data: null,
 		success: function(resp) {
 			console.log(resp);
+			setDataToTable(resp);
 		}
 	});
+}
+
+function setDataToTable(data) {
+	$table.bootstrapTable({ data: data })
 }
