@@ -28,3 +28,14 @@ function getDataForTable() {
 function setDataToTable(data) {
 	$table.bootstrapTable({ data: data })
 }
+
+function isInTable(name) {
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	tableData.forEach((element, index) => {
+		if (element.name === name) {
+			isExist = true;
+		}
+	});
+	return isExist;
+}
