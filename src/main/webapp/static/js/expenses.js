@@ -11,7 +11,23 @@ var checkedRows = [];
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 getDataForTable();
+
+function btnAddClicked() {
+	let stringName = textName.value;
+	let isExist = isInTable(stringName);
+
+	if (isExist) {
+		alert("This value already exist!");
+		return;
+	}
+
+	let jsonData = getFormData($('#expenses_form'));
+	console.log(jsonData);
+	postDataToServer(jsonData);
+}
 
 function postDataToServer(json) {
 	$.ajax({
