@@ -13,6 +13,24 @@ btnDelete.disabled = true;
 
 getDataForTable();
 
+function postDataToServer(json) {
+	$.ajax({
+		type: "POST",
+		url: URL_REST,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(json),
+		success: function(resp) {
+			console.log(resp);
+
+			let rows = [];
+			rows.push(resp);
+			$table.bootstrapTable('append', rows);
+			$table.bootstrapTable('scrollTo', 'bottom');
+		}
+	});
+}
+
 function getDataForTable() {
 	$.ajax({
 		type: "GET",
