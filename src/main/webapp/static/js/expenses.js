@@ -74,6 +74,19 @@ function isInTable(name) {
 	return isExist;
 }
 
+function findIndexInTable(row) {
+	let tableData = $table.bootstrapTable('getData');
+	let index = 0;
+
+	for (let i = 0; i < tableData.length; ++i) {
+		if (row.id === tableData[i].id) {
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
+
 function getFormData($form) {
 	var unindexed_array = $form.serializeArray();
 	var indexed_array = {};
