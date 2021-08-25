@@ -12,6 +12,7 @@ btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 getDataForTable();
 
@@ -27,6 +28,22 @@ function btnAddClicked() {
 	let jsonData = getFormData($('#expenses_form'));
 	console.log(jsonData);
 	postDataToServer(jsonData);
+}
+
+function btnUpdateClicked() {
+	let newName = textName.value;
+	let item = checkedRows[0];
+	let index = findIndexInTable(item);
+
+	let isExist = isInTable(newName);
+	if (isExist) {
+		alert("This value already exist!");
+		return;
+	}
+
+	item.name = newName;
+
+	patchDataToServer(item, index)
 }
 
 function postDataToServer(json) {
