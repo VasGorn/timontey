@@ -47,6 +47,24 @@ function postDataToServer(json) {
 	});
 }
 
+function patchDataToServer(json, index) {
+	$.ajax({
+		type: "PATCH",
+		url: URL_REST + json.id,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(json),
+		success: function(resp) {
+			console.log(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: resp
+			});
+		}
+	});
+}
+
 function getDataForTable() {
 	$.ajax({
 		type: "GET",
