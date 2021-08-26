@@ -132,3 +132,23 @@ function getFormData($form) {
 
 	return indexed_array;
 }
+
+function setButtonDisabled(len) {
+	if (len < 1) {
+		btnAdd.disabled = false;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (len === 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = false;
+		btnDelete.disabled = false;
+		return;
+	}
+	if (len > 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = false;
+	}
+}
