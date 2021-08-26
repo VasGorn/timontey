@@ -133,6 +133,24 @@ function getFormData($form) {
 	return indexed_array;
 }
 
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push({ id: row.id, name: row.name });
+	setButtonDisabled(checkedRows.length);
+	textName.value = row.name;
+	console.log(checkedRows);
+});
+
+$table.on('uncheck.bs.table', function(e, row) {
+	checkedRows.forEach((element, index) => {
+		if (element.id === row.id) {
+			checkedRows.splice(index, 1);
+		}
+	});
+	setButtonDisabled(checkedRows.length);
+	textName.value = "";
+	console.log(checkedRows);
+});
+
 function setButtonDisabled(len) {
 	if (len < 1) {
 		btnAdd.disabled = false;
