@@ -13,6 +13,7 @@ btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 getDataForTable();
 
@@ -44,6 +45,16 @@ function btnUpdateClicked() {
 	item.name = newName;
 
 	patchDataToServer(item, index)
+}
+
+function btnDeleteClicked() {
+	let ids = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id
+	});
+
+	for (let i = 0; i < ids.length; ++i) {
+		console.log(ids[i]);
+	}
 }
 
 function postDataToServer(json) {
