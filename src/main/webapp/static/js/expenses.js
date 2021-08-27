@@ -54,6 +54,7 @@ function btnDeleteClicked() {
 
 	for (let i = 0; i < ids.length; ++i) {
 		console.log(ids[i]);
+		deleteDataOnServer(ids[i]);
 	}
 }
 
@@ -89,6 +90,26 @@ function patchDataToServer(json, index) {
 				index: index,
 				row: resp
 			});
+		}
+	});
+}
+
+function deleteDataOnServer(id) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST + id,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(id);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			checkedRows=[];
+			setButtonDisabled(checkedRows.length);
 		}
 	});
 }
