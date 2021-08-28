@@ -56,6 +56,7 @@ function btnDeleteClicked() {
 		console.log(ids[i]);
 		deleteDataOnServer(ids[i]);
 	}
+	textName.value = "";	
 }
 
 function postDataToServer(json) {
