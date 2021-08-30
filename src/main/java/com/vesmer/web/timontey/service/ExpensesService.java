@@ -1,9 +1,9 @@
-package service;
+package com.vesmer.web.timontey.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import domain.Expenses;
+import com.vesmer.web.timontey.domain.Expenses;
 
 public interface ExpensesService {
 

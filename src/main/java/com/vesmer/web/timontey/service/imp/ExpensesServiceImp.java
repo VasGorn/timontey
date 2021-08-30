@@ -1,4 +1,4 @@
-package service.imp;
+package com.vesmer.web.timontey.service.imp;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Expenses;
-import repository.ExpensesRepository;
-import service.ExpensesService;
+import com.vesmer.web.timontey.domain.Expenses;
+import com.vesmer.web.timontey.repository.ExpensesRepository;
+import com.vesmer.web.timontey.service.ExpensesService;
 
 @Service
 @Transactional

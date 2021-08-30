@@ -1,4 +1,4 @@
-package repository.imp;
+package com.vesmer.web.timontey.repository.imp;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -13,9 +13,9 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import domain.Expenses;
-import repository.ExpensesRepository;
-import rowmapper.ExpensesRowMapper;
+import com.vesmer.web.timontey.domain.Expenses;
+import com.vesmer.web.timontey.repository.ExpensesRepository;
+import com.vesmer.web.timontey.rowmapper.ExpensesRowMapper;
 
 @Repository
 public class ExpensesJdbcRepo implements ExpensesRepository {

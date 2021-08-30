@@ -13,7 +13,9 @@
 
 	<import resource="classpath:spring-config.xml" />
 
-    <context:component-scan base-package="controllers, service.imp, repository.imp" />  
+    <context:component-scan base-package="com.vesmer.web.timontey.controllers, 
+    									  com.vesmer.web.timontey.service.imp, 
+    									  com.vesmer.web.timontey.repository.imp" />  
 		
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

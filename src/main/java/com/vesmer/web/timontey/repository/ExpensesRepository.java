@@ -1,9 +1,9 @@
-package repository;
+package com.vesmer.web.timontey.repository;
 
 import java.util.List;
 import java.util.Optional;
 
-import domain.Expenses;
+import com.vesmer.web.timontey.domain.Expenses;
 
 public interface ExpensesRepository {
 

@@ -1,4 +1,4 @@
-package controllers;
+package com.vesmer.web.timontey.controllers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Const;
-import domain.NavigationLink;
+import com.vesmer.web.timontey.domain.Const;
+import com.vesmer.web.timontey.domain.NavigationLink;
 
 @Controller
 public class NavigationController {

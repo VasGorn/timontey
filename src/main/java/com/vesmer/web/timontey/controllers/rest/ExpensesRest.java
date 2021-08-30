@@ -1,4 +1,4 @@
-package controllers.rest;
+package com.vesmer.web.timontey.controllers.rest;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import domain.Expenses;
-import service.ExpensesService;
+import com.vesmer.web.timontey.domain.Expenses;
+import com.vesmer.web.timontey.service.ExpensesService;
 
 @RestController
 @RequestMapping(path = "/rest/expenses", produces = "application/json")

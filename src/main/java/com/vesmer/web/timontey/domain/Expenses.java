@@ -1,4 +1,4 @@
-package domain;
+package com.vesmer.web.timontey.domain;
 
 public class Expenses {
 	private long id;
