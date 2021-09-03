@@ -1,5 +1,5 @@
 package com.vesmer.web.timontey.service;
 
-public interface staffService {
+public interface StaffService {
 
 }
