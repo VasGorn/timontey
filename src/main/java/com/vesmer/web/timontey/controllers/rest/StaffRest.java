@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vesmer.web.timontey.domain.Employee;
+import com.vesmer.web.timontey.service.StaffService;
 
 @RestController
 @RequestMapping(path = "/rest/staff", produces = "application/json")
