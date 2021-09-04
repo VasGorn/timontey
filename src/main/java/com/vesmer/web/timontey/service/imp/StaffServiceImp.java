@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,27 +24,30 @@ public class StaffServiceImp implements StaffService {
 	}
 
 	@Override
-	public Employee save(Employee emloyee) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee save(Employee employee) {
+		long id = staffRepository.save(employee);
+		employee.setId(id);
+		return employee;
 	}
 
 	@Override
 	public Employee update(Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		staffRepository.update(employee);
+		return employee;
 	}
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-
+		try {
+			staffRepository.delete(id);
+		} catch (EmptyResultDataAccessException ex) {
+			System.out.println("Delete failing: " + ex.getMessage());
+		}
 	}
 
 	@Override
 	public Optional<Employee> getEmployeeById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return staffRepository.findById(id);
 	}
 
 }
