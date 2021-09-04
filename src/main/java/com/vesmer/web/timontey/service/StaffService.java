@@ -9,7 +9,7 @@ public interface StaffService {
 
 	List<Employee> getAll();
 
-	Employee save(Employee emloyee);
+	Employee save(Employee employee);
 
 	Employee update(Employee employee);
 
