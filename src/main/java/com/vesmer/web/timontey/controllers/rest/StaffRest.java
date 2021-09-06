@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +36,21 @@ public class StaffRest {
 	
 	@PutMapping("/{id}")
 	public Employee putEmployee(@RequestBody Employee employee) {
+		return staffService.update(employee);
+	}
+	
+	@PatchMapping(path = "/{id}", consumes = "application/json")
+	public Employee patchEmployee(@PathVariable("id") Long id, @RequestBody Employee patch){
+		Employee employee = staffService.getEmployeeById(id).get();
+		if(patch.getLastName() != null) {
+			employee.setLastName(patch.getLastName());
+		}
+		if(patch.getFirstName() != null) {
+			employee.setFirstName(patch.getFirstName());
+		}
+		if(patch.getMiddleName() != null) {
+			employee.setMiddleName(patch.getMiddleName());
+		}
 		return staffService.update(employee);
 	}
 
