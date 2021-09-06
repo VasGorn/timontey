@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,6 +30,11 @@ public class StaffRest {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Employee postEmployee(@RequestBody Employee employee) {
 		return staffService.save(employee);
+	}
+	
+	@PutMapping("/{id}")
+	public Employee putEmployee(@RequestBody Employee employee) {
+		return staffService.update(employee);
 	}
 
 }
