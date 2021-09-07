@@ -10,3 +10,21 @@ var URL_REST = "/timontey/rest/staff/";
 
 var $table = $('#table');
 var checkedRows = [];
+
+getDataForTable();
+
+function getDataForTable() {
+	$.ajax({
+		type: "GET",
+		url: URL_REST + "all",
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			setDataToTable(resp);
+		}
+	});
+}
+
+function setDataToTable(data) {
+	$table.bootstrapTable({ data: data })
+}
