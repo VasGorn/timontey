@@ -11,6 +11,9 @@ var URL_REST = "/timontey/rest/staff/";
 var $table = $('#table');
 var checkedRows = [];
 
+btnUpdate.disabled = true;
+btnDelete.disabled = true;
+
 getDataForTable();
 
 function getDataForTable() {
