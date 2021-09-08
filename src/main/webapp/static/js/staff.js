@@ -55,3 +55,9 @@ function getFormData($form) {
 
 	return indexed_array;
 }
+
+function clearTextFields(){
+	txtLastName.value = "";
+	txtFirstName.value = "";
+	txtMiddleName.value = "";
+}
