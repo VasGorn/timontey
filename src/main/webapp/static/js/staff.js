@@ -31,3 +31,16 @@ function getDataForTable() {
 function setDataToTable(data) {
 	$table.bootstrapTable({ data: data })
 }
+
+function isInTable(lastName, firstName, middleName) {
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	tableData.forEach((element, index) => {
+		if (element.lastName === lastName &&
+			element.firstName === firstName &&
+			element.middleName === middleName ) {
+			isExist = true;
+		}
+	});
+	return isExist;
+}
