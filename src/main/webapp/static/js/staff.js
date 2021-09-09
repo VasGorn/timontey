@@ -18,6 +18,22 @@ btnDelete.disabled = true;
 
 getDataForTable();
 
+function btnAddClicked() {
+	let lastName = txtLastName.value;
+	let firstName = txtFirstName.value;
+	let middleName = txtMiddleName.value;
+	
+	let isExist = isInTable(lastName, firstName, middleName);
+	if (isExist) {
+		alert("This value already exist!");
+		return;
+	}
+
+	let employee = getFormData($('#staff_form'));
+	console.log(employee);
+	postDataToServer(employee);
+}
+
 function getDataForTable() {
 	$.ajax({
 		type: "GET",
