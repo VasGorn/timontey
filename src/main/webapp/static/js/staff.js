@@ -100,6 +100,27 @@ function clearTextFields(){
 	txtMiddleName.value = "";
 }
 
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push({ id: row.id, lastName: row.lastName, firstName: row.firstName,
+					middleName: row.middleName});
+	setButtonDisabled(checkedRows.length);
+	txtLastName.value = row.lastName;
+	txtFirstName.value = row.firstName;
+	txtMiddleName.value = row.middleName;
+	console.log(checkedRows);
+});
+
+$table.on('uncheck.bs.table', function(e, row) {
+	checkedRows.forEach((element, index) => {
+		if (element.id === row.id) {
+			checkedRows.splice(index, 1);
+		}
+	});
+	setButtonDisabled(checkedRows.length);
+	clearTextFields();
+	console.log(checkedRows);
+});
+
 function setButtonDisabled(len) {
 	if (len < 1) {
 		btnAdd.disabled = false;
