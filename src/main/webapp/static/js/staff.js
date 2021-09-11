@@ -35,6 +35,27 @@ function btnAddClicked() {
 	postDataToServer(employee);
 }
 
+function btnUpdateClicked() {
+	let newLastName = txtLastName.value;
+	let newFirstName = txtFirstName.value;
+	let newMiddleName = txtMiddleName.value;
+	
+	let item = checkedRows[0];
+	let index = findIndexInTable(item);
+
+	let isExist = isInTable(newLastName, newFirstName, newMiddleName);
+	if (isExist) {
+		alert("This value already exist!");
+		return;
+	}
+
+	item.lastName = newLastName;
+	item.firstName = newFirstName;
+	item.middleName = newMiddleName;
+
+	patchDataToServer(item, index);
+}
+
 function postDataToServer(employee) {
 	$.ajax({
 		type: "POST",
