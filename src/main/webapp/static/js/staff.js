@@ -76,6 +76,24 @@ function postDataToServer(employee) {
 	});
 }
 
+function patchDataToServer(employee, index) {
+	$.ajax({
+		type: "PATCH",
+		url: URL_REST + employee.id,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(employee),
+		success: function(resp) {
+			console.log(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: resp
+			});
+		}
+	});
+}
+
 function getDataForTable() {
 	$.ajax({
 		type: "GET",
