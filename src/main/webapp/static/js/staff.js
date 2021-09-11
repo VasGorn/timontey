@@ -12,6 +12,7 @@ var $table = $('#table');
 var checkedRows = [];
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
