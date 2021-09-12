@@ -108,6 +108,31 @@ function patchDataToServer(employee, index) {
 	});
 }
 
+function deleteDataOnServer(id) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST + id,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(id);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if(id === checkedRows[i].id){
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			setButtonDisabled(checkedRows.length);
+		}
+	});
+}
+
 function getDataForTable() {
 	$.ajax({
 		type: "GET",
