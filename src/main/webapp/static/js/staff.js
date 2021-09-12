@@ -13,6 +13,7 @@ var checkedRows = [];
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
