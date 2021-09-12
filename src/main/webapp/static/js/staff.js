@@ -57,6 +57,19 @@ function btnUpdateClicked() {
 	patchDataToServer(item, index);
 }
 
+function btnDeleteClicked() {
+	let ids = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	clearTextFields();
+
+	for (let i = 0; i < ids.length; ++i) {
+		console.log(ids[i]);
+		deleteDataOnServer(ids[i]);
+	}
+}
+
 function postDataToServer(employee) {
 	$.ajax({
 		type: "POST",
