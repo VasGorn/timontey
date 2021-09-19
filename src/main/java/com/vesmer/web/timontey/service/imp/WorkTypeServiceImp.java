@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vesmer.web.timontey.domain.WorkType;
+import com.vesmer.web.timontey.repository.WorkTypeRepository;
 import com.vesmer.web.timontey.service.WorkTypeService;
 
 @Service
