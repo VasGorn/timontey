@@ -15,4 +15,9 @@ public class WorkTypeServiceImp implements WorkTypeService {
 	@Autowired
 	private WorkTypeRepository workTypeRepository;
 
+	@Override
+	public List<WorkType> getWorkTypesByRole(long roleId) {
+		return workTypeRepository.getWorkTypesByRole(roleId);
+	}
+
 }
