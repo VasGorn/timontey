@@ -42,4 +42,13 @@ function setDataToSelectRole(){
 	});
 }
 
-
+function setWorkTypesToRole(role){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_WORK + "/role/" + role.id,
+		data: null,
+		success: function(resp) {
+			role.workTypes = resp;
+		}
+	});
+}
