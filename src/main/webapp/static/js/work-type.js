@@ -14,3 +14,7 @@ var $table = $('#table');
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+btnAdd.disabled = true;
+btnUpdate.disabled = true;
+btnDelete.disabled = true;
