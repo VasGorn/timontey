@@ -12,3 +12,5 @@ var ROLES = [];
 
 var $table = $('#table');
 var checkedRows = [];
+
+$table.bootstrapTable({ data: [] });
