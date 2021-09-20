@@ -18,3 +18,28 @@ $table.bootstrapTable({ data: [] });
 btnAdd.disabled = true;
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
+
+setDataToSelectRole();
+
+function setDataToSelectRole(){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_ROLE + "all",
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			ROLES = resp;
+			
+			for(let i = 0; i < ROLES.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = ROLES[i].id;
+				opt.innerHTML = ROLES[i].roleName;
+				roleSelect.appendChild(opt);
+				
+				setWorkTypesToRole(ROLES[i]);
+			}
+		}
+	});
+}
+
+
