@@ -5,8 +5,8 @@ var btnDelete = document.getElementById("delete");
 var roleSelect = document.getElementById("role_select");
 var txtWorkType = document.getElementById("work_type");
 
-var URL_REST_ROLE = "/timontey1/rest/role/";
-var URL_REST_WORK = "/timontey1/rest/work-type/";
+var URL_REST_ROLE = "/timontey/rest/role";
+var URL_REST_WORK = "/timontey/rest/work-type";
 
 var ROLES = [];
 
@@ -24,7 +24,7 @@ setDataToSelectRole();
 function setDataToSelectRole(){
 	$.ajax({
 		type: "GET",
-		url: URL_REST_ROLE + "all",
+		url: URL_REST_ROLE + "/all",
 		data: null,
 		success: function(resp) {
 			console.log(resp);
