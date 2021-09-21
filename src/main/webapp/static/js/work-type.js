@@ -21,6 +21,25 @@ btnDelete.disabled = true;
 
 setDataToSelectRole();
 
+roleSelect.addEventListener("change", (event) => {
+	let roleId = parseInt(event.target.value);
+	let data = [];
+		
+	btnAdd.disabled = false;
+	btnUpdate.disabled = true;
+	btnDelete.disabled = true;
+
+	for(let i = 0; i < ROLES.length; ++i){
+		if(roleId === ROLES[i].id){
+			data = ROLES[i].workTypes;
+			break;
+		}
+	}
+	$table.bootstrapTable('load', data);
+	checkedRows = [];
+	txtWorkType.value = "";
+});
+
 function setDataToSelectRole(){
 	$.ajax({
 		type: "GET",
