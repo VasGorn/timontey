@@ -19,7 +19,30 @@ btnAdd.disabled = true;
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 setDataToSelectRole();
+
+function btnAddClicked() {
+	let stringName = txtWorkType.value.trim();
+	let isExist = isInTable(stringName);
+	let roleId = parseInt(roleSelect.value);
+
+	if (isExist) {
+		alert("This value already exist!");
+		return;
+	}
+	
+	if (stringName.length < 3){
+		alert("Name must be larger then 3 characters!");
+		return;
+	}
+
+	let workType = new Object();
+	workType.workTypeName = stringName;
+	
+	postDataToServer(workType, roleId);
+}
 
 roleSelect.addEventListener("change", (event) => {
 	let roleId = parseInt(event.target.value);
