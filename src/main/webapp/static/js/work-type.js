@@ -23,7 +23,7 @@ setDataToSelectRole();
 
 roleSelect.addEventListener("change", (event) => {
 	let roleId = parseInt(event.target.value);
-	let data = [];
+	let workTypes = [];
 		
 	btnAdd.disabled = false;
 	btnUpdate.disabled = true;
@@ -31,11 +31,11 @@ roleSelect.addEventListener("change", (event) => {
 
 	for(let i = 0; i < ROLES.length; ++i){
 		if(roleId === ROLES[i].id){
-			data = ROLES[i].workTypes;
+			workTypes = ROLES[i].workTypes;
 			break;
 		}
 	}
-	$table.bootstrapTable('load', data);
+	$table.bootstrapTable('load', workTypes);
 	checkedRows = [];
 	txtWorkType.value = "";
 });
