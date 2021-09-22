@@ -8,4 +8,6 @@ public interface WorkTypeService {
 
 	List<WorkType> getWorkTypesByRole(long roleId);
 
+	WorkType save(WorkType workType, long roleId);
+
 }
