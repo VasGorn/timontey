@@ -63,6 +63,30 @@ roleSelect.addEventListener("change", (event) => {
 	txtWorkType.value = "";
 });
 
+function postDataToServer(workType, roleId) {
+	$.ajax({
+		type: "POST",
+		url: URL_REST_WORK + "/role/" + roleId,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(workType),
+		success: function(resp) {
+			let data = [];
+			
+			for(let i = 0; i < ROLES.length; ++i){
+				if(roleId === ROLES[i].id){
+					ROLES[i].workTypes.push(resp);
+					data = ROLES[i].workTypes;
+					break;
+				}
+			}
+			$table.bootstrapTable('load', data);
+			$table.bootstrapTable('scrollTo', 'bottom');
+			txtWorkType.value = "";
+		}
+	});
+}
+
 function setDataToSelectRole(){
 	$.ajax({
 		type: "GET",
