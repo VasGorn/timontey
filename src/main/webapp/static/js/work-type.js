@@ -94,3 +94,14 @@ function setWorkTypesToRole(role){
 		}
 	});
 }
+
+function isInTable(name) {
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	tableData.forEach((element, index) => {
+		if (element.workTypeName === name) {
+			isExist = true;
+		}
+	});
+	return isExist;
+}
