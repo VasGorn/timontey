@@ -8,4 +8,6 @@ public interface WorkTypeRepository {
 
 	List<WorkType> getWorkTypesByRole(long roleId);
 
+	long save(long roleId, WorkType workType);
+
 }
