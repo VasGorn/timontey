@@ -27,12 +27,21 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 																+ "  AND r.id = rw.role_id"
 																+ "  AND r.id = ?;";
 	private static final String INSERT_SQL						= "INSERT INTO work_types (work_name) VALUES (?);";
+	private static final String INSERT_LINK_TO_ROLE_SQL			= "INSERT INTO role_worktype (worktype_id, role_id) "
+																+ "VALUES (?, ?);";
 
 	@Override
 	public List<WorkType> getWorkTypesByRole(long roleId) {
 		List<WorkType> list = (List<WorkType>) jdbcTemplate.query(SELECT_WORKTYPE_BY_ROLE_ID_SQL,
 				new WorkTypeRowMapper(), roleId);
 		return list;
+	}
+	
+	@Override
+	public long save(long roleId, WorkType workType) {
+		long workTypeId = insertWorkType(workType);
+		jdbcTemplate.update(INSERT_LINK_TO_ROLE_SQL, workTypeId, roleId);
+		return workTypeId;
 	}
 	
 	private long insertWorkType(WorkType workType) {
