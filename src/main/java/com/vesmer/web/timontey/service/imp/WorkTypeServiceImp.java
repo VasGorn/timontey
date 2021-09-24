@@ -21,4 +21,11 @@ public class WorkTypeServiceImp implements WorkTypeService {
 		return workTypeRepository.getWorkTypesByRole(roleId);
 	}
 
+	@Override
+	public WorkType save(WorkType workType, long roleId) {
+		long id = workTypeRepository.save(roleId, workType);
+		workType.setId(id);
+		return workType;
+	}
+
 }
