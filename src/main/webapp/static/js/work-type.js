@@ -20,6 +20,7 @@ btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setDataToSelectRole();
 
@@ -42,6 +43,18 @@ function btnAddClicked() {
 	workType.workTypeName = stringName;
 	
 	postDataToServer(workType, roleId);
+}
+
+function btnDeleteClicked() {
+	let roleId = parseInt(roleSelect.value);
+	let workTypeIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id
+	});
+
+	for (let i = 0; i < workTypeIds.length; ++i) {
+		console.log(workTypeIds[i]);
+		deleteDataOnServer(roleId, workTypeIds[i]);
+	}
 }
 
 roleSelect.addEventListener("change", (event) => {
