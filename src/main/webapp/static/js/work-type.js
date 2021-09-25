@@ -100,6 +100,27 @@ function postDataToServer(workType, roleId) {
 	});
 }
 
+function deleteDataOnServer(roleId, workTypeId) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_WORK + workTypeId + "/role/" + roleId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(workTypeId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			checkedRows=[];
+			txtWorkType.value = "";
+			setButtonDisabled(checkedRows.length);
+		}
+	});
+}
+
 function setDataToSelectRole(){
 	$.ajax({
 		type: "GET",
