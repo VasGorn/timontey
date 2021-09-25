@@ -10,4 +10,6 @@ public interface WorkTypeService {
 
 	WorkType save(WorkType workType, long roleId);
 
+	void delete(Long roleId, Long workTypeId);
+
 }
