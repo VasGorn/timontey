@@ -33,6 +33,16 @@ public class WorkTypeRest {
 		return workTypeService.save(workType, roleId);
 	}
 	
+	@PatchMapping(path = "/{workTypeId}/role/{roleId}", consumes = "application/json")
+	public WorkType patchWorkType(@PathVariable("workTypeId") Long workTypeId, @PathVariable("roleId") Long roleId,
+			@RequestBody WorkType patch){
+		WorkType workType = workTypeService.getWorkTypeById(workTypeId).get();
+		if(patch.getWorkTypeName() != null) {
+			workType.setWorkTypeName(patch.getWorkTypeName());
+		}
+		return workTypeService.update(workType);
+	}
+	
 	@DeleteMapping("/{workTypeId}/role/{roleId}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void deleteWorkType(@PathVariable("workTypeId") Long workTypeId, @PathVariable("roleId") Long roleId) {
