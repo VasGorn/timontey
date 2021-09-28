@@ -28,4 +28,9 @@ public class WorkTypeServiceImp implements WorkTypeService {
 		return workType;
 	}
 
+	@Override
+	public void delete(Long roleId, Long workTypeId) {
+		workTypeRepository.delete(roleId, workTypeId);
+	}
+
 }
