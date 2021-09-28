@@ -29,7 +29,10 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 	private static final String INSERT_SQL						= "INSERT INTO work_types (work_name) VALUES (?);";
 	private static final String INSERT_LINK_TO_ROLE_SQL			= "INSERT INTO role_worktype (worktype_id, role_id) "
 																+ "VALUES (?, ?);";
-
+	private static final String DELETE_SQL						= "DELETE FROM work_types WHERE id = ?;";
+	private static final String DELETE_LINK_FROM_ROLE_SQL		= "DELETE FROM role_worktype WHERE worktype_id = ? "
+																+ "AND role_id = ?;";
+	
 	@Override
 	public List<WorkType> getWorkTypesByRole(long roleId) {
 		List<WorkType> list = (List<WorkType>) jdbcTemplate.query(SELECT_WORKTYPE_BY_ROLE_ID_SQL,
@@ -63,6 +66,12 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 	    }
 	
         return newId;
+	}
+
+	@Override
+	public int delete(Long roleId, Long workTypeId) {
+		jdbcTemplate.update(DELETE_LINK_FROM_ROLE_SQL, workTypeId, roleId);
+		return jdbcTemplate.update(DELETE_SQL, workTypeId);
 	}
 
 }
