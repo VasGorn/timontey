@@ -10,4 +10,6 @@ public interface WorkTypeRepository {
 
 	long save(long roleId, WorkType workType);
 
+	int delete(Long roleId, Long workTypeId);
+
 }
