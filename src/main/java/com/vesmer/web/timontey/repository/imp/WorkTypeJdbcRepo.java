@@ -3,8 +3,10 @@ package com.vesmer.web.timontey.repository.imp;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -32,6 +34,7 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 	private static final String DELETE_SQL						= "DELETE FROM work_types WHERE id = ?;";
 	private static final String DELETE_LINK_FROM_ROLE_SQL		= "DELETE FROM role_worktype WHERE worktype_id = ? "
 																+ "AND role_id = ?;";
+	private static final String SELECT_BY_ID_SQL				= "SELECT * FROM work_types WHERE id = ?;";
 	
 	@Override
 	public List<WorkType> getWorkTypesByRole(long roleId) {
@@ -72,6 +75,16 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 	public int delete(Long roleId, Long workTypeId) {
 		jdbcTemplate.update(DELETE_LINK_FROM_ROLE_SQL, workTypeId, roleId);
 		return jdbcTemplate.update(DELETE_SQL, workTypeId);
+	}
+
+	@Override
+	public Optional<WorkType> findById(long id) {
+		try {
+			return Optional.of(jdbcTemplate.queryForObject(SELECT_BY_ID_SQL, 
+				new WorkTypeRowMapper(), id));
+		} catch (EmptyResultDataAccessException ex){
+			return Optional.empty();
+		}
 	}
 
 }
