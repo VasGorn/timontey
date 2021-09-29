@@ -1,6 +1,7 @@
 package com.vesmer.web.timontey.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,11 @@ public class WorkTypeServiceImp implements WorkTypeService {
 	@Override
 	public void delete(Long roleId, Long workTypeId) {
 		workTypeRepository.delete(roleId, workTypeId);
+	}
+
+	@Override
+	public Optional<WorkType> getWorkTypeById(long id) {
+		return workTypeRepository.findById(id);
 	}
 
 }
