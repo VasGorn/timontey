@@ -15,4 +15,6 @@ public interface WorkTypeService {
 
 	Optional<WorkType> getWorkTypeById(long id);
 
+	WorkType update(WorkType workType);
+
 }
