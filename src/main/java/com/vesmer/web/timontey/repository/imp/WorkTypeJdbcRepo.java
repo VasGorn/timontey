@@ -35,6 +35,7 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 	private static final String DELETE_LINK_FROM_ROLE_SQL		= "DELETE FROM role_worktype WHERE worktype_id = ? "
 																+ "AND role_id = ?;";
 	private static final String SELECT_BY_ID_SQL				= "SELECT * FROM work_types WHERE id = ?;";
+	private static final String UPDATE_SQL						= "UPDATE work_types SET work_name = ? WHERE id = ?;";
 	
 	@Override
 	public List<WorkType> getWorkTypesByRole(long roleId) {
@@ -85,6 +86,11 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 		} catch (EmptyResultDataAccessException ex){
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public int update(WorkType workType) {
+		return jdbcTemplate.update(UPDATE_SQL, workType.getWorkTypeName(), workType.getId());
 	}
 
 }
