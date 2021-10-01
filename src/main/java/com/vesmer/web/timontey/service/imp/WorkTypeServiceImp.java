@@ -39,4 +39,10 @@ public class WorkTypeServiceImp implements WorkTypeService {
 		return workTypeRepository.findById(id);
 	}
 
+	@Override
+	public WorkType update(WorkType workType) {
+		workTypeRepository.update(workType);
+		return workType;
+	}
+
 }
