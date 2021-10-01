@@ -15,4 +15,6 @@ public interface WorkTypeRepository {
 
 	Optional<WorkType> findById(long id);
 
+	int update(WorkType workType);
+
 }
