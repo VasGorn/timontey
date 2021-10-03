@@ -24,11 +24,15 @@ public class NavigationController {
 				Const.BASE_URL+"work-type/", "bar-chart-2");
 		NavigationLink navLink5 = new NavigationLink("Expenses", 
 				Const.BASE_URL+"expenses/", "layers");
+		NavigationLink navLink6 = new NavigationLink("Orders", 
+				Const.BASE_URL+"orders/", "layers");
+		
 
 		list.add(navLink1);
 		list.add(navLink2);
 		list.add(navLink4);
 		list.add(navLink5);
+		list.add(navLink6);
 
         ModelAndView model = new ModelAndView("main");
 		model.addObject("navList", list);
