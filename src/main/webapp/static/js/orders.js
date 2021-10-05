@@ -11,3 +11,6 @@ var URL_REST_ORDERS = "/timontey/rest/orders";
 
 var $table = $('#table');
 var checkedRows = [];
+
+btnUpdate.disabled = true;
+btnDelete.disabled = true;
