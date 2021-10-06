@@ -42,6 +42,26 @@ function btnAddClicked() {
 	postDataToServer(order);
 }
 
+function postDataToServer(order) {
+	$.ajax({
+		type: "POST",
+		url: URL_REST_ORDERS,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(order),
+		success: function(resp) {
+			console.log(resp);
+
+			let rows = [];
+			rows.push(resp);
+			$table.bootstrapTable('append', rows);
+			$table.bootstrapTable('scrollTo', 'bottom');
+			
+			clearTextFields();
+		}
+	});
+}
+
 function getDataForTable(managerID) {
 	$.ajax({
 		type: "GET",
