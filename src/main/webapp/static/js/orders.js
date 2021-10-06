@@ -15,7 +15,32 @@ var checkedRows = [];
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 getDataForTable(hiddenManagerId.value);
+
+function btnAddClicked() {
+	let orderName = txtOrderName.value.trim();
+	let description = txtDescription.value;
+	let address = txtAddress.value.trim();
+	
+	let isExist = isInTable(orderName);
+	if (isExist) {
+		alert("This order name already exist!");
+		return;
+	}
+	
+	let manager = new Object();
+	manager.id = parseInt(hiddenManagerId.value);
+	
+	let order = new Object();
+	order.name = orderName;
+	order.manager = manager;
+	order.description = description;
+	order.address = address;
+
+	postDataToServer(order);
+}
 
 function getDataForTable(managerID) {
 	$.ajax({
