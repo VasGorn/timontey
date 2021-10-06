@@ -84,3 +84,9 @@ function isInTable(orderName) {
 	});
 	return isExist;
 }
+
+function clearTextFields(){
+	txtOrderName.value = "";
+	txtDescription.value = "";
+	txtAddress.value = "";
+}
