@@ -14,3 +14,17 @@ var checkedRows = [];
 
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
+
+getDataForTable(hiddenManagerId.value);
+
+function getDataForTable(managerID) {
+	$.ajax({
+		type: "GET",
+		url: URL_REST_ORDERS + "/" + managerID,
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			$table.bootstrapTable({ data: resp });
+		}
+	});
+}
