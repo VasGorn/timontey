@@ -53,3 +53,14 @@ function getDataForTable(managerID) {
 		}
 	});
 }
+
+function isInTable(orderName) {
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	tableData.forEach((element, index) => {
+		if (element.name === orderName) {
+			isExist = true;
+		}
+	});
+	return isExist;
+}
