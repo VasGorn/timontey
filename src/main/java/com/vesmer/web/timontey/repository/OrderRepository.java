@@ -9,4 +9,6 @@ public interface OrderRepository {
 
 	List<Order> getOrders(Employee manager);
 
+	long save(Order order);
+
 }
