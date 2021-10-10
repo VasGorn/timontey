@@ -27,4 +27,13 @@ public class OrderServiceImp implements OrderService {
 		return orderList;
 	}
 
+	@Override
+	public Order save(Order order) {
+		Employee manager = staffRepository.findById(order.getManager().getId()).get();
+		long orderId = orderRepository.save(order);
+		order.setId(orderId);
+		order.setManager(manager);
+		return order;
+	}
+
 }
