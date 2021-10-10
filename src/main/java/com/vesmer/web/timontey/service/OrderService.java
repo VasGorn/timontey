@@ -8,4 +8,6 @@ public interface OrderService {
 
 	List<Order> getOrders(long managerId);
 
+	Order save(Order order);
+
 }
