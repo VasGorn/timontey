@@ -16,6 +16,7 @@ btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 getDataForTable(hiddenManagerId.value);
 
@@ -40,6 +41,28 @@ function btnAddClicked() {
 	order.address = address;
 
 	postDataToServer(order);
+}
+
+function btnUpdateClicked() {
+	let orderName = txtOrderName.value.trim();
+	let description = txtDescription.value;
+	let address = txtAddress.value;
+	
+	let order = checkedRows[0];
+	let index = findIndexInTable(order);
+	
+	if(orderName == order.name && 
+		description == order.description && 
+		address == order.address){
+		alert("Order not changed!");
+		return;
+	}
+	
+	order.name = orderName;
+	order.description = description;
+	order.address = address;
+
+	putDataToServer(order, index);
 }
 
 function postDataToServer(order) {
