@@ -85,6 +85,24 @@ function postDataToServer(order) {
 	});
 }
 
+function putDataToServer(order, index) {
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_ORDERS,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(order),
+		success: function(resp) {
+			console.log(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: resp
+			});
+		}
+	});
+}
+
 function getDataForTable(managerID) {
 	$.ajax({
 		type: "GET",
