@@ -23,6 +23,8 @@ public class OrderJdbcRepo implements OrderRepository {
 	private static final String INSERT_SQL		= 
 			"INSERT INTO orders (name, manager_id, description, address) "
 			+ "VALUES (?, ?, ?, ?);";
+	private static final String UPDATE_SQL		= 
+			"UPDATE orders SET name=?, description=?, address=? WHERE id=?;";
 
 	@Override
 	public List<Order> getOrders(Employee manager) {
@@ -54,6 +56,12 @@ public class OrderJdbcRepo implements OrderRepository {
 	    }
 
         return newId;
+	}
+
+	@Override
+	public int update(Order order) {
+		return jdbcTemplate.update(UPDATE_SQL, order.getName(), 
+				order.getDescription(), order.getAddress(), order.getId());
 	}
 
 }
