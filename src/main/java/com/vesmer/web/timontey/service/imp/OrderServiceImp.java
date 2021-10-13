@@ -40,4 +40,10 @@ public class OrderServiceImp implements OrderService {
 		return order;
 	}
 
+	@Override
+	public Order update(Order order) {
+		orderRepository.update(order);
+		return order;
+	}
+
 }
