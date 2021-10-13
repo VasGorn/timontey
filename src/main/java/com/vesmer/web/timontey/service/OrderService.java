@@ -10,4 +10,6 @@ public interface OrderService {
 
 	Order save(Order order);
 
+	Order update(Order order);
+
 }
