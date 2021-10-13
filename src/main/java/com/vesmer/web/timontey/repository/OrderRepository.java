@@ -11,4 +11,6 @@ public interface OrderRepository {
 
 	long save(Order order);
 
+	int update(Order order);
+
 }
