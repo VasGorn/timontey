@@ -117,6 +117,31 @@ function putDataToServer(order, index) {
 	});
 }
 
+function deleteDataOnServer(orderId) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_ORDERS + "/" + orderId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(orderId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if(orderId === checkedRows[i].id){
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			setButtonDisabled(checkedRows.length);
+		}
+	});
+}
+
 function getDataForTable(managerID) {
 	$.ajax({
 		type: "GET",
