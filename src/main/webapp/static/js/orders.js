@@ -17,6 +17,7 @@ btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 getDataForTable(hiddenManagerId.value);
 
@@ -63,6 +64,19 @@ function btnUpdateClicked() {
 	order.address = address;
 
 	putDataToServer(order, index);
+}
+
+function btnDeleteClicked() {
+	let orderIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	clearTextFields();
+	
+	for (let i = 0; i < orderIds.length; ++i) {
+		console.log(orderIds[i]);
+		deleteDataOnServer(orderIds[i]);
+	}
 }
 
 function postDataToServer(order) {
