@@ -25,6 +25,8 @@ public class OrderJdbcRepo implements OrderRepository {
 			+ "VALUES (?, ?, ?, ?);";
 	private static final String UPDATE_SQL		= 
 			"UPDATE orders SET name=?, description=?, address=? WHERE id=?;";
+	private static final String DELETE_SQL		= 
+			"DELETE FROM orders WHERE id=?;";
 
 	@Override
 	public List<Order> getOrders(Employee manager) {
@@ -62,6 +64,11 @@ public class OrderJdbcRepo implements OrderRepository {
 	public int update(Order order) {
 		return jdbcTemplate.update(UPDATE_SQL, order.getName(), 
 				order.getDescription(), order.getAddress(), order.getId());
+	}
+
+	@Override
+	public void delete(long orderId) {
+		jdbcTemplate.update(DELETE_SQL, orderId);
 	}
 
 }
