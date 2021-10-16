@@ -13,4 +13,6 @@ public interface OrderRepository {
 
 	int update(Order order);
 
+	void delete(long orderId);
+
 }
