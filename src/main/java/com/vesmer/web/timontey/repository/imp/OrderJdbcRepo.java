@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import com.vesmer.web.timontey.domain.Employee;
 import com.vesmer.web.timontey.domain.Order;
 import com.vesmer.web.timontey.repository.OrderRepository;
 import com.vesmer.web.timontey.rowmapper.OrderRowMapper;
 
+@Repository
 public class OrderJdbcRepo implements OrderRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
