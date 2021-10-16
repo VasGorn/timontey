@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +45,15 @@ public class OrderServiceImp implements OrderService {
 	public Order update(Order order) {
 		orderRepository.update(order);
 		return order;
+	}
+
+	@Override
+	public void delete(long orderId) {
+		try {
+			orderRepository.delete(orderId);
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("Data not found: " + e.getMessage());
+		}
 	}
 
 }
