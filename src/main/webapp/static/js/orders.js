@@ -184,6 +184,15 @@ function clearTextFields(){
 	txtAddress.value = "";
 }
 
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonDisabled(checkedRows.length);
+	txtOrderName.value = row.name;
+	txtDescription.value = row.description;
+	txtAddress.value = row.address;
+	console.log(checkedRows);
+});
+
 function setButtonDisabled(len) {
 	if (len < 1) {
 		btnAdd.disabled = false;
