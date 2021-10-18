@@ -215,6 +215,24 @@ function findIndexInTable(row) {
 	return index;
 }
 
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push({ id: row.id, workTypeName: row.workTypeName });
+	setButtonDisabled(checkedRows.length);
+	txtWorkType.value = row.workTypeName;
+	console.log(checkedRows);
+});
+
+$table.on('uncheck.bs.table', function(e, row) {
+	checkedRows.forEach((element, index) => {
+		if (element.id === row.id) {
+			checkedRows.splice(index, 1);
+		}
+	});
+	setButtonDisabled(checkedRows.length);
+	txtWorkType.value = "";
+	console.log(checkedRows);
+});
+
 function setButtonDisabled(len) {
 	if (len < 1) {
 		btnAdd.disabled = false;
