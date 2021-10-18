@@ -119,6 +119,25 @@ function postDataToServer(workType, roleId) {
 	});
 }
 
+function patchDataToServer(workType, roleId, index) {
+	let workTypeId = workType.id;
+	$.ajax({
+		type: "PATCH",
+		url: URL_REST_WORK + workTypeId + "/role/" + roleId,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(workType),
+		success: function(resp) {
+			console.log(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: resp
+			});
+		}
+	});
+}
+
 function deleteDataOnServer(roleId, workTypeId) {
 	$.ajax({
 		type: "DELETE",
