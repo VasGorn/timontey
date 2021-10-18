@@ -20,6 +20,7 @@ btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setDataToSelectRole();
@@ -43,6 +44,24 @@ function btnAddClicked() {
 	workType.workTypeName = stringName;
 	
 	postDataToServer(workType, roleId);
+}
+
+function btnUpdateClicked() {
+	let newName = txtWorkType.value;
+	let roleId = parseInt(roleSelect.value);
+	let item = checkedRows[0];
+	let index = findIndexInTable(item);
+
+	let isExist = isInTable(newName);
+	if (isExist) {
+		alert("This value already exist!");
+		return;
+	}
+
+	item.workTypeName = newName;
+	console.log("to sent: " + item);
+
+	patchDataToServer(item, roleId, index)
 }
 
 function btnDeleteClicked() {
