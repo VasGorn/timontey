@@ -193,6 +193,17 @@ $table.on('check.bs.table', function(e, row) {
 	console.log(checkedRows);
 });
 
+$table.on('uncheck.bs.table', function(e, row) {
+	checkedRows.forEach((element, index) => {
+		if (element.id === row.id) {
+			checkedRows.splice(index, 1);
+		}
+	});
+	setButtonDisabled(checkedRows.length);
+	clearTextFields();
+	console.log(checkedRows);
+});
+
 function setButtonDisabled(len) {
 	if (len < 1) {
 		btnAdd.disabled = false;
