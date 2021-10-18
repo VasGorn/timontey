@@ -123,7 +123,7 @@ function patchDataToServer(workType, roleId, index) {
 	let workTypeId = workType.id;
 	$.ajax({
 		type: "PATCH",
-		url: URL_REST_WORK + workTypeId + "/role/" + roleId,
+		url: URL_REST_WORK + "/" + workTypeId + "/role/" + roleId,
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
 		data: JSON.stringify(workType),
@@ -141,7 +141,7 @@ function patchDataToServer(workType, roleId, index) {
 function deleteDataOnServer(roleId, workTypeId) {
 	$.ajax({
 		type: "DELETE",
-		url: URL_REST_WORK + workTypeId + "/role/" + roleId,
+		url: URL_REST_WORK + "/" + workTypeId + "/role/" + roleId,
 		async: true,
 		data: null,
 		success: function() {
