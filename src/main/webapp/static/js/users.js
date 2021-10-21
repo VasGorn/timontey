@@ -16,3 +16,7 @@ var checkedRows = [];
 var URL_REST_ROLE = "/timontey/rest/role/";
 var URL_REST_STAFF = "/timontey/rest/staff/";
 var URL_REST_USERS = "/timontey/rest/users/";
+
+btnAdd.disabled = true;
+btnUpdate.disabled = true;
+btnDelete.disabled = true;
