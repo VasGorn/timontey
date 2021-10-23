@@ -98,3 +98,7 @@ function getDataForTable() {
 		}
 	});
 }
+
+function setDataToTable(data) {
+	$table.bootstrapTable({ data: data });
+}
