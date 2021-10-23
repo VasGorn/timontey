@@ -23,6 +23,7 @@ btnDelete.disabled = true;
 
 setDataToSelectRole();
 setDataToSelectEmployee();
+getDataForTable();
 
 function setDataToSelectRole() {
 	$.ajax({
@@ -76,6 +77,24 @@ function setDataToSelectEmployee() {
 				opt.innerHTML = fullName;
 				selectEmployee.appendChild(opt);
 			}
+		}
+	});
+}
+
+function getDataForTable() {
+	$.ajax({
+		type: "GET",
+		url: URL_REST_USERS + "all",
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			let rows = [];
+			for (let i = 0; i < resp.length; ++i) {
+				let user = resp[i];
+				let userRow = toUserRow(user);
+				rows.push(userRow);
+			}
+			setDataToTable(rows);
 		}
 	});
 }
