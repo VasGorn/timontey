@@ -22,6 +22,7 @@ btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
 setDataToSelectRole();
+setDataToSelectEmployee();
 
 function setDataToSelectRole() {
 	$.ajax({
@@ -52,6 +53,29 @@ function setDataToSelectRole() {
 				checkBoxContainer.appendChild(newDiv);
 			}
 			checkBoxRoles = document.getElementsByName("roles");
+		}
+	});
+}
+
+function setDataToSelectEmployee() {
+	$.ajax({
+		type: "GET",
+		url: URL_REST_STAFF + "all",
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			for (let i = 0; i < resp.length; ++i) {
+				const opt = document.createElement("option");
+				opt.value = resp[i].id;
+
+				let lastName = resp[i].lastName;
+				let firstName = resp[i].firstName;
+				let middleName = resp[i].middleName;
+				let fullName = lastName + " " + firstName + " " + middleName;
+
+				opt.innerHTML = fullName;
+				selectEmployee.appendChild(opt);
+			}
 		}
 	});
 }
