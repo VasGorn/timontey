@@ -27,8 +27,6 @@ public class UserSeviceImp implements UserService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-
-
 	@Override
 	public List<User> getAll() {
 		List<User> userList = userRepository.getAll();
