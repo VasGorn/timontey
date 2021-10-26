@@ -25,6 +25,10 @@ setDataToSelectRole();
 setDataToSelectEmployee();
 getDataForTable();
 
+selectEmployee.addEventListener("change", (event) => {
+	btnAdd.disabled = false;
+});
+
 function setDataToSelectRole() {
 	$.ajax({
 		type: "GET",
