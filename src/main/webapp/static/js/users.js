@@ -106,3 +106,23 @@ function getDataForTable() {
 function setDataToTable(data) {
 	$table.bootstrapTable({ data: data });
 }
+
+function toUserRow(user) {
+	let userRow = new Object();
+	userRow.username = user.username;
+	userRow.id = user.id;
+	userRow.employee = user.lastName + ' ' + user.firstName + ' ' + user.middleName;
+	userRow.roleArray = user.roles;
+
+	let strRoles = "";
+	for (let i = 0; i < user.roles.length; ++i) {
+		if (i < (user.roles.length - 1)) {
+			strRoles += (user.roles[i].roleName + ", ");
+		} else {
+			strRoles += user.roles[i].roleName;
+		}
+	}
+
+	userRow.role = strRoles;
+	return userRow;
+}
