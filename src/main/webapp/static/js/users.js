@@ -154,3 +154,16 @@ function toUserRow(user) {
 	userRow.role = strRoles;
 	return userRow;
 }
+
+function getRoles(){
+	const lenOfRoles = checkBoxRoles.length;
+	let roles = [];
+	for (let i = 0; i < lenOfRoles; ++i) {
+		if (checkBoxRoles[i].checked) {
+			let role = new Object();
+			role.id = parseInt(checkBoxRoles[i].value);
+			roles.push(role);
+		}
+	}
+	return roles;
+}
