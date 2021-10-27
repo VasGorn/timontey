@@ -21,6 +21,8 @@ btnAdd.disabled = true;
 btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 setDataToSelectRole();
 setDataToSelectEmployee();
 getDataForTable();
@@ -101,6 +103,32 @@ function getDataForTable() {
 			setDataToTable(rows);
 		}
 	});
+}
+
+function btnAddClicked() {
+	const password = txtPassword.value.trim();
+	const repeatPass = txtRepeatPassword.value.trim();
+	
+	if (password != repeatPass) {
+		alert("Password and confirmation password do not match.");
+		return;
+	}
+
+	let roles = getRoles();
+
+	if (roles.length < 1) {
+		alert("Please select role...");
+		return;
+	}
+	
+	let user = createUserFromForm();
+
+	if(isUserExist(user)){
+		alert("Username or employee already exist!")	
+		return;
+	}
+
+	postDataToServer(user);
 }
 
 function setDataToTable(data) {
