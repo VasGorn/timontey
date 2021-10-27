@@ -149,6 +149,22 @@ function setDataToTable(data) {
 	$table.bootstrapTable({ data: data });
 }
 
+function isUserExist(user) {
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	
+	for (let i = 0; i < tableData.length; ++i) {
+		if (tableData[i].id === user.id) {
+			isExist = true;
+		}
+		if (tableData[i].username === user.username) {
+			isExist = true;
+		}
+	}
+	
+	return isExist;
+}
+
 function toUserRow(user) {
 	let userRow = new Object();
 	userRow.username = user.username;
