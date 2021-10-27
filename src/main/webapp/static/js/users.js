@@ -131,6 +131,20 @@ function btnAddClicked() {
 	postDataToServer(user);
 }
 
+function createUserFromForm(){
+	let user = new Object();
+	
+	const username = txtUsername.value.trim();
+	const password = txtPassword.value.trim();
+
+	user.id = parseInt(selectEmployee.value);
+	user.username = username;
+	user.password = password;
+	user.roles = getRoles();
+	
+	return user;
+}
+
 function setDataToTable(data) {
 	$table.bootstrapTable({ data: data });
 }
