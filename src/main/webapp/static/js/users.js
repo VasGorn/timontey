@@ -131,6 +131,24 @@ function btnAddClicked() {
 	postDataToServer(user);
 }
 
+function postDataToServer(user) {
+	$.ajax({
+		type: "POST",
+		url: URL_REST_USERS,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(user),
+		success: function(resp) {
+			console.log(resp);
+			let userRow = toUserRow(resp);
+			let rows = [];
+			rows.push(userRow);
+			$table.bootstrapTable('append', rows);
+			$table.bootstrapTable('scrollTo', 'bottom');
+		}
+	});
+}
+
 function createUserFromForm(){
 	let user = new Object();
 	
