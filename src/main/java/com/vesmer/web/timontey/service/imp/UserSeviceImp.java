@@ -58,5 +58,11 @@ public class UserSeviceImp implements UserService {
 		User fullUser = getUserByUsername(user.getUsername()).get();
 		return fullUser;
 	}
+	
+	private void saveRolesToUser(User user, List<Role> roles) {
+		for (int i = 0; i < roles.size(); ++i) {
+			roleRepository.saveRoleToUser(user, roles.get(i));
+		}
+	}
 
 }
