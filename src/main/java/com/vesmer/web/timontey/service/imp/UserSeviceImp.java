@@ -49,4 +49,14 @@ public class UserSeviceImp implements UserService {
 		return userList;
 	}
 
+	@Override
+	public User save(User user) {
+		userRepository.save(user);
+
+		saveRolesToUser(user, user.getRoles());
+		
+		User fullUser = getUserByUsername(user.getUsername()).get();
+		return fullUser;
+	}
+
 }
