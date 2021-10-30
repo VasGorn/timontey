@@ -59,6 +59,29 @@ public class UserSeviceImp implements UserService {
 		return fullUser;
 	}
 	
+	@Override
+	public Optional<User> getUserByUsername(String username) {
+		Optional<User> optUser = userRepository.getUserByUsername(username);
+
+		if (optUser.isPresent()) {
+			User user = optUser.get();
+
+			long employeeId = user.getId();
+			Optional<Employee> optEmployee = staffRepository.findById(employeeId);
+			if (optEmployee.isPresent()) {
+				Employee employee = optEmployee.get();
+				user.setEmployee(employee);
+			} else {
+				user.setLastName("not found");
+			}
+
+			List<Role> roles = roleRepository.getRolesForUser(user);
+			user.setRoles(roles);
+		}
+
+		return optUser;
+	}
+	
 	private void saveRolesToUser(User user, List<Role> roles) {
 		for (int i = 0; i < roles.size(); ++i) {
 			roleRepository.saveRoleToUser(user, roles.get(i));
