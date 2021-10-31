@@ -22,6 +22,9 @@ public class RoleJdbcRepo implements RoleRepository {
 		+ "FROM roles AS r, user_role AS ur "
 		+ "WHERE r.id = ur.role_id "
 		+ "AND ur.username = ?;";
+	private static final String INSERT_ROLE_TO_USER_SQL =
+		"INSERT INTO user_role (username, role_id) "
+		+ "VALUES (?, ?);";
 
 	@Override
 	public List<Role> getAll() {
@@ -35,6 +38,11 @@ public class RoleJdbcRepo implements RoleRepository {
 		List<Role> list = (List<Role>) jdbcTemplate.query(SELECT_ROLES_FOR_USER_SQL,
 				new RoleRowMapper(), user.getUsername());
 		return list;
+	}
+
+	@Override
+	public void saveRoleToUser(User user, Role role) {
+		jdbcTemplate.update(INSERT_ROLE_TO_USER_SQL, user.getUsername(), role.getId());
 	}
 
 }
