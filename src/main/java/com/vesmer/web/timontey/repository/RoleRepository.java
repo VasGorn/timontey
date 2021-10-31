@@ -11,4 +11,6 @@ public interface RoleRepository {
 
 	List<Role> getRolesForUser(User user);
 
+	void saveRoleToUser(User user, Role role);
+
 }
