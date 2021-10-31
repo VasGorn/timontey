@@ -1,8 +1,10 @@
 package com.vesmer.web.timontey.repository.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +19,8 @@ public class UserJdbcRepo implements UserRepository {
 	
 	private static final String SELECT_ALL_SQL =
 		"SELECT * FROM users;";
+	private static final String SELECT_BY_USERNAME_SQL =
+		"SELECT * FROM users WHERE username=?;";
 	private static final String INSERT_SQL = 
 		"INSERT INTO users (username, password, employee_id) "
 		+ "VALUES (?, ?, ?);";
@@ -37,6 +41,15 @@ public class UserJdbcRepo implements UserRepository {
 		jdbcTemplate.update(INSERT_SQL, username, password, employeeId);
 		
 		return user;
+	}
+
+	@Override
+	public Optional<User> getUserByUsername(String username) {
+		try {
+			return Optional.of(jdbcTemplate.queryForObject(SELECT_BY_USERNAME_SQL, new UserRowMapper(), username));
+		} catch (EmptyResultDataAccessException e) {
+			return Optional.empty();
+		}
 	}
 
 }
