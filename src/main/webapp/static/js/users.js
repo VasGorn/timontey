@@ -250,3 +250,16 @@ function getRoles(){
 	}
 	return roles;
 }
+
+function findIndexInTable(row) {
+	let tableData = $table.bootstrapTable('getData');
+	let index = 0;
+
+	for (let i = 0; i < tableData.length; ++i) {
+		if (row.username === tableData[i].username) {
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
