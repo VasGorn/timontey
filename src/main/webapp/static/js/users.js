@@ -22,6 +22,7 @@ btnUpdate.disabled = true;
 btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 setDataToSelectRole();
 setDataToSelectEmployee();
@@ -129,6 +130,40 @@ function btnAddClicked() {
 	}
 
 	postDataToServer(user);
+}
+
+function btnUpdateClicked() {
+	let username = txtUsername.value.trim();
+	let password = txtPassword.value.trim();
+	let repeatPassword = txtRepeatPassword.value.trim();
+	let employeeId = selectEmployee.value;
+	let roles = getRoles();
+
+	let userInTable = checkedRows[0];
+	let index = findIndexInTable(userInTable);
+	
+	if(employeeId != userInTable.id){
+		alert("Employee cannot be changed!")	
+		return;
+	}
+	
+	if(username != userInTable.username){
+		alert("Username cannot be changed!")	
+		return;
+	}
+	
+	if (password != repeatPassword) {
+		alert("Password and confirmation password do not match.");
+		return;
+	}
+	
+	if (roles.length < 1) {
+		alert("Please select role...");
+		return;
+	}
+	
+	let user = createUserFromForm();
+	putDataToServer(user, index);
 }
 
 function postDataToServer(user) {
