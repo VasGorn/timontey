@@ -184,6 +184,25 @@ function postDataToServer(user) {
 	});
 }
 
+function putDataToServer(user, index) {
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_USERS + user.username,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(user),
+		success: function(resp) {
+			console.log(resp);
+			let userRow = toUserRow(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: userRow 
+			});
+		}
+	});
+}
+
 function createUserFromForm(){
 	let user = new Object();
 	
