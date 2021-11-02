@@ -13,4 +13,6 @@ public interface UserService {
 	
 	Optional<User> getUserByUsername(String username);
 
+	User update(User user);
+
 }
