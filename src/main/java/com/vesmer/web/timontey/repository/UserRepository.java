@@ -13,4 +13,6 @@ public interface UserRepository {
 
 	Optional<User> getUserByUsername(String username);
 
+	int update(User user);
+
 }
