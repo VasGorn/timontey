@@ -13,4 +13,6 @@ public interface RoleRepository {
 
 	void saveRoleToUser(User user, Role role);
 
+	void deleteRolesFromUser(String username);
+
 }
