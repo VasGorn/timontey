@@ -82,6 +82,17 @@ public class UserSeviceImp implements UserService {
 		return optUser;
 	}
 	
+	@Override
+	public User update(User user) {
+		userRepository.update(user);
+		
+		roleRepository.deleteRolesFromUser(user.getUsername());
+		saveRolesToUser(user, user.getRoles());
+
+		User fullUser = getUserByUsername(user.getUsername()).get();
+		return fullUser;
+	}
+	
 	private void saveRolesToUser(User user, List<Role> roles) {
 		for (int i = 0; i < roles.size(); ++i) {
 			roleRepository.saveRoleToUser(user, roles.get(i));
