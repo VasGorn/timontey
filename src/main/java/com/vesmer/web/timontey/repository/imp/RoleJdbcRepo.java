@@ -25,6 +25,8 @@ public class RoleJdbcRepo implements RoleRepository {
 	private static final String INSERT_ROLE_TO_USER_SQL =
 		"INSERT INTO user_role (username, role_id) "
 		+ "VALUES (?, ?);";
+	private static final String DELETE_ROLE_FROM_USER_SQL =
+		"DELETE FROM user_role WHERE username=?;";
 
 	@Override
 	public List<Role> getAll() {
@@ -43,6 +45,11 @@ public class RoleJdbcRepo implements RoleRepository {
 	@Override
 	public void saveRoleToUser(User user, Role role) {
 		jdbcTemplate.update(INSERT_ROLE_TO_USER_SQL, user.getUsername(), role.getId());
+	}
+
+	@Override
+	public void deleteRolesFromUser(String username) {
+		jdbcTemplate.update(DELETE_ROLE_FROM_USER_SQL, username);
 	}
 
 }
