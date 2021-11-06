@@ -224,6 +224,26 @@ function putDataToServer(user, index) {
 	});
 }
 
+function deleteDataOnServer(username) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_USERS + username,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(username);
+			$table.bootstrapTable('remove', {
+				field: 'username',
+				values: array 
+			});
+			
+			checkedRows=[];
+			setButtonDisabled(checkedRows.length);
+		}
+	});
+}
+
 function createUserFromForm(){
 	let user = new Object();
 	
