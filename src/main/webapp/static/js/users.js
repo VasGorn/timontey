@@ -23,6 +23,7 @@ btnDelete.disabled = true;
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setDataToSelectRole();
 setDataToSelectEmployee();
@@ -164,6 +165,26 @@ function btnUpdateClicked() {
 	
 	let user = createUserFromForm();
 	putDataToServer(user, index);
+}
+
+function btnDeleteClicked() {
+	let usernames = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.username;
+	});
+	
+	txtUsername.value = "";
+	txtPassword.value = "";
+	txtRepeatPassword.value = "";
+	selectEmployee.value = 0;
+	
+	for(let checkBoxRole of checkBoxRoles){
+		checkBoxRole.checked = false;
+	}
+
+	for (let i = 0; i < usernames.length; ++i) {
+		console.log(usernames[i]);
+		deleteDataOnServer(usernames[i]);
+	}
 }
 
 function postDataToServer(user) {
