@@ -24,6 +24,8 @@ public class UserJdbcRepo implements UserRepository {
 	private static final String INSERT_SQL = 
 		"INSERT INTO users (username, password, employee_id) "
 		+ "VALUES (?, ?, ?);";
+	private static final String UPDATE_SQL =
+		"UPDATE users SET password=?, employee_id=? WHERE username=?;";
 
 	@Override
 	public List<User> getAll() {
@@ -50,6 +52,11 @@ public class UserJdbcRepo implements UserRepository {
 		} catch (EmptyResultDataAccessException e) {
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public int update(User user) {
+		return jdbcTemplate.update(UPDATE_SQL, user.getPassword(), user.getId(), user.getUsername());
 	}
 
 }
