@@ -26,6 +26,8 @@ public class UserJdbcRepo implements UserRepository {
 		+ "VALUES (?, ?, ?);";
 	private static final String UPDATE_SQL =
 		"UPDATE users SET password=?, employee_id=? WHERE username=?;";
+	private static final String DELETE_SQL = 
+		"DELETE FROM users WHERE username=?;";
 
 	@Override
 	public List<User> getAll() {
@@ -57,6 +59,11 @@ public class UserJdbcRepo implements UserRepository {
 	@Override
 	public int update(User user) {
 		return jdbcTemplate.update(UPDATE_SQL, user.getPassword(), user.getId(), user.getUsername());
+	}
+
+	@Override
+	public int delete(String username) {
+		return jdbcTemplate.update(DELETE_SQL, username);
 	}
 
 }
