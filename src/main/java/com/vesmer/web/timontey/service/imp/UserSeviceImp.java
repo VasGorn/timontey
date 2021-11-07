@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,6 +97,16 @@ public class UserSeviceImp implements UserService {
 	private void saveRolesToUser(User user, List<Role> roles) {
 		for (int i = 0; i < roles.size(); ++i) {
 			roleRepository.saveRoleToUser(user, roles.get(i));
+		}
+	}
+
+	@Override
+	public void delete(String username) {
+		try {
+			roleRepository.deleteRolesFromUser(username);
+			userRepository.delete(username);
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("Delete failing: " + e.getMessage());
 		}
 	}
 
