@@ -341,6 +341,26 @@ $table.on('uncheck.bs.table', function(e, row) {
 	console.log(checkedRows);
 });
 
+function setButtonDisabled(len) {
+	if (len < 1) {
+		btnAdd.disabled = false;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (len === 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = false;
+		btnDelete.disabled = false;
+		return;
+	}
+	if (len > 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = false;
+	}
+}
+
 function getRoles(){
 	const lenOfRoles = checkBoxRoles.length;
 	let roles = [];
