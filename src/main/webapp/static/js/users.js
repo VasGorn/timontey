@@ -298,6 +298,49 @@ function toUserRow(user) {
 	return userRow;
 }
 
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonDisabled(checkedRows.length);
+	txtUsername.value = row.username;
+	txtPassword.value = "";
+	txtRepeatPassword.value = "";
+	selectEmployee.value = row.id;
+
+	for(let checkBoxRole of checkBoxRoles){
+		checkBoxRole.checked = false;
+	}
+
+	let	roles = row.roleArray;
+	for(let role of roles){
+		for(let checkBoxRole of checkBoxRoles){
+			if(role.id == checkBoxRole.value){
+				checkBoxRole.checked = true;
+			}
+		}
+	}
+	
+	console.log(roles);
+});
+
+$table.on('uncheck.bs.table', function(e, row) {
+	checkedRows.forEach((element, index) => {
+		if (element.id === row.id) {
+			checkedRows.splice(index, 1);
+		}
+	});
+	setButtonDisabled(checkedRows.length);
+	txtUsername.value = "";
+	txtPassword.value = "";
+	txtRepeatPassword.value = "";
+	selectEmployee.value = 0;
+	
+	for(let checkBoxRole of checkBoxRoles){
+		checkBoxRole.checked = false;
+	}
+	
+	console.log(checkedRows);
+});
+
 function getRoles(){
 	const lenOfRoles = checkBoxRoles.length;
 	let roles = [];
