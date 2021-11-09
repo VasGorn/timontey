@@ -26,13 +26,15 @@ public class NavigationController {
 				Const.BASE_URL+"expenses/", "layers");
 		NavigationLink navLink6 = new NavigationLink("Orders", 
 				Const.BASE_URL+"orders/", "layers");
-		
+		NavigationLink navLink7 = new NavigationLink("Quota of money", 
+				Const.BASE_URL+"quota-money/", "layers");
 
 		list.add(navLink1);
 		list.add(navLink2);
 		list.add(navLink4);
 		list.add(navLink5);
 		list.add(navLink6);
+		list.add(navLink7);
 
         ModelAndView model = new ModelAndView("main");
 		model.addObject("navList", list);
