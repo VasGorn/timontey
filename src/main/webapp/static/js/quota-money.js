@@ -1,1 +1,25 @@
-console.log("TODO quota money script!");
+var btnAdd = document.getElementById("add");
+var btnUpdate = document.getElementById("update");
+var btnDelete = document.getElementById("delete");
+
+var selectOrder = document.getElementById("select_order");
+var txtOrderName = document.getElementById("order_name");
+var hiddenManagerId = document.getElementById("manager_id");
+var txtDescription = document.getElementById("description");
+var txtAddress = document.getElementById("address");
+
+var selectRole = document.getElementById("select_role");
+var selectEmployee = document.getElementById("select_employee");
+
+var numMoneyLimit = document.getElementById("money_limit");
+
+var URL_REST_ROLE = "/timontey1/rest/role";
+var URL_REST_EMPLOYEE = "/timontey1/rest/staff";
+var URL_REST_ORDER = "/timontey1/rest/orders";
+var URL_REST_QUOTA_MONEY = "/timontey1/rest/quota-money";
+
+var ROLES = [];
+var ORDERS = [];
+
+var $table = $('#table');
+var checkedRows = [];
