@@ -13,10 +13,10 @@ var selectEmployee = document.getElementById("select_employee");
 
 var numMoneyLimit = document.getElementById("money_limit");
 
-var URL_REST_ROLE = "/timontey1/rest/role";
-var URL_REST_EMPLOYEE = "/timontey1/rest/staff";
-var URL_REST_ORDER = "/timontey1/rest/orders";
-var URL_REST_QUOTA_MONEY = "/timontey1/rest/quota-money";
+var URL_REST_ROLE = "/timontey/rest/role";
+var URL_REST_EMPLOYEE = "/timontey/rest/staff";
+var URL_REST_ORDER = "/timontey/rest/orders";
+var URL_REST_QUOTA_MONEY = "/timontey/rest/quota-money";
 
 var ROLES = [];
 var ORDERS = [];
