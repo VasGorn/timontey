@@ -59,9 +59,9 @@
 				required>
 		</div>
 		
-		<button id="add" type="button" class="btn btn-success">Add</button>
-		<button id="update" type="button" class="btn btn-primary">Update</button>
-		<button id="delete" type="button" class="btn btn-danger">Delete</button>
+		<button id="add" type="button" class="btn btn-success" disabled>Add</button>
+		<button id="update" type="button" class="btn btn-primary" disabled>Update</button>
+		<button id="delete" type="button" class="btn btn-danger" disabled>Delete</button>
 	</fieldset>
 </form>
 
