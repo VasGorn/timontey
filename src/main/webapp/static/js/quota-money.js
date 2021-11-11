@@ -23,3 +23,5 @@ var ORDERS = [];
 
 var $table = $('#table');
 var checkedRows = [];
+
+$table.bootstrapTable({ data: [] });
