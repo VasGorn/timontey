@@ -68,3 +68,14 @@ function setRolesToSelect(){
 		}
 	});
 }
+
+function setEmployeesToRole(role){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_EMPLOYEE + "/role/" + role.id,
+		data: null,
+		success: function(resp) {
+			role.staff = resp;
+		}
+	});
+}
