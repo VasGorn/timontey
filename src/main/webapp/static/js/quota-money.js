@@ -28,6 +28,7 @@ $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect();
 setRolesToSelect();
+setQuotaMoneyToTable(hiddenManagerId.value);
 
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
@@ -76,6 +77,24 @@ function setEmployeesToRole(role){
 		data: null,
 		success: function(resp) {
 			role.staff = resp;
+		}
+	});
+}
+
+function setQuotaMoneyToTable(managerId){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_QUOTA_MONEY + "/manager/" + managerId,
+		data: null,
+		success: function(resp) {
+			let qMoneyRowArray = [];
+			for(let i = 0; i < resp.length; ++i){
+				let quotaMoney = resp[i];
+				let quotaMoneyRow = qMoneyRowMapper(quotaMoney);
+				qMoneyRowArray.push(quotaMoneyRow);
+			}
+			
+			$table.bootstrapTable('append', qMoneyRowArray);
 		}
 	});
 }
