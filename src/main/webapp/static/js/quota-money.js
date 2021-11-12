@@ -27,6 +27,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect();
+setRolesToSelect();
 
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
@@ -43,6 +44,26 @@ function setOrdersToSelect(){
 				opt.value = ORDERS[i].id;
 				opt.innerHTML = ORDERS[i].name;
 				selectOrder.appendChild(opt);
+			}
+		}
+	});
+}
+
+function setRolesToSelect(){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_ROLE + "/all",
+		data: null,
+		success: function(resp) {
+			ROLES = resp;
+			
+			for(let i = 0; i < resp.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = resp[i].id;
+				opt.innerHTML = resp[i].roleName;
+				selectRole.appendChild(opt);
+				
+				setEmployeesToRole(ROLES[i]);
 			}
 		}
 	});
