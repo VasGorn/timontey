@@ -98,3 +98,19 @@ function setQuotaMoneyToTable(managerId){
 		}
 	});
 }
+
+function qMoneyRowMapper(quotaMoney){
+	let quotaMoneyRow = new Object();
+	quotaMoneyRow.id = quotaMoney.id;
+
+	quotaMoneyRow.order = quotaMoney.order.name;
+	quotaMoneyRow.orderId = quotaMoney.order.id;
+
+	quotaMoneyRow.employee	= quotaMoney.employee.lastName + ' ' 
+							+ quotaMoney.employee.firstName + ' '
+							+ quotaMoney.employee.middleName;
+	quotaMoneyRow.employeeId = quotaMoney.employee.id;
+	
+	quotaMoneyRow.moneyLimit = quotaMoney.moneyLimit;
+	return quotaMoneyRow;
+}
