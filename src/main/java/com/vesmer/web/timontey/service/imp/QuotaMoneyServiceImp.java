@@ -3,6 +3,8 @@ package com.vesmer.web.timontey.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vesmer.web.timontey.domain.Employee;
 import com.vesmer.web.timontey.domain.Order;
@@ -12,6 +14,8 @@ import com.vesmer.web.timontey.repository.QuotaMoneyRepository;
 import com.vesmer.web.timontey.repository.StaffRepository;
 import com.vesmer.web.timontey.service.QuotaMoneyService;
 
+@Service
+@Transactional
 public class QuotaMoneyServiceImp implements QuotaMoneyService{
 	@Autowired
 	private QuotaMoneyRepository quotaMoneyRepository;
