@@ -3,8 +3,10 @@ package com.vesmer.web.timontey.repository.imp;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -22,6 +24,8 @@ public class OrderJdbcRepo implements OrderRepository {
 
 	private static final String SELECT_ALL_SQL	= 
 			"SELECT * FROM orders WHERE manager_id=?;";
+	private static final String SELECT_ONE_SQL	= 
+			"SELECT * FROM orders WHERE id=?;";
 	private static final String INSERT_SQL		= 
 			"INSERT INTO orders (name, manager_id, description, address) "
 			+ "VALUES (?, ?, ?, ?);";
@@ -71,6 +75,16 @@ public class OrderJdbcRepo implements OrderRepository {
 	@Override
 	public void delete(long orderId) {
 		jdbcTemplate.update(DELETE_SQL, orderId);
+	}
+
+	@Override
+	public Optional<Order> findById(long id) {
+		try {
+			return Optional.of(jdbcTemplate.queryForObject(SELECT_ONE_SQL, 
+				new OrderRowMapper(), id));
+		} catch (EmptyResultDataAccessException ex){
+			return Optional.empty();
+		}
 	}
 
 }
