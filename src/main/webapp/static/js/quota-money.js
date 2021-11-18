@@ -24,11 +24,30 @@ var ORDERS = [];
 var $table = $('#table');
 var checkedRows = [];
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect();
 setRolesToSelect();
 setQuotaMoneyToTable(hiddenManagerId.value);
+
+function btnAddClicked(){
+	let newQuotaMoneyRow = getQuotaMoneyFromForm();
+
+	if(isInTable(newQuotaMoneyRow)){
+		alert("This employee already have money limit on the selected order!");
+		return;
+	}
+	
+	if(newQuotaMoneyRow.moneyLimit < 0.0){
+		alert("Money limit must be greater then zero!");
+		return;
+	}
+	
+	let quotaMoney = getModelQuotaMoney(newQuotaMoneyRow);
+	postDataToServer(quotaMoney);
+}
 
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
