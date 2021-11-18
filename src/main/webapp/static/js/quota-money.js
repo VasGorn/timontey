@@ -148,3 +148,15 @@ function getQuotaMoneyFromForm(){
 	
 	return newQuotaMoneyRow;
 }
+
+function isInTable(quotaMoneyRow){
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	tableData.forEach((element, index) => {
+		if (element.orderId == quotaMoneyRow.orderId &&
+			element.employeeId == quotaMoneyRow.employeeId) {
+			isExist = true;
+		}
+	});
+	return isExist;
+}
