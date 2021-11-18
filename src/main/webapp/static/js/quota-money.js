@@ -49,6 +49,23 @@ function btnAddClicked(){
 	postDataToServer(quotaMoney);
 }
 
+function postDataToServer(quotaMoney){
+	$.ajax({
+		type: "POST",
+		url: URL_REST_QUOTA_MONEY,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(quotaMoney),
+		success: function(resp) {
+			let rows = [];
+			let quotaMoneyRow = qMoneyRowMapper(resp);
+			rows.push(quotaMoneyRow);
+			$table.bootstrapTable('append', rows);
+			$table.bootstrapTable('scrollTo', 'bottom');
+		}
+	});
+}
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
