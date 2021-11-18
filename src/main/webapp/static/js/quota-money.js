@@ -133,3 +133,18 @@ function qMoneyRowMapper(quotaMoney){
 	quotaMoneyRow.moneyLimit = quotaMoney.moneyLimit;
 	return quotaMoneyRow;
 }
+
+function getQuotaMoneyFromForm(){
+	let newQuotaMoneyRow = new Object();
+	newQuotaMoneyRow.orderId = selectOrder.value;
+	newQuotaMoneyRow.employeeId = selectEmployee.value;
+	newQuotaMoneyRow.managerId = hiddenManagerId.value;
+
+	let moneyLimit = parseFloat(numMoneyLimit.value);
+	moneyLimit = Math.round(moneyLimit * 100) / 100;
+	numMoneyLimit.value = moneyLimit;
+	
+	newQuotaMoneyRow.moneyLimit = moneyLimit;
+	
+	return newQuotaMoneyRow;
+}
