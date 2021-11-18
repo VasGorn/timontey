@@ -160,3 +160,18 @@ function isInTable(quotaMoneyRow){
 	});
 	return isExist;
 }
+
+function getModelQuotaMoney(quotaMoneyRow){
+	let quotaMoney = new Object();
+	let employee = new Object();
+	let order = new Object();
+	
+	order.id = quotaMoneyRow.orderId;
+	employee.id = quotaMoneyRow.employeeId;
+	
+	quotaMoney.order = order;
+	quotaMoney.employee = employee;
+	quotaMoney.moneyLimit = quotaMoneyRow.moneyLimit;
+
+	return quotaMoney;
+}
