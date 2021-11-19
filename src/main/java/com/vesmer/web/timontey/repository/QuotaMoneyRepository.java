@@ -8,4 +8,6 @@ public interface QuotaMoneyRepository {
 
 	List<QuotaMoney> getQuotaMoneysForManager(long managerId);
 
+	long save(QuotaMoney quotaMoney);
+
 }
