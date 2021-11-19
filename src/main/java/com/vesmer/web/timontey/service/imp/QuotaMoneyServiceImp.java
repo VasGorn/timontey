@@ -35,6 +35,14 @@ public class QuotaMoneyServiceImp implements QuotaMoneyService{
 		return quotaMoneyList;
 	}
 	
+	@Override
+	public QuotaMoney save(QuotaMoney quotaMoney) {
+		long quotaMoneyId = quotaMoneyRepository.save(quotaMoney);
+		quotaMoney.setId(quotaMoneyId);
+		patch(quotaMoney);
+		return quotaMoney;
+	}
+	
 	public void patch(QuotaMoney qMoney) {
 		Employee employee = staffRepository.findById(qMoney.getEmployee().getId()).get();
 		qMoney.setEmployee(employee);
