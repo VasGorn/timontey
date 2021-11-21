@@ -219,3 +219,16 @@ function getModelQuotaMoney(quotaMoneyRow){
 
 	return quotaMoney;
 }
+
+function findIndexInTable(row) {
+	let tableData = $table.bootstrapTable('getData');
+	let index = 0;
+
+	for (let i = 0; i < tableData.length; ++i) {
+		if (row.id === tableData[i].id) {
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
