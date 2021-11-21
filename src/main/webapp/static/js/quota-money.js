@@ -93,6 +93,25 @@ function postDataToServer(quotaMoney){
 	});
 }
 
+function putDataToServer(quotaMoney, index){
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_QUOTA_MONEY + '/' + quotaMoney.id,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(quotaMoney),
+		success: function(resp) {
+			console.log(resp);
+			let quotaMoneyRow = qMoneyRowMapper(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: quotaMoneyRow 
+			});
+		}
+	});
+}
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
