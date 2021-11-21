@@ -25,6 +25,7 @@ var $table = $('#table');
 var checkedRows = [];
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 $table.bootstrapTable({ data: [] });
 
@@ -47,6 +48,32 @@ function btnAddClicked(){
 	
 	let quotaMoney = getModelQuotaMoney(newQuotaMoneyRow);
 	postDataToServer(quotaMoney);
+}
+
+function btnUpdateClicked(){
+	let newQuotaMoneyRow = getQuotaMoneyFromForm();
+	let oldQuotaMonetRow = checkedRows[0];
+
+	let index = findIndexInTable(oldQuotaMonetRow);
+	
+	if(newQuotaMoneyRow.orderId != oldQuotaMonetRow.orderId){
+		alert("Order cannot be changed!");
+		return;
+	}
+	
+	if(newQuotaMoneyRow.employeeId != oldQuotaMonetRow.employeeId){
+		alert("Employee cannot be changed!");
+		return;
+	}
+	
+	if(newQuotaMoneyRow.moneyLimit < 0.0){
+		alert("Money limit must be greater then zero!");
+		return;
+	}
+	
+	let quotaMoney = getModelQuotaMoney(newQuotaMoneyRow);
+	quotaMoney.id = oldQuotaMonetRow.id;
+	putDataToServer(quotaMoney, index);
 }
 
 function postDataToServer(quotaMoney){
