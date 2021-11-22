@@ -28,11 +28,19 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 	private static final String INSERT_QUOTA_MONEY_SQL	= 
 			"INSERT INTO quota_money (order_id, employee_id, "
 			+ "money_limit) VALUES (?, ?, ?);";
+	private static final String UPDATE_QUOTA_MONEY_SQL	= 
+			"UPDATE quota_money SET money_limit=? "
+			+ "WHERE id=?;";
 
 	@Override
 	public List<QuotaMoney> getQuotaMoneysForManager(long managerId) {
 		return jdbcTemplate.query(SELECT_QUOTA_MONEY_BY_MANAGER_ID_SQL, 
 				new QuotaMoneyRowMapper(), managerId);
+	}
+	
+	@Override
+	public int update(QuotaMoney quotaMoney) {
+		return jdbcTemplate.update(UPDATE_QUOTA_MONEY_SQL, quotaMoney.getMoneyLimit(), quotaMoney.getId());
 	}
 
 	@Override
