@@ -10,4 +10,6 @@ public interface QuotaMoneyRepository {
 
 	long save(QuotaMoney quotaMoney);
 
+	int update(QuotaMoney quotaMoney);
+
 }
