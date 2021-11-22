@@ -43,6 +43,13 @@ public class QuotaMoneyServiceImp implements QuotaMoneyService{
 		return quotaMoney;
 	}
 	
+	@Override
+	public QuotaMoney update(QuotaMoney quotaMoney) {
+		quotaMoneyRepository.update(quotaMoney);
+		patch(quotaMoney);
+		return quotaMoney;
+	}
+	
 	public void patch(QuotaMoney qMoney) {
 		Employee employee = staffRepository.findById(qMoney.getEmployee().getId()).get();
 		qMoney.setEmployee(employee);
