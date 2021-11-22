@@ -10,4 +10,6 @@ public interface QuotaMoneyService {
 
 	QuotaMoney save(QuotaMoney quotaMoney);
 
+	QuotaMoney update(QuotaMoney quotaMoney);
+
 }
