@@ -123,6 +123,34 @@ function putDataToServer(quotaMoney, index){
 	});
 }
 
+function deleteDataOnServer(quotaMoneyId) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_QUOTA_MONEY + '/' + quotaMoneyId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(quotaMoneyId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if(quotaMoneyId === checkedRows[i].id){
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			setButtonState(checkedRows.length);
+			if(checkedRows.length < 1){
+				setButtonsState();
+			}
+		}
+	});
+}
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
