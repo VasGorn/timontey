@@ -26,6 +26,7 @@ var checkedRows = [];
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 $table.bootstrapTable({ data: [] });
 
@@ -74,6 +75,16 @@ function btnUpdateClicked(){
 	let quotaMoney = getModelQuotaMoney(newQuotaMoneyRow);
 	quotaMoney.id = oldQuotaMonetRow.id;
 	putDataToServer(quotaMoney, index);
+}
+
+function btnDeleteClicked(){
+	let quotaMoneyIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < quotaMoneyIds.length; ++i) {
+		deleteDataOnServer(quotaMoneyIds[i]);
+	}
 }
 
 function postDataToServer(quotaMoney){
