@@ -290,3 +290,34 @@ function findIndexInTable(row) {
 	}
 	return index;
 }
+
+function setButtonsState(checkedRowsLength){
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	
+	if(orderId == 0 || employeeId == 0){
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	} 
+	
+	if (checkedRowsLength < 1) {
+		btnAdd.disabled = false;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (checkedRowsLength === 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = false;
+		btnDelete.disabled = false;
+		return;
+	}
+	if (checkedRowsLength > 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = false;
+	}
+
+}
