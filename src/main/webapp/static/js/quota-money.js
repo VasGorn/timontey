@@ -143,10 +143,7 @@ function deleteDataOnServer(quotaMoneyId) {
 				}
 			}
 			
-			setButtonState(checkedRows.length);
-			if(checkedRows.length < 1){
-				setButtonsState();
-			}
+			setButtonsState(checkedRows.length);
 		}
 	});
 }
