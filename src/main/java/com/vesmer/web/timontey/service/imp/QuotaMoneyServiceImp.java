@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,6 +59,15 @@ public class QuotaMoneyServiceImp implements QuotaMoneyService{
 		Employee manager = staffRepository.findById(order.getManager().getId()).get();
 		order.setManager(manager);
 		qMoney.setOrder(order);
+	}
+
+	@Override
+	public void delete(long quotaMoneyId) {
+		try {
+			quotaMoneyRepository.delete(quotaMoneyId);
+		} catch (EmptyResultDataAccessException e) {
+			System.err.println("Data not found: " + e.getMessage());
+		}
 	}
 
 }
