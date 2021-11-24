@@ -31,6 +31,8 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 	private static final String UPDATE_QUOTA_MONEY_SQL	= 
 			"UPDATE quota_money SET money_limit=? "
 			+ "WHERE id=?;";
+	private static final String DELETE_QUOTA_MONEY_SQL	= 
+			"DELETE FROM quota_money WHERE id=?;";
 
 	@Override
 	public List<QuotaMoney> getQuotaMoneysForManager(long managerId) {
@@ -64,6 +66,11 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 	    }
 
         return newId;
+	}
+
+	@Override
+	public void delete(long quotaMoneyId) {
+		jdbcTemplate.update(DELETE_QUOTA_MONEY_SQL, quotaMoneyId);
 	}
 
 }
