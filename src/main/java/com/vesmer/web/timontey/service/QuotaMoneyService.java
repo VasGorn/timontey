@@ -12,4 +12,6 @@ public interface QuotaMoneyService {
 
 	QuotaMoney update(QuotaMoney quotaMoney);
 
+	void delete(long quotaMoneyId);
+
 }
