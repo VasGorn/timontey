@@ -349,3 +349,12 @@ function removeStaffFromSelect(){
 		selectEmployee.removeChild(selectEmployee.options[1]);
 	}
 }
+
+function setStaffToSelect(staff){
+	for(let i = 0; i < staff.length; ++i){
+		const opt = document.createElement("option");
+		opt.value = staff[i].id;
+		opt.innerHTML = staff[i].lastName + ' ' + staff[i].firstName + ' ' + staff[i].middleName;
+		selectEmployee.appendChild(opt);
+	}
+}
