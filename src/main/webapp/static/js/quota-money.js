@@ -340,3 +340,12 @@ function setButtonsState(checkedRowsLength){
 	}
 
 }
+
+function removeStaffFromSelect(){
+	const length = selectEmployee.options.length;
+	selectEmployee.value = 0;
+	
+	for(let i = 1; i < length; ++i){
+		selectEmployee.removeChild(selectEmployee.options[1]);
+	}
+}
