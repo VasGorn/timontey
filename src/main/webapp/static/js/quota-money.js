@@ -34,6 +34,28 @@ setOrdersToSelect();
 setRolesToSelect();
 setQuotaMoneyToTable(hiddenManagerId.value);
 
+selectRole.addEventListener("change", (event) => {
+	let roleId = parseInt(event.target.value);
+	let staff = [];
+		
+	btnAdd.disabled = true;
+	btnUpdate.disabled = true;
+	btnDelete.disabled = true;
+
+	for(let i = 0; i < ROLES.length; ++i){
+		if(roleId === ROLES[i].id){
+			staff = ROLES[i].staff;
+			break;
+		}
+	}
+	
+	removeStaffFromSelect();
+	setStaffToSelect(staff);
+	
+	$table.bootstrapTable('uncheckAll');
+	checkedRows = [];
+});
+
 function btnAddClicked(){
 	let newQuotaMoneyRow = getQuotaMoneyFromForm();
 
