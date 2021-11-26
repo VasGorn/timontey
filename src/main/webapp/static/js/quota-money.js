@@ -56,6 +56,20 @@ selectRole.addEventListener("change", (event) => {
 	checkedRows = [];
 });
 
+selectOrder.addEventListener("change", (event) => {
+	let orderId = parseInt(event.target.value);
+	
+	setOrderInfo(orderId);
+		
+	btnAdd.disabled = true;
+	btnUpdate.disabled = true;
+	btnDelete.disabled = true;
+
+	$table.bootstrapTable('uncheckAll');
+	checkedRows = [];
+	setButtonsState();
+});
+
 function btnAddClicked(){
 	let newQuotaMoneyRow = getQuotaMoneyFromForm();
 
