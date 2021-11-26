@@ -70,6 +70,13 @@ selectOrder.addEventListener("change", (event) => {
 	setButtonsState();
 });
 
+selectEmployee.addEventListener("change", (event) => {
+	$table.bootstrapTable('uncheckAll');
+	checkedRows = [];
+
+	setButtonsState();
+});
+
 function btnAddClicked(){
 	let newQuotaMoneyRow = getQuotaMoneyFromForm();
 
