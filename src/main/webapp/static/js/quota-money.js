@@ -393,3 +393,18 @@ function setOrderInfo(orderId){
 	txtDescription.value = order.description;
 	txtAddress.value = order.address;
 }
+
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonsState(checkedRows.length);
+	
+	selectOrder.value = row.orderId;
+	setOrderInfo(row.orderId);
+	
+	numMoneyLimit.value = row.moneyLimit;
+
+	setEmployeeInSelect(row.employeeId);
+
+	console.log(checkedRows);
+});
+
