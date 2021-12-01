@@ -29,6 +29,11 @@ public class StaffRest {
 		return staffService.getAll();
 	}
 	
+	@GetMapping("/role/{roleId}")
+	public List<Employee> getEmployeesByRole(@PathVariable("roleId") long roleId){
+		return staffService.getEmployeesByRole(roleId);
+	}
+	
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Employee postEmployee(@RequestBody Employee employee) {
