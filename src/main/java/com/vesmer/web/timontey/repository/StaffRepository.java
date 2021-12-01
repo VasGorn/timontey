@@ -17,4 +17,6 @@ public interface StaffRepository {
 
 	Optional<Employee> findById(long id);
 
+	List<Employee> getEmployeesByRole(long roleId);
+
 }
