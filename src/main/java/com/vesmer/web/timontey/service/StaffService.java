@@ -17,4 +17,6 @@ public interface StaffService {
 
 	Optional<Employee> getEmployeeById(long id);
 
+	List<Employee> getEmployeesByRole(long roleId);
+
 }
