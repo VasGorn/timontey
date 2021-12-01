@@ -29,13 +29,29 @@ public class StaffJdbcRepo implements StaffRepository {
 												   + "WHERE id=?;";
 	private static final String DELETE_SQL		= "DELETE FROM staff WHERE id=?;";
 	private static final String SELECT_ONE_SQL	= "SELECT * FROM staff WHERE id=?;";
-	
+	private static final String SELECT_EMPLOYEE_BY_ROLE_ID_SQL = 
+		"SELECT s.id, s.last_name, s.first_name, s.middle_name "
+		+ "FROM staff AS s, "
+		+ "users AS u, "
+		+ "user_role AS ur "
+		+ "WHERE s.id = u.employee_id"
+		+ "  AND u.username = ur.username"
+		+ "  AND ur.role_id = ?;";
 
 	@Override
 	public List<Employee> getAll() {
 		List<Employee> list = (List<Employee>) jdbcTemplate.query(SELECT_ALL_SQL,
 				new EmployeeRowMapper());
 		System.out.println(Arrays.toString(list.toArray()));
+		return list;
+	}
+	
+	@Override
+	public List<Employee> getEmployeesByRole(long roleId) {
+		List<Employee> list = (List<Employee>) jdbcTemplate.query(
+				SELECT_EMPLOYEE_BY_ROLE_ID_SQL,
+				new EmployeeRowMapper(), roleId
+		);
 		return list;
 	}
 
