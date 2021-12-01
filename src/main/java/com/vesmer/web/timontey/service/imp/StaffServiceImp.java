@@ -22,6 +22,11 @@ public class StaffServiceImp implements StaffService {
 	public List<Employee> getAll() {
 		return staffRepository.getAll();
 	}
+	
+	@Override
+	public List<Employee> getEmployeesByRole(long roleId) {
+		return staffRepository.getEmployeesByRole(roleId);
+	}
 
 	@Override
 	public Employee save(Employee employee) {
