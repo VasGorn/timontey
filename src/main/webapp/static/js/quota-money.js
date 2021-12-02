@@ -418,3 +418,20 @@ $table.on('uncheck.bs.table', function(e, row) {
 	
 	console.log(checkedRows);
 });
+
+function setEmployeeInSelect(employeeId){
+	let staff;
+	for(let i = 0; i < ROLES.length; ++i){
+		staff = ROLES[i].staff;
+		for(let j = 0; j < staff.length; ++j){
+			if(staff[j].id == employeeId){
+				selectRole.value = ROLES[i].id;
+				removeStaffFromSelect();
+				setStaffToSelect(staff);
+
+				selectEmployee.value = employeeId;
+				break;
+			}
+		}
+	}
+}
