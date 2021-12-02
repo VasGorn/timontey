@@ -331,7 +331,7 @@ function findIndexInTable(row) {
 	return index;
 }
 
-function setButtonsState(checkedRowsLength){
+function setButtonsState(checkedRowsLength = 0){
 	let orderId = parseInt(selectOrder.value);
 	let employeeId = parseInt(selectEmployee.value);
 	
