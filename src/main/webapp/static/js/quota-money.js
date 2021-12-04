@@ -396,7 +396,6 @@ function setOrderInfo(orderId){
 
 $table.on('check.bs.table', function(e, row) {
 	checkedRows.push(row);
-	setButtonsState(checkedRows.length);
 	
 	selectOrder.value = row.orderId;
 	setOrderInfo(row.orderId);
@@ -404,6 +403,7 @@ $table.on('check.bs.table', function(e, row) {
 	numMoneyLimit.value = row.moneyLimit;
 
 	setEmployeeInSelect(row.employeeId);
+	setButtonsState(checkedRows.length);
 
 	console.log(checkedRows);
 });
