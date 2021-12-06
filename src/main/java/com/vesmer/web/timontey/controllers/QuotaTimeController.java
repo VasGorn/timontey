@@ -1,5 +1,7 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +33,15 @@ public class QuotaTimeController {
 		model.addObject("years", years);
 		model.addObject("months", months);
 		return model;
+	}
+	
+	private List<String> getYearsList(){
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		List<String> years = new ArrayList<String>(5);
+		for(int i = 0; i < 5; ++i) {
+			years.add(Integer.toString(year + i));
+		}
+		return years;
 	}
 
 }
