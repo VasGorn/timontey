@@ -28,6 +28,8 @@ public class NavigationController {
 				Const.BASE_URL+"orders/", "layers");
 		NavigationLink navLink7 = new NavigationLink("Quota of money", 
 				Const.BASE_URL+"quota-money/", "layers");
+		NavigationLink navLink8 = new NavigationLink("Quota of time", 
+				Const.BASE_URL+"quota-time/", "layers");
 
 		list.add(navLink1);
 		list.add(navLink2);
@@ -35,6 +37,7 @@ public class NavigationController {
 		list.add(navLink5);
 		list.add(navLink6);
 		list.add(navLink7);
+		list.add(navLink8);
 
         ModelAndView model = new ModelAndView("main");
 		model.addObject("navList", list);
