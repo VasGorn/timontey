@@ -30,3 +30,25 @@ var $table = $('#table');
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+setOrdersToSelect();
+
+function setOrdersToSelect(){
+	let managerId = hiddenManagerId.value;
+	
+	$.ajax({
+		type: "GET",
+		url: URL_REST_ORDER + "/" + managerId,
+		data: null,
+		success: function(resp) {
+			ORDERS = resp;
+			
+			for(let i = 0; i < ORDERS.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = ORDERS[i].id;
+				opt.innerHTML = ORDERS[i].name;
+				selectOrder.appendChild(opt);
+			}
+		}
+	});
+}
