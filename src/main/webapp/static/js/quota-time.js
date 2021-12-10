@@ -17,11 +17,11 @@ var numHours = document.getElementById("hours_limit");
 
 var numMoneyLimit = document.getElementById("money_limit");
 
-var URL_REST_ROLE = "/timontey1/rest/role";
-var URL_REST_EMPLOYEE = "/timontey1/rest/staff";
-var URL_REST_WORK = "/timontey1/rest/work-type";
-var URL_REST_ORDER = "/timontey1/rest/orders";
-var URL_REST_QUOTA_TIME = "/timontey1/rest/quota-time";
+var URL_REST_ROLE = "/timontey/rest/role";
+var URL_REST_EMPLOYEE = "/timontey/rest/staff";
+var URL_REST_WORK = "/timontey/rest/work-type";
+var URL_REST_ORDER = "/timontey/rest/orders";
+var URL_REST_QUOTA_TIME = "/timontey/rest/quota-time";
 
 var ROLES = [];
 var ORDERS = [];
