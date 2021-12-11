@@ -33,6 +33,7 @@ $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect();
 setRolesToSelect();
+selectedMonth();
 
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
@@ -73,4 +74,9 @@ function setRolesToSelect(){
 			}
 		}
 	});
+}
+
+function setSelectedMonth(){
+	const date = new Date();
+	selectMonth.value = date.getMonth();
 }
