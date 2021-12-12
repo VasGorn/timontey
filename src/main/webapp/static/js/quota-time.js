@@ -80,3 +80,19 @@ function selectCurrentMonth(){
 	const date = new Date();
 	selectMonth.value = date.getMonth();
 }
+
+function setEmployeesToRole(role){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_EMPLOYEE + "/role/" + role.id,
+		data: null,
+		success: function(resp) {
+			resp.forEach((element) => {
+				element.toString = element.lastName + ' ' 
+								 + element.firstName + ' ' 
+								 + element.middleName;
+			});
+			role.staff = resp;
+		}
+	});
+}
