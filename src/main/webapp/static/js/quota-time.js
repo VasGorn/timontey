@@ -96,3 +96,17 @@ function setEmployeesToRole(role){
 		}
 	});
 }
+
+function setWorkTypes(role){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_WORK + "/role/" + role.id,
+		data: null,
+		success: function(resp) {
+			resp.forEach((element) => {
+				element.toString = element.workTypeName; 
+			});
+			role.workTypes = resp;
+		}
+	});
+}
