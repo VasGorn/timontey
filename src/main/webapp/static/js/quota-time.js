@@ -35,6 +35,20 @@ setOrdersToSelect();
 setRolesToSelect();
 selectCurrentMonth();
 
+selectOrder.addEventListener("change", (event) => {
+	let orderId = parseInt(event.target.value);
+	let numMonth = parseInt(selectMonth.value) + 1;
+	let year = parseInt(selectYear.value);
+	
+	setOrderInfo(orderId);
+
+	$table.bootstrapTable('uncheckAll');
+	checkedRows = [];
+	setButtonsState(checkedRows.length);
+	setSelectsState();
+	setQuotaTimeToTable(orderId, numMonth, year);
+});
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
