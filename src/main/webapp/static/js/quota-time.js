@@ -170,3 +170,12 @@ function setButtonsState(numRowSelected){
 	}
 
 }
+
+function setSelectsState(){
+	let orderId = parseInt(selectOrder.value);
+	let roleId = parseInt(selectRole.value);
+	if(orderId > 0 && roleId > 0){
+		selectEmployee.disabled = false;
+		selectWorkType.disabled = false;
+	}
+}
