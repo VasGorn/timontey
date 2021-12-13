@@ -125,6 +125,21 @@ function setWorkTypes(role){
 	});
 }
 
+function setQuotaTimeToTable(orderId, numMonth, year){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_QUOTA_TIME + "/order/" + orderId
+								 + "/month/" + numMonth
+								 + "/year/"  + year,
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			let quotaTimeRowArray = quotaTimeToRowArray(resp);
+			$table.bootstrapTable('load', quotaTimeRowArray);
+		}
+	});
+}
+
 function setOrderInfo(orderId){
 	let order;
 	for(let i = 0; i < ORDERS.length; ++i){
