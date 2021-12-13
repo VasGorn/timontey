@@ -124,3 +124,17 @@ function setWorkTypes(role){
 		}
 	});
 }
+
+function setOrderInfo(orderId){
+	let order;
+	for(let i = 0; i < ORDERS.length; ++i){
+		if(orderId === ORDERS[i].id){
+			order = ORDERS[i];
+			break;
+		}
+	}
+
+	txtOrderName.value = order.name;
+	txtDescription.value = order.description;
+	txtAddress.value = order.address;
+}
