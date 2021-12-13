@@ -138,3 +138,35 @@ function setOrderInfo(orderId){
 	txtDescription.value = order.description;
 	txtAddress.value = order.address;
 }
+
+function setButtonsState(numRowSelected){
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	let workTypeId = parseInt(selectWorkType.value);
+	
+	if(orderId == 0 || employeeId == 0 || workTypeId == 0){
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	} 
+	
+	if (numRowSelected < 1) {
+		btnAdd.disabled = false;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (numRowSelected === 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = false;
+		btnDelete.disabled = false;
+		return;
+	}
+	if (numRowSelected > 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = false;
+	}
+
+}
