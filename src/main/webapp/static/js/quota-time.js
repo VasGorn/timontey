@@ -248,3 +248,12 @@ function removeOptionsFromSelect(select){
 		select.removeChild(select.options[1]);
 	}
 }
+
+function setObjectsToSelect(objectArray, select){
+	for(let i = 0; i < objectArray.length; ++i){
+		const opt = document.createElement("option");
+		opt.value = objectArray[i].id;
+		opt.innerHTML = objectArray[i].toString;
+		select.appendChild(opt);
+	}
+}
