@@ -49,6 +49,28 @@ selectOrder.addEventListener("change", (event) => {
 	setQuotaTimeToTable(orderId, numMonth, year);
 });
 
+selectRole.addEventListener("change", (event) => {
+	let roleId = parseInt(event.target.value);
+		
+	let staff = [];
+	let workTypes = [];
+	for(let i = 0; i < ROLES.length; ++i){
+		if(roleId === ROLES[i].id){
+			staff = ROLES[i].staff;
+			workTypes = ROLES[i].workTypes;
+			break;
+		}
+	}
+
+	removeOptionsFromSelect(selectEmployee);
+	setObjectsToSelect(staff, selectEmployee);
+	
+	removeOptionsFromSelect(selectWorkType);
+	setObjectsToSelect(workTypes, selectWorkType);
+	
+	setSelectsState();
+});
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
