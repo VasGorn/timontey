@@ -140,6 +140,29 @@ function setQuotaTimeToTable(orderId, numMonth, year){
 	});
 }
 
+function quotaTimeToRowArray(quotaTimeArray){
+	let rowArray = [];
+	for(let i = 0; i < quotaTimeArray.length; ++i){
+		let quotaTime = quotaTimeArray[i];
+		let workTypeHours = quotaTime.workTypeHours;
+		for(let j = 0; j < workTypeHours.length; ++j){
+			let workHour = workTypeHours[j];
+			let row = new Object();
+			row.workHourId = workHour.id;
+			row.quotaTimeId = quotaTime.id;
+			row.employeeId = quotaTime.employee.id;
+			row.employee = quotaTime.employee.lastName + ' '
+							+ quotaTime.employee.firstName + ' '
+							+ quotaTime.employee.middleName;
+			row.workTypeId = workHour.workType.id;
+			row.workType = workHour.workType.workTypeName;
+			row.hours = workHour.hours;
+			rowArray.push(row);
+		}
+	}
+	return rowArray;
+}
+
 function setOrderInfo(orderId){
 	let order;
 	for(let i = 0; i < ORDERS.length; ++i){
