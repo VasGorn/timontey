@@ -75,6 +75,10 @@ selectEmployee.addEventListener("change", (event) => {
 	setButtonsState(checkedRows.length);
 });
 
+selectWorkType.addEventListener("change", (event) => {
+	setButtonsState(checkedRows.length);
+});
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
