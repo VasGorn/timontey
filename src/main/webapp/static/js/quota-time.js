@@ -71,6 +71,10 @@ selectRole.addEventListener("change", (event) => {
 	setSelectsState();
 });
 
+selectEmployee.addEventListener("change", (event) => {
+	setButtonsState(checkedRows.length);
+});
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
