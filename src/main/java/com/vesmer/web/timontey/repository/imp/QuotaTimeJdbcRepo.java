@@ -7,8 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.vesmer.web.timontey.domain.QuotaTime;
+import com.vesmer.web.timontey.domain.WorkTypeHours;
 import com.vesmer.web.timontey.repository.QuotaTimeRepository;
 import com.vesmer.web.timontey.rowmapper.QuotaTimeRowMapper;
+import com.vesmer.web.timontey.rowmapper.WorkTypeHoursRowMapper;
 
 @Repository
 public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
@@ -17,6 +19,9 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 	
 	private static final String SELECT_QUOTA_TIME_LIST_FOR_ORDER_SQL =
 		"SELECT * FROM quota_time WHERE order_id=? AND year=?;";
+	private static final String SELECT_WORKTYPE_HOURS_LIST_SQL =
+			"SELECT * FROM worktype_hours WHERE quota_time_id=?"
+			+ " AND num_month=?;";
 
 	@Override
 	public List<QuotaTime> getQuotaTimeListForOrder(long orderId, 
@@ -36,6 +41,12 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 		}
 		
 		return listQuota;
+	}
+	
+	private List<WorkTypeHours> getWorktypeQuotaList(long quotaTimeId, short numMonth) {
+		return jdbcTemplate.query(SELECT_WORKTYPE_HOURS_LIST_SQL, 
+				new WorkTypeHoursRowMapper(), 
+				quotaTimeId, numMonth);
 	}
 
 }
