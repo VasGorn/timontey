@@ -92,6 +92,19 @@ selectYear.addEventListener("change", (event) => {
 	setQuotaTimeToTable(orderId, numMonth, year);
 });
 
+selectMonth.addEventListener("change", (event) => {
+	let orderId = parseInt(selectOrder.value);
+	let numMonth = parseInt(selectMonth.value) + 1;
+	let year = parseInt(selectYear.value);
+	
+	if(orderId < 1){
+		return;
+	}
+	
+	checkedRows = [];
+	setQuotaTimeToTable(orderId, numMonth, year);
+});
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
