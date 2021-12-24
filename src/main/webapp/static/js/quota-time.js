@@ -123,6 +123,22 @@ function btnAddClicked(){
 	postDataToServer(newQuotaTime);
 }
 
+function postDataToServer(quotaTime){
+	$.ajax({
+		type: "POST",
+		url: URL_REST_QUOTA_TIME,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(quotaTime),
+		success: function(resp) {
+			let quotaTimeRow = quotaTimeToRow(resp);
+			console.log(quotaTimeRow);
+			$table.bootstrapTable('append', quotaTimeRow);
+			$table.bootstrapTable('scrollTo', 'bottom');
+		}
+	});
+}
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
