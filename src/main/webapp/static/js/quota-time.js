@@ -35,6 +35,8 @@ setOrdersToSelect();
 setRolesToSelect();
 selectCurrentMonth();
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 selectOrder.addEventListener("change", (event) => {
 	let orderId = parseInt(event.target.value);
 	let numMonth = parseInt(selectMonth.value) + 1;
@@ -104,6 +106,22 @@ selectMonth.addEventListener("change", (event) => {
 	checkedRows = [];
 	setQuotaTimeToTable(orderId, numMonth, year);
 });
+
+function btnAddClicked(){
+	let newQuotaTime = getQuotaTimeFromForm();
+
+	if(countQuotaInTable(newQuotaTime) > 0){
+		alert("This record already exist on the selected order!");
+		return;
+	}
+	
+	if(newQuotaTime.workTypeHours[0].hours < 0.0){
+		alert("Money limit must be greater then zero!");
+		return;
+	}
+	
+	postDataToServer(newQuotaTime);
+}
 
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
