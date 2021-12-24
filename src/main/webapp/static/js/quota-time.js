@@ -309,3 +309,31 @@ function setObjectsToSelect(objectArray, select){
 		select.appendChild(opt);
 	}
 }
+
+function getQuotaTimeFromForm(){
+	let order = new Object();
+	order.id = parseInt(selectOrder.value);
+	
+	let employee = new Object();
+	employee.id = parseInt(selectEmployee.value);
+	
+	let workType = new Object();
+	workType.id = parseInt(selectWorkType.value);
+
+	let workHours = new Object();
+	workHours.numMonth = parseInt(selectMonth.value) + 1;
+	workHours.workType = workType;
+	workHours.hours = parseInt(numHours.value.trim());
+
+	let workTypeHours = [];
+	workTypeHours.push(workHours);
+	
+	let quotaTime = new Object();
+	quotaTime.id = 0;
+	quotaTime.order = order;
+	quotaTime.employee = employee;
+	quotaTime.workTypeHours = workTypeHours;
+	quotaTime.year = parseInt(selectYear.value);
+	
+	return quotaTime;
+}
