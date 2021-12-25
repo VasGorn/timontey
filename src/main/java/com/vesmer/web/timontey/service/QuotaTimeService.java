@@ -9,4 +9,6 @@ public interface QuotaTimeService {
 	List<QuotaTime> getQuotaTimeListForOrder(long orderId, short numMonth, 
 			short year);
 
+	QuotaTime save(QuotaTime quotaTime);
+
 }
