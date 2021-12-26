@@ -9,6 +9,6 @@ public interface QuotaTimeRepository {
 	List<QuotaTime> getQuotaTimeListForOrder(long orderId, short numMonth, 
 			short year);
 
-	QuotaTime save(QuotaTime quotaTime);
+	void save(QuotaTime quotaTime);
 
 }
