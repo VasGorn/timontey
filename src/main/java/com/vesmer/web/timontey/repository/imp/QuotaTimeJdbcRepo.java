@@ -1,10 +1,14 @@
 package com.vesmer.web.timontey.repository.imp;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.vesmer.web.timontey.domain.QuotaTime;
@@ -27,6 +31,9 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			"SELECT id FROM quota_time WHERE order_id=?"
 			+ " AND employee_id=?"
 			+ " AND year=?;";
+	private static final String INSERT_QUOTA_TIME_SQL =
+			"INSERT INTO quota_time (order_id, employee_id, year)"
+			+ " VALUES (?, ?, ?);";
 
 	@Override
 	public List<QuotaTime> getQuotaTimeListForOrder(long orderId, 
@@ -81,6 +88,28 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			System.out.println("Not found quota time!!");
 		}
 		return id;
+	}
+	
+	private long saveQuotaTime(QuotaTime quotaTime) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(INSERT_QUOTA_TIME_SQL, Statement.RETURN_GENERATED_KEYS);
+	          ps.setLong(1, quotaTime.getOrder().getId());
+	          ps.setLong(2, quotaTime.getEmployee().getId());
+	          ps.setShort(3, quotaTime.getYear());
+	          return ps;
+	        }, keyHolder);
+	    
+	    long newId;
+	    if (keyHolder.getKeys().size() > 1) {
+	        newId = ((Number) keyHolder.getKeys().get("id")).longValue();
+	    } else {
+	        newId= keyHolder.getKey().longValue();
+	    }
+
+        return newId;
 	}
 
 }
