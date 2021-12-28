@@ -30,6 +30,21 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 				orderId, numMonth, year);
 	}
 	
+	@Override
+	public void save(QuotaTime quotaTime) {
+		long quotaTimeId = getQuotaTimeId(quotaTime);
+		
+		if(quotaTimeId < 1) {
+			quotaTimeId = saveQuotaTime(quotaTime);
+		}
+		quotaTime.setId(quotaTimeId);
+		
+		WorkTypeHours workHours = quotaTime.getWorkTypeHours().get(0);
+		long workTypeHoursId = saveWorkTypeHours(workHours, quotaTimeId);
+		workHours.setId(workTypeHoursId);
+		
+	}
+	
 	private List<QuotaTime> getQuotaTimeList(String sql, long paramerId, 
 			short numMonth, short year){
 		List<QuotaTime> listQuota = jdbcTemplate.query(sql, 
@@ -48,5 +63,4 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 				new WorkTypeHoursRowMapper(), 
 				quotaTimeId, numMonth);
 	}
-
 }
