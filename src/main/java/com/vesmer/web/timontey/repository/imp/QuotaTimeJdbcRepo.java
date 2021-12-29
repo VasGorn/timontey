@@ -34,6 +34,10 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 	private static final String INSERT_QUOTA_TIME_SQL =
 			"INSERT INTO quota_time (order_id, employee_id, year)"
 			+ " VALUES (?, ?, ?);";
+	private static final String INSERT_WORKTYPE_HOURS_SQL =
+			"INSERT INTO worktype_hours (quota_time_id, work_type_id,"
+			+ " num_month, hours)"
+			+ " VALUES (?, ?, ?, ?);";
 
 	@Override
 	public List<QuotaTime> getQuotaTimeListForOrder(long orderId, 
@@ -99,6 +103,29 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 	          ps.setLong(1, quotaTime.getOrder().getId());
 	          ps.setLong(2, quotaTime.getEmployee().getId());
 	          ps.setShort(3, quotaTime.getYear());
+	          return ps;
+	        }, keyHolder);
+	    
+	    long newId;
+	    if (keyHolder.getKeys().size() > 1) {
+	        newId = ((Number) keyHolder.getKeys().get("id")).longValue();
+	    } else {
+	        newId= keyHolder.getKey().longValue();
+	    }
+
+        return newId;
+	}
+	
+	private long saveWorkTypeHours(WorkTypeHours workHours, long quotaTimeId) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection .prepareStatement(
+	        		INSERT_WORKTYPE_HOURS_SQL, Statement.RETURN_GENERATED_KEYS);
+	          ps.setLong(1, quotaTimeId);
+	          ps.setLong(2, workHours.getWorkType().getId());
+	          ps.setShort(3, workHours.getNumMonth());
+	          ps.setInt(4, workHours.getHours());
 	          return ps;
 	        }, keyHolder);
 	    
