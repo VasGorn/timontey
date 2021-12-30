@@ -36,6 +36,7 @@ setRolesToSelect();
 selectCurrentMonth();
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 selectOrder.addEventListener("change", (event) => {
 	let orderId = parseInt(event.target.value);
@@ -121,6 +122,36 @@ function btnAddClicked(){
 	}
 	
 	postDataToServer(newQuotaTime);
+}
+
+function btnUpdateClicked(){
+	let newQuotaTime = getQuotaTimeFromForm();
+	let oldQuotaTimeRow = checkedRows[0];
+	
+	newQuotaTime.id = oldQuotaTimeRow.quotaTimeId;
+	newQuotaTime.workTypeHours[0].id = oldQuotaTimeRow.workHourId;
+	
+	let index = findIndexInTable(oldQuotaTimeRow);
+
+	console.log(newQuotaTime);
+	if(newQuotaTime.workTypeHours[0].hours < 0.0){
+		alert("Money limit must be greater then zero!");
+		return;
+	}
+	
+	if(newQuotaTime.workTypeHours[0].workType.id === oldQuotaTimeRow.workTypeId
+			&& newQuotaTime.employee.id === oldQuotaTimeRow.employeeId
+			&& newQuotaTime.workTypeHours[0].hours === oldQuotaTimeRow.hours){
+		alert("Record not changed!");
+		return;
+	}
+	
+	if(countQuotaInTable(newQuotaTime) > 0){
+		alert("Updated value already exist!");
+		return;
+	}
+	
+	putDataToServer(newQuotaTime, index);
 }
 
 function postDataToServer(quotaTime){
