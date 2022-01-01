@@ -170,6 +170,25 @@ function postDataToServer(quotaTime){
 	});
 }
 
+function putDataToServer(quotaTime, index){
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_QUOTA_TIME + '/' + quotaTime.id,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(quotaTime),
+		success: function(resp) {
+			console.log(resp);
+			let quotaTimeRow = quotaTimeToRow(resp);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: quotaTimeRow 
+			});
+		}
+	});
+}
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
@@ -411,4 +430,20 @@ function countQuotaInTable(newQuotaTime){
 		}
 	});
 	return count;
+}
+
+function quotaTimeToRow(quotaTime){
+	let workTypeHours = quotaTime.workTypeHours;
+	let workHour = workTypeHours[0];
+	let row = new Object();
+	row.workHourId = workHour.id;
+	row.quotaTimeId = quotaTime.id;
+	row.employeeId = quotaTime.employee.id;
+	row.employee = quotaTime.employee.lastName + ' '
+					+ quotaTime.employee.firstName + ' '
+					+ quotaTime.employee.middleName;
+	row.workTypeId = workHour.workType.id;
+	row.workType = workHour.workType.workTypeName;
+	row.hours = workHour.hours;
+	return row;
 }
