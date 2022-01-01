@@ -397,3 +397,18 @@ function findIndexInTable(row) {
 	}
 	return index;
 }
+
+function countQuotaInTable(newQuotaTime){
+	let tableData = $table.bootstrapTable('getData');
+	let count = 0;
+	
+	let employeeId = newQuotaTime.employee.id;
+	let workTypeId = newQuotaTime.workTypeHours[0].workType.id;
+	tableData.forEach((element, index) => {
+		if (element.employeeId == employeeId &&
+				element.workTypeId == workTypeId) {
+			count++;	
+		}
+	});
+	return count;
+}
