@@ -11,4 +11,6 @@ public interface QuotaTimeService {
 
 	QuotaTime save(QuotaTime quotaTime);
 
+	QuotaTime update(QuotaTime quotaTime);
+
 }
