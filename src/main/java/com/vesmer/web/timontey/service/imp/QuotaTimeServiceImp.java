@@ -53,6 +53,13 @@ public class QuotaTimeServiceImp implements QuotaTimeService {
 		patchQuotaTime(quotaTime);
 		return quotaTime;
 	}
+	
+	@Override
+	public QuotaTime update(QuotaTime quotaTime) {
+		quotaTimeRepository.update(quotaTime);
+		patchQuotaTime(quotaTime);
+		return quotaTime;
+	}
 
 	private void patchQuotaTime(QuotaTime quotaTime) {
 		Employee employee = 
@@ -72,5 +79,5 @@ public class QuotaTimeServiceImp implements QuotaTimeService {
 			workHours.setWorkType(workType);
 		}
 	}
-	
+
 }
