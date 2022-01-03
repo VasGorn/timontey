@@ -11,4 +11,6 @@ public interface QuotaTimeRepository {
 
 	void save(QuotaTime quotaTime);
 
+	int update(QuotaTime quotaTime);
+
 }
