@@ -61,6 +61,12 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 		
 	}
 	
+	@Override
+	public int update(QuotaTime quotaTime) {
+		updateQuotaTime(quotaTime);
+		return updateWorkTypeHours(quotaTime);
+	}
+	
 	private List<QuotaTime> getQuotaTimeList(String sql, long paramerId, 
 			short numMonth, short year){
 		List<QuotaTime> listQuota = jdbcTemplate.query(sql, 
