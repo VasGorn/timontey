@@ -38,6 +38,9 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			"INSERT INTO worktype_hours (quota_time_id, work_type_id,"
 			+ " num_month, hours)"
 			+ " VALUES (?, ?, ?, ?);";
+	private static final String UPDATE_QUOTA_TIME_SQL =
+			"UPDATE quota_time SET order_id=?, employee_id=?, year=?"
+			+ " WHERE id=?;";
 
 	@Override
 	public List<QuotaTime> getQuotaTimeListForOrder(long orderId, 
@@ -143,6 +146,11 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 	    }
 
         return newId;
+	}
+	
+	private int updateQuotaTime(QuotaTime quotaTime) {
+		return jdbcTemplate.update(UPDATE_QUOTA_TIME_SQL, quotaTime.getOrder().getId(),
+				quotaTime.getEmployee().getId(), quotaTime.getYear(), quotaTime.getId());
 	}
 
 }
