@@ -200,6 +200,31 @@ function putDataToServer(quotaTime, index){
 	});
 }
 
+function deleteDataOnServer(workHourId) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_QUOTA_TIME + '/workHours/' + workHourId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(workHourId);
+			$table.bootstrapTable('remove', {
+				field: 'workHourId',
+				values: array 
+			});
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if(workHourId === checkedRows[i].workHourId){
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
 	
