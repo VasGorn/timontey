@@ -37,6 +37,7 @@ selectCurrentMonth();
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 selectOrder.addEventListener("change", (event) => {
 	let orderId = parseInt(event.target.value);
@@ -152,6 +153,16 @@ function btnUpdateClicked(){
 	}
 	
 	putDataToServer(newQuotaTime, index);
+}
+
+function btnDeleteClicked(){
+	let workHoursIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.workHourId;
+	});
+	
+	for (let i = 0; i < workHoursIds.length; ++i) {
+		deleteDataOnServer(workHoursIds[i]);
+	}
 }
 
 function postDataToServer(quotaTime){
