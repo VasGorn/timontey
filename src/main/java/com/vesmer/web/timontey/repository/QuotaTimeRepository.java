@@ -13,4 +13,6 @@ public interface QuotaTimeRepository {
 
 	int update(QuotaTime quotaTime);
 
+	void delete(long workHoursId);
+
 }
