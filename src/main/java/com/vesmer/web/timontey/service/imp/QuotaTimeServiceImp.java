@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +60,15 @@ public class QuotaTimeServiceImp implements QuotaTimeService {
 		quotaTimeRepository.update(quotaTime);
 		patchQuotaTime(quotaTime);
 		return quotaTime;
+	}
+	
+	@Override
+	public void delete(long workHoursId) {
+		try {
+			quotaTimeRepository.delete(workHoursId);
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("Data not found" + e.toString());
+		}
 	}
 
 	private void patchQuotaTime(QuotaTime quotaTime) {
