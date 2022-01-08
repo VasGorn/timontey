@@ -45,6 +45,8 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			"UPDATE worktype_hours SET quota_time_id=?, work_type_id=?,"
 			+ " num_month=?, hours=? "
 			+ " WHERE id=?;";
+	private static final String DELETE_WORKTYPE_HOURS_SQL =
+			"DELETE FROM worktype_hours WHERE id=?;";
 
 	@Override
 	public List<QuotaTime> getQuotaTimeListForOrder(long orderId, 
@@ -72,6 +74,11 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 	public int update(QuotaTime quotaTime) {
 		updateQuotaTime(quotaTime);
 		return updateWorkTypeHours(quotaTime);
+	}
+	
+	@Override
+	public void delete(long workHoursId) {
+		jdbcTemplate.update(DELETE_WORKTYPE_HOURS_SQL, workHoursId);
 	}
 	
 	private List<QuotaTime> getQuotaTimeList(String sql, long paramerId, 
