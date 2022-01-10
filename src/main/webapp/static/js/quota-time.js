@@ -483,3 +483,17 @@ function quotaTimeToRow(quotaTime){
 	row.hours = workHour.hours;
 	return row;
 }
+
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonsState(checkedRows.length);
+	
+	let emoloyeeId = row.employeeId;
+	let workTypeId = row.workTypeId;
+	
+	setSelectValue(emoloyeeId, workTypeId);
+	
+	numHours.value = row.hours;
+
+	console.log(checkedRows);
+});
