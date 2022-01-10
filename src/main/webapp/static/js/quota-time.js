@@ -508,3 +508,41 @@ $table.on('uncheck.bs.table', function(e, row) {
 	
 	console.log(checkedRows);
 });
+
+function setSelectValue(emoloyeeId, workTypeId){
+	let staff = [];
+	let workTypes = [];
+	let roleId = 0;
+	let stopLoop = false;
+	for(let i = 0; i < ROLES.length; ++i){
+		roleId = ROLES[i].id;
+		staff = ROLES[i].staff;
+		workTypes = ROLES[i].workTypes;
+		for(let j = 0; j < workTypes.length; ++j){
+			if(workTypes[j].id === workTypeId){
+				stopLoop = true;
+				break;
+			}
+		}
+		
+		if(stopLoop){
+			break;
+		}
+	}
+	
+	if(!stopLoop){
+		return;
+	}
+
+	removeOptionsFromSelect(selectEmployee);
+	setObjectsToSelect(staff, selectEmployee);
+	
+	removeOptionsFromSelect(selectWorkType);
+	setObjectsToSelect(workTypes, selectWorkType);
+
+	selectRole.value = roleId;
+	selectEmployee.value = emoloyeeId;
+	selectWorkType.value = workTypeId;
+
+	setSelectsState();
+}
