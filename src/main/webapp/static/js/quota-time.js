@@ -486,7 +486,6 @@ function quotaTimeToRow(quotaTime){
 
 $table.on('check.bs.table', function(e, row) {
 	checkedRows.push(row);
-	setButtonsState(checkedRows.length);
 	
 	let emoloyeeId = row.employeeId;
 	let workTypeId = row.workTypeId;
@@ -494,6 +493,8 @@ $table.on('check.bs.table', function(e, row) {
 	setSelectValue(emoloyeeId, workTypeId);
 	
 	numHours.value = row.hours;
+
+	setButtonsState(checkedRows.length);
 
 	console.log(checkedRows);
 });
