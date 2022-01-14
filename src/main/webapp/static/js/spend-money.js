@@ -27,3 +27,24 @@ var BALANCE_MONEY = 0.0;
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+setOrdersToSelect(parseInt(hEmployeeId.value));
+
+function setOrdersToSelect(employeeId){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_SPEND_MONEY + "/employee/" + employeeId,
+		data: null,
+		success: function(resp) {
+			QUOTA_MONEY_ARRAY = resp;
+			console.log(resp);
+			
+			for(let i = 0; i < QUOTA_MONEY_ARRAY.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = QUOTA_MONEY_ARRAY[i].quotaMoney.id;
+				opt.innerHTML = QUOTA_MONEY_ARRAY[i].quotaMoney.order.name;
+				selectOrder.appendChild(opt);
+			}
+		}
+	});
+}
