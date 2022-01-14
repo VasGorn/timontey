@@ -25,3 +25,5 @@ var LIMIT_MONEY = 0.0;
 var BALANCE_MONEY = 0.0;
 
 var checkedRows = [];
+
+$table.bootstrapTable({ data: [] });
