@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vesmer.web.timontey.domain.MoneySpend;
+import com.vesmer.web.timontey.domain.MoneySpendExpense;
+import com.vesmer.web.timontey.domain.QuotaMoney;
 import com.vesmer.web.timontey.repository.SpendMoneyRepository;
+import com.vesmer.web.timontey.service.QuotaMoneyService;
 import com.vesmer.web.timontey.service.SpendMoneyService;
 
 @Service
@@ -15,6 +18,9 @@ import com.vesmer.web.timontey.service.SpendMoneyService;
 public class SpendMoneyServiceImp implements SpendMoneyService {
 	@Autowired
 	private SpendMoneyRepository spendMoneyRepository;
+
+	@Autowired
+	private QuotaMoneyService quotaMoneyService;
 
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
@@ -24,6 +30,18 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 			patch(moneySpend);
 		}
 		return moneySpendList;
+	}
+	
+	private void patch(MoneySpend moneySpend) {
+		QuotaMoney quotaMoney = 
+				quotaMoneyService.getQuotaMoneyById(moneySpend.getQuotaMoney().getId()).get();
+		moneySpend.setQuotaMoney(quotaMoney);
+		
+		List<MoneySpendExpense> moneyExpensesList = moneySpend.getMoneyExpenseList();
+		for(int i = 0; i < moneyExpensesList.size(); ++i) {
+			MoneySpendExpense moneyExpense = moneyExpensesList.get(i);
+			patchSpendExpense(moneyExpense);
+		}
 	}
 
 }
