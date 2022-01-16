@@ -1,6 +1,7 @@
 package com.vesmer.web.timontey.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.vesmer.web.timontey.domain.QuotaMoney;
 
@@ -13,5 +14,7 @@ public interface QuotaMoneyService {
 	QuotaMoney update(QuotaMoney quotaMoney);
 
 	void delete(long quotaMoneyId);
+
+	Optional<QuotaMoney> getQuotaMoneyById(long id);
 
 }
