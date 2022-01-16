@@ -1,6 +1,7 @@
 package com.vesmer.web.timontey.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -69,5 +70,16 @@ public class QuotaMoneyServiceImp implements QuotaMoneyService{
 			System.err.println("Data not found: " + e.getMessage());
 		}
 	}
+		
+	@Override
+	public Optional<QuotaMoney> getQuotaMoneyById(long id) {
+		Optional<QuotaMoney> opt = quotaMoneyRepository.findQuotaMoneyById(id);
+
+		if(opt.isPresent()) {
+			patch(opt.get());
+		}
+		return opt;
+	}
+	
 
 }
