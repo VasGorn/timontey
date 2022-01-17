@@ -3,8 +3,10 @@ package com.vesmer.web.timontey.repository.imp;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -33,6 +35,9 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 			+ "WHERE id=?;";
 	private static final String DELETE_QUOTA_MONEY_SQL	= 
 			"DELETE FROM quota_money WHERE id=?;";
+	private static final String SELECT_QUOTA_MONEY_BY_ID_SQL = 
+			"SELECT * FROM quota_money  "
+			+ "WHERE id = ?;";
 
 	@Override
 	public List<QuotaMoney> getQuotaMoneysForManager(long managerId) {
@@ -71,6 +76,16 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 	@Override
 	public void delete(long quotaMoneyId) {
 		jdbcTemplate.update(DELETE_QUOTA_MONEY_SQL, quotaMoneyId);
+	}
+
+	@Override
+	public Optional<QuotaMoney> findQuotaMoneyById(long id) {
+		try {
+			return Optional.of(jdbcTemplate.queryForObject(SELECT_QUOTA_MONEY_BY_ID_SQL, 
+				new QuotaMoneyRowMapper(), id));
+		} catch (EmptyResultDataAccessException ex){
+			return Optional.empty();
+		}
 	}
 
 }
