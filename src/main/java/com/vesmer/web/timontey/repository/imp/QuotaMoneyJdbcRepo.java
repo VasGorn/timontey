@@ -38,6 +38,9 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 	private static final String SELECT_QUOTA_MONEY_BY_ID_SQL = 
 			"SELECT * FROM quota_money  "
 			+ "WHERE id = ?;";
+	private static final String SELECT_QUOTA_MONEY_BY_EMPLOYEE_ID_SQL = 
+			"SELECT * FROM quota_money  "
+			+ "WHERE employee_id = ?;";
 
 	@Override
 	public List<QuotaMoney> getQuotaMoneysForManager(long managerId) {
@@ -86,6 +89,12 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 		} catch (EmptyResultDataAccessException ex){
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public List<QuotaMoney> getQuotaMoneysForEmployee(long employeeId) {
+		return jdbcTemplate.query(SELECT_QUOTA_MONEY_BY_EMPLOYEE_ID_SQL,
+				new QuotaMoneyRowMapper(), employeeId);
 	}
 
 }
