@@ -12,6 +12,7 @@ import com.vesmer.web.timontey.domain.MoneySpendExpense;
 import com.vesmer.web.timontey.domain.QuotaMoney;
 import com.vesmer.web.timontey.repository.QuotaMoneyRepository;
 import com.vesmer.web.timontey.repository.SpendMoneyRepository;
+import com.vesmer.web.timontey.rowmapper.MoneySpendExpenseRowMapper;
 
 @Repository
 public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
@@ -20,6 +21,9 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 	
 	@Autowired
 	private QuotaMoneyRepository quotaMoneyRepository;
+	
+	private static final String SELECT_MONEY_EXPENSE_BY_QUOTA_ID_SQL =
+		"SELECT * FROM spend_money WHERE quota_money_id = ?;";
 	
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
@@ -37,6 +41,14 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 			moneySpendList.add(moneySpend);
 		}
 		return moneySpendList;
+	}
+	
+	@Override
+	public List<MoneySpendExpense> getMoneyExpenseListByQuota(long quotaId) {
+		List<MoneySpendExpense> moneyExpenseList =
+				jdbcTemplate.query(SELECT_MONEY_EXPENSE_BY_QUOTA_ID_SQL, 
+						new MoneySpendExpenseRowMapper(), quotaId);
+		return moneyExpenseList;
 	}
 
 }
