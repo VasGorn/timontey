@@ -2,8 +2,10 @@ package com.vesmer.web.timontey.repository.imp;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,8 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 	
 	private static final String SELECT_MONEY_EXPENSE_BY_QUOTA_ID_SQL =
 		"SELECT * FROM spend_money WHERE quota_money_id = ?;";
+	private static final String SELECT_MONEY_EXPENSE_BY_ID_SQL =
+		"SELECT * FROM spend_money WHERE id = ?;";
 	
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
@@ -49,6 +53,16 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 				jdbcTemplate.query(SELECT_MONEY_EXPENSE_BY_QUOTA_ID_SQL, 
 						new MoneySpendExpenseRowMapper(), quotaId);
 		return moneyExpenseList;
+	}
+
+	@Override
+	public Optional<MoneySpendExpense> findMoneyExpenseById(long id) {
+		try {
+			return Optional.of(jdbcTemplate.queryForObject(SELECT_MONEY_EXPENSE_BY_ID_SQL, 
+				new MoneySpendExpenseRowMapper(), id));
+		} catch (EmptyResultDataAccessException ex){
+			return Optional.empty();
+		}
 	}
 
 }
