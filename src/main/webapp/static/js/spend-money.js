@@ -188,3 +188,13 @@ function setOrderInfo(order){
 	txtDescription.value = order.description;
 	txtAddress.value = order.address;
 }
+
+function loadMoneyExpenseToTable(moneyExpensesList){
+	let rowArray = [];
+	for(let i = 0; i < moneyExpensesList.length; ++i){
+		let row = spendExpenseToRow(moneyExpensesList[i]);
+		rowArray.push(row);
+	}
+	
+	$table.bootstrapTable('load', rowArray);
+}
