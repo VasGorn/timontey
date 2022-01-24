@@ -29,6 +29,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect(parseInt(hEmployeeId.value));
+setExpensesToSelect();
 
 function setOrdersToSelect(employeeId){
 	$.ajax({
@@ -44,6 +45,23 @@ function setOrdersToSelect(employeeId){
 				opt.value = QUOTA_MONEY_ARRAY[i].quotaMoney.id;
 				opt.innerHTML = QUOTA_MONEY_ARRAY[i].quotaMoney.order.name;
 				selectOrder.appendChild(opt);
+			}
+		}
+	});
+}
+
+function setExpensesToSelect(){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_EXPENSES + "/all" ,
+		data: null,
+		success: function(resp) {
+			for(let i = 0; i < resp.length; ++i){
+				let expenses = resp[i];
+				const opt = document.createElement("option");
+				opt.value = expenses.id;
+				opt.innerHTML = expenses.name ;
+				selectExpenses.appendChild(opt);
 			}
 		}
 	});
