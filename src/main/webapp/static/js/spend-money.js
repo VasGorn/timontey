@@ -198,3 +198,14 @@ function loadMoneyExpenseToTable(moneyExpensesList){
 	
 	$table.bootstrapTable('load', rowArray);
 }
+
+function spendExpenseToRow(spendExpense){
+	let row = new Object();
+	row.id = spendExpense.id;
+	row.expenses = spendExpense.expenses.name;
+	row.expensesId = spendExpense.expenses.id;
+	row.date = spendExpense.date;
+	row.money = spendExpense.money;
+	row.approve = spendExpense.approve;
+	return row;
+}
