@@ -33,6 +33,24 @@ btnAdd.addEventListener("click", btnAddClicked, false);
 setOrdersToSelect(parseInt(hEmployeeId.value));
 setExpensesToSelect();
 
+selectOrder.addEventListener("change", (event) => {
+	let moneyQuotId = parseInt(event.target.value);
+	let order;
+	let moneyExpenseList;
+	
+	for(let i = 0; i < QUOTA_MONEY_ARRAY.length; ++i){
+		if(moneyQuotId === QUOTA_MONEY_ARRAY[i].quotaMoney.id){
+			order = QUOTA_MONEY_ARRAY[i].quotaMoney.order;
+			moneyExpenseList = QUOTA_MONEY_ARRAY[i].moneyExpenseList;
+			updateOrderMoney(QUOTA_MONEY_ARRAY[i].quotaMoney, moneyExpenseList);
+			break;
+		}
+	}
+
+	setOrderInfo(order);
+	loadMoneyExpenseToTable(moneyExpenseList);
+});
+
 function setOrdersToSelect(employeeId){
 	$.ajax({
 		type: "GET",
