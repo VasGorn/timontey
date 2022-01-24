@@ -116,3 +116,24 @@ function getDataFromForm(){
 	
 	return moneySpend;
 }
+
+function postDataToServer(spendMoney){
+	$.ajax({
+		type: "POST",
+		url: URL_REST_SPEND_MONEY,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(spendMoney),
+		success: function(resp) {
+			addSpendMoneyToArray(resp);
+
+			let spendExpense = resp.moneyExpenseList[0];
+			let spendExpenseRow = spendExpenseToRow(spendExpense);
+
+			$table.bootstrapTable('append', spendExpenseRow);
+			$table.bootstrapTable('scrollTo', 'bottom');
+			console.log(resp);
+			btnAdd.disabled = false;
+		}
+	});
+}
