@@ -87,3 +87,8 @@ function btnAddClicked(){
 	let moneySpend = getDataFromForm();
 	postDataToServer(moneySpend);
 }
+
+function roundTwoDigit(number){
+	let newValue = Math.round(number * 100.0) / 100.0;
+	return newValue;
+}
