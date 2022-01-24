@@ -28,6 +28,8 @@ var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 setOrdersToSelect(parseInt(hEmployeeId.value));
 setExpensesToSelect();
 
@@ -65,4 +67,23 @@ function setExpensesToSelect(){
 			}
 		}
 	});
+}
+
+function btnAddClicked(){
+	let money = roundTwoDigit(parseFloat(numMoneySpend.value));
+	numMoneySpend.value = money;
+	
+	if(money <= 0.0){
+		alert("Amount of money must be positive number!");
+		return;
+	}
+	
+	if(money + BALANCE_MONEY > LIMIT_MONEY){
+		alert("Amount of money is above limit!");
+		return;
+	}
+
+	btnAdd.disabled = true;
+	let moneySpend = getDataFromForm();
+	postDataToServer(moneySpend);
 }
