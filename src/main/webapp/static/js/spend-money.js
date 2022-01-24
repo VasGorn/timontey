@@ -151,3 +151,13 @@ function addSpendMoneyToArray(spendMoney){
 		}
 	}
 }
+
+function updateOrderMoney(quotaMoney, moneyExpenseList){
+	LIMIT_MONEY = quotaMoney.moneyLimit;
+	BALANCE_MONEY = 0.0;
+	for(let i = 0; i < moneyExpenseList.length; ++i){
+		BALANCE_MONEY += parseFloat(moneyExpenseList[i].money);
+	}
+	numOrderLimitMoney.value = roundTwoDigit(LIMIT_MONEY);
+	numOrderBalanceMoney.value = roundTwoDigit(BALANCE_MONEY);
+}
