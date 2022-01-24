@@ -137,3 +137,17 @@ function postDataToServer(spendMoney){
 		}
 	});
 }
+
+function addSpendMoneyToArray(spendMoney){
+	let moneyQuotaId = spendMoney.quotaMoney.id;
+	let moneyExpense = spendMoney.moneyExpenseList[0];
+	for(let i = 0; i < QUOTA_MONEY_ARRAY.length; ++i){
+		if(moneyQuotaId === QUOTA_MONEY_ARRAY[i].quotaMoney.id){
+			let moneyExpenseList = QUOTA_MONEY_ARRAY[i].moneyExpenseList;
+			moneyExpenseList.push(moneyExpense);
+			updateOrderMoney(QUOTA_MONEY_ARRAY[i].quotaMoney, 
+							 QUOTA_MONEY_ARRAY[i].moneyExpenseList);
+			break;
+		}
+	}
+}
