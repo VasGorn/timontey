@@ -179,3 +179,12 @@ function updateOrderMoney(quotaMoney, moneyExpenseList){
 	numOrderLimitMoney.value = roundTwoDigit(LIMIT_MONEY);
 	numOrderBalanceMoney.value = roundTwoDigit(BALANCE_MONEY);
 }
+
+function setOrderInfo(order){
+	let manager = order.manager;
+
+	txtManagerName.value = manager.lastName + ' ' + manager.firstName + ' ' 
+						   + manager.middleName;
+	txtDescription.value = order.description;
+	txtAddress.value = order.address;
+}
