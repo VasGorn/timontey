@@ -213,3 +213,29 @@ function spendExpenseToRow(spendExpense){
 	row.approve = spendExpense.approve;
 	return row;
 }
+
+function setButtonsState(numRowSelected) {
+	if (parseInt(selectExpenses.value) === 0) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (numRowSelected < 1) {
+		btnAdd.disabled = false;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (numRowSelected === 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = false;
+		btnDelete.disabled = false;
+		return;
+	}
+	if (numRowSelected > 1) {
+		btnAdd.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = false;
+	}
+}
