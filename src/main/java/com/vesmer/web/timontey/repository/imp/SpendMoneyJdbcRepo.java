@@ -1,5 +1,7 @@
 package com.vesmer.web.timontey.repository.imp;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +9,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.vesmer.web.timontey.domain.MoneySpend;
@@ -28,6 +32,9 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 		"SELECT * FROM spend_money WHERE quota_money_id = ?;";
 	private static final String SELECT_MONEY_EXPENSE_BY_ID_SQL =
 		"SELECT * FROM spend_money WHERE id = ?;";
+	private static final String INSERT_SPEND_MONEY_SQL = 
+		"INSERT INTO spend_money (quota_money_id, expenses_id, money) "
+		+ "VALUES (?, ?, ?);";
 	
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
@@ -73,5 +80,28 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 		long moneyExpenseId = saveMoneyExpense(quotaMoneyId, moneyExpense);
 		moneyExpense.setId(moneyExpenseId);
 	}
+	
+	private long saveMoneyExpense(long quotaMoneyId, MoneySpendExpense moneyExpense) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(INSERT_SPEND_MONEY_SQL, Statement.RETURN_GENERATED_KEYS);
+	          ps.setLong(1, quotaMoneyId);
+	          ps.setLong(2, moneyExpense.getExpenses().getId());
+	          ps.setFloat(3, moneyExpense.getMoney());
+	          return ps;
+	        }, keyHolder);
+	    
+	    long newId;
+	    if (keyHolder.getKeys().size() > 1) {
+	        newId = ((Number) keyHolder.getKeys().get("id")).longValue();
+	    } else {
+	        newId= keyHolder.getKey().longValue();
+	    }
+
+        return newId;
+	}
+
 
 }
