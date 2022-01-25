@@ -37,6 +37,13 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 		return moneySpendList;
 	}
 	
+	@Override
+	public MoneySpend save(MoneySpend moneySpend) {
+		spendMoneyRepository.save(moneySpend);
+		patch(moneySpend);
+		return moneySpend;
+	}
+	
 	private void patch(MoneySpend moneySpend) {
 		QuotaMoney quotaMoney = 
 				quotaMoneyService.getQuotaMoneyById(moneySpend.getQuotaMoney().getId()).get();
@@ -57,5 +64,4 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 		moneyExpense.setExpenses(expenses);
 		moneyExpense.setDate(fullMoneyExpense.getDate());
 	}
-
 }
