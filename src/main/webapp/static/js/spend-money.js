@@ -29,6 +29,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 setOrdersToSelect(parseInt(hEmployeeId.value));
 setExpensesToSelect();
@@ -108,6 +109,33 @@ function btnAddClicked(){
 	btnAdd.disabled = true;
 	let moneySpend = getDataFromForm();
 	postDataToServer(moneySpend);
+}
+
+function btnUpdateClicked(){
+	let oldSpendMoneyRow = checkedRows[0];
+
+	let newMoneyValue = roundTwoDigit(parseFloat(numMoneySpend.value));
+	let oldMoneyValue = oldSpendMoneyRow.money;
+	
+	if(newMoneyValue <= 0.0){
+		alert("Amount of money must be positive number!");
+		return;
+	}
+	
+	if(newMoneyValue + (BALANCE_MONEY - oldMoneyValue) > LIMIT_MONEY){
+		alert("Amount of money is above limit!");
+		return;
+	}
+
+	numMoneySpend.value = newMoneyValue;
+	btnUpdate.disabled = true;
+
+	let newMoneySpend = getDataFromForm();
+	let newMoneySpendExpense = newMoneySpend.moneyExpenseList[0];
+	newMoneySpendExpense.id = oldSpendMoneyRow.id;
+	
+	let index = findIndexInTable(oldSpendMoneyRow);
+	putDataToServer(newMoneySpendExpense, index);
 }
 
 function roundTwoDigit(number){
