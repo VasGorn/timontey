@@ -8,4 +8,6 @@ public interface SpendMoneyService {
 
 	List<MoneySpend> getMoneySpendListForEmployee(long employeeId);
 
+	MoneySpend save(MoneySpend moneySpend);
+
 }
