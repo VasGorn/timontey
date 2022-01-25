@@ -14,4 +14,6 @@ public interface SpendMoneyRepository {
 
 	Optional<MoneySpendExpense> findMoneyExpenseById(long id);
 
+	void save(MoneySpend moneySpend);
+
 }
