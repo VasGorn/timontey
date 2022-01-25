@@ -65,4 +65,13 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 		}
 	}
 
+	@Override
+	public void save(MoneySpend moneySpend) {
+		long quotaMoneyId = moneySpend.getQuotaMoney().getId();
+		
+		MoneySpendExpense moneyExpense = moneySpend.getMoneyExpenseList().get(0);
+		long moneyExpenseId = saveMoneyExpense(quotaMoneyId, moneyExpense);
+		moneyExpense.setId(moneyExpenseId);
+	}
+
 }
