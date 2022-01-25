@@ -51,6 +51,10 @@ selectOrder.addEventListener("change", (event) => {
 	loadMoneyExpenseToTable(moneyExpenseList);
 });
 
+selectExpenses.addEventListener("change", (event) => {
+	setButtonsState(checkedRows.length);
+});
+
 function setOrdersToSelect(employeeId){
 	$.ajax({
 		type: "GET",
