@@ -188,6 +188,34 @@ function postDataToServer(spendMoney){
 	});
 }
 
+function putDataToServer(newSpendMoney, index){
+	let moneyExpenseId = newSpendMoney.id;
+	let moneyQuotaId = parseInt(selectOrder.value);
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_SPEND_MONEY + '/' + moneyExpenseId,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(newSpendMoney),
+		success: function(resp) {
+			console.log(resp);
+			let spendExpense = resp;
+			
+			let spendExpenseRow = spendExpenseToRow(spendExpense);
+			updateSpendExpenseInArray(spendExpense, moneyQuotaId);
+
+			$table.bootstrapTable('uncheckAll');
+			checkedRows = [];
+			setButtonsState(checkedRows.length);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: spendExpenseRow
+			});
+		}
+	});
+}
+
 function addSpendMoneyToArray(spendMoney){
 	let moneyQuotaId = spendMoney.quotaMoney.id;
 	let moneyExpense = spendMoney.moneyExpenseList[0];
