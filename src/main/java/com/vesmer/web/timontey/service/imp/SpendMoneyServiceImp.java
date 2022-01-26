@@ -44,6 +44,13 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 		return moneySpend;
 	}
 	
+	@Override
+	public MoneySpendExpense update(MoneySpendExpense mSpendExpense) {
+		spendMoneyRepository.update(mSpendExpense);
+		patchSpendExpense(mSpendExpense);
+		return mSpendExpense;
+	}
+	
 	private void patch(MoneySpend moneySpend) {
 		QuotaMoney quotaMoney = 
 				quotaMoneyService.getQuotaMoneyById(moneySpend.getQuotaMoney().getId()).get();
