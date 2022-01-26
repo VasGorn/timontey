@@ -394,4 +394,7 @@ $table.on('check.bs.table', function(e, row) {
 	console.log(checkedRows);
 });
 
-
+function setSelectValue(row){
+	selectExpenses.value = row.expensesId;
+	numMoneySpend.value = row.money;
+}
