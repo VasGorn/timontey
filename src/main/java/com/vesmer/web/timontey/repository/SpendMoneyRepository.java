@@ -16,4 +16,6 @@ public interface SpendMoneyRepository {
 
 	void save(MoneySpend moneySpend);
 
+	int update(MoneySpendExpense mSpendExpense);
+
 }
