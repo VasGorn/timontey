@@ -35,6 +35,9 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 	private static final String INSERT_SPEND_MONEY_SQL = 
 		"INSERT INTO spend_money (quota_money_id, expenses_id, money) "
 		+ "VALUES (?, ?, ?);";
+	private static final String UPDATE_MONEY_EXPENSE_SQL =
+		"UPDATE spend_money SET expenses_id = ?, money = ?, approve = FALSE "
+		+ "WHERE id = ?;";
 	
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
@@ -81,6 +84,15 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 		moneyExpense.setId(moneyExpenseId);
 	}
 	
+	@Override
+	public int update(MoneySpendExpense mSpendExpense) {
+		long mSpendExpenseId = mSpendExpense.getId();
+		long expenseId = mSpendExpense.getExpenses().getId();
+		float money = mSpendExpense.getMoney();
+		return jdbcTemplate.update(UPDATE_MONEY_EXPENSE_SQL, expenseId,
+				money, mSpendExpenseId);
+	}
+	
 	private long saveMoneyExpense(long quotaMoneyId, MoneySpendExpense moneyExpense) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
@@ -102,6 +114,4 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 
         return newId;
 	}
-
-
 }
