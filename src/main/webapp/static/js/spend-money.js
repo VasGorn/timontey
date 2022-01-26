@@ -288,6 +288,24 @@ function updateSpendExpenseInArray(moneyExpense, moneyQuotaId){
 	}
 }
 
+function deleteSpendExpenseInArray(moneyExpenseId, moneyQuotaId){
+	for(let i = 0; i < QUOTA_MONEY_ARRAY.length; ++i){
+		if(moneyQuotaId === QUOTA_MONEY_ARRAY[i].quotaMoney.id){
+			let moneyExpenseList = QUOTA_MONEY_ARRAY[i].moneyExpenseList;
+			
+			for(let j = 0; j < moneyExpenseList.length; ++j){
+				if(moneyExpenseId === moneyExpenseList[j].id){
+					moneyExpenseList.splice(j, 1);
+				}
+			}
+
+			updateOrderMoney(QUOTA_MONEY_ARRAY[i].quotaMoney, 
+							 QUOTA_MONEY_ARRAY[i].moneyExpenseList);
+			break;
+		}
+	}
+}
+
 function updateOrderMoney(quotaMoney, moneyExpenseList){
 	LIMIT_MONEY = quotaMoney.moneyLimit;
 	BALANCE_MONEY = 0.0;
