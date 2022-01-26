@@ -7,12 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vesmer.web.timontey.domain.MoneySpend;
+import com.vesmer.web.timontey.domain.MoneySpendExpense;
 import com.vesmer.web.timontey.service.SpendMoneyService;
 
 @RestController
@@ -32,5 +34,10 @@ public class SpendMoneyRest {
 	public MoneySpend postMoneySpend(@RequestBody MoneySpend moneySpend) {
 		return spendMoneyService.save(moneySpend);
 	}
-
+		
+	@PutMapping(path = "/{moneySpendExpenseId}", consumes = "application/json")
+	public MoneySpendExpense putMoneySpendExpense(
+			@RequestBody MoneySpendExpense mSpendExpense) {
+		return spendMoneyService.update(mSpendExpense);
+	}
 }
