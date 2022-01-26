@@ -227,6 +227,35 @@ function putDataToServer(newSpendMoney, index){
 	});
 }
 
+function deleteDataOnServer(spendExpenseId) {
+	let moneyQuotaId = parseInt(selectOrder.value);
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_SPEND_MONEY + '/' + spendExpenseId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(spendExpenseId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			console.log(spendExpenseId);
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if(spendExpenseId === checkedRows[i].id){
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			deleteSpendExpenseInArray(spendExpenseId, moneyQuotaId);
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function addSpendMoneyToArray(spendMoney){
 	let moneyQuotaId = spendMoney.quotaMoney.id;
 	let moneyExpense = spendMoney.moneyExpenseList[0];
