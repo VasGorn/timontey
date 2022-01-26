@@ -30,6 +30,7 @@ $table.bootstrapTable({ data: [] });
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setOrdersToSelect(parseInt(hEmployeeId.value));
 setExpensesToSelect();
@@ -136,6 +137,16 @@ function btnUpdateClicked(){
 	
 	let index = findIndexInTable(oldSpendMoneyRow);
 	putDataToServer(newMoneySpendExpense, index);
+}
+
+function btnDeleteClicked(){
+	let spendExpenseIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < spendExpenseIds.length; ++i) {
+		deleteDataOnServer(spendExpenseIds[i]);
+	}
 }
 
 function roundTwoDigit(number){
