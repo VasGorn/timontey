@@ -13,4 +13,6 @@ public interface SpendMoneyService {
 
 	MoneySpendExpense update(MoneySpendExpense mSpendExpense);
 
+	void delete(long spendExpeseId);
+
 }
