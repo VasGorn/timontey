@@ -37,4 +37,13 @@ public class WorkDayController {
 		
 		return model;
 	}
+	
+	private List<String> getDaysOfMonth(short dayOfMonth) {
+		short minDay = (short) (dayOfMonth - DAYS);
+		if(minDay < 1) {
+			minDay = 1;
+		}
+		List<String> daysList = getStringList(minDay, dayOfMonth);
+		return daysList;
+	}
 }
