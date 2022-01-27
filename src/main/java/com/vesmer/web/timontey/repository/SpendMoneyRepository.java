@@ -18,4 +18,6 @@ public interface SpendMoneyRepository {
 
 	int update(MoneySpendExpense mSpendExpense);
 
+	void delete(long spendExpeseId);
+
 }
