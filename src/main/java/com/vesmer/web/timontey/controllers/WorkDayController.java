@@ -1,5 +1,6 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class WorkDayController {
 		
 		return model;
 	}
-	
+
 	private List<String> getDaysOfMonth(short dayOfMonth) {
 		short minDay = (short) (dayOfMonth - DAYS);
 		if(minDay < 1) {
@@ -45,5 +46,16 @@ public class WorkDayController {
 		}
 		List<String> daysList = getStringList(minDay, dayOfMonth);
 		return daysList;
+	}
+	
+	private List<String> getStringList(int minValue, int maxValue){
+		List<String> stringList = new ArrayList<String>();
+		int number = maxValue;
+		while(number >= minValue) {
+			String str = String.valueOf(number);
+			stringList.add(str);
+			number--;
+		}
+		return stringList;
 	}
 }
