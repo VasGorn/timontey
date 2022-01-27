@@ -38,6 +38,8 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 	private static final String UPDATE_MONEY_EXPENSE_SQL =
 		"UPDATE spend_money SET expenses_id = ?, money = ?, approve = FALSE "
 		+ "WHERE id = ?;";
+	private static final String DELETE_MONEY_EXPENSE_SQL = 
+		"DELETE FROM spend_money WHERE id = ?;";
 	
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
@@ -91,6 +93,11 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 		float money = mSpendExpense.getMoney();
 		return jdbcTemplate.update(UPDATE_MONEY_EXPENSE_SQL, expenseId,
 				money, mSpendExpenseId);
+	}
+	
+	@Override
+	public void delete(long spendExpeseId) {
+		jdbcTemplate.update(DELETE_MONEY_EXPENSE_SQL, spendExpeseId);
 	}
 	
 	private long saveMoneyExpense(long quotaMoneyId, MoneySpendExpense moneyExpense) {
