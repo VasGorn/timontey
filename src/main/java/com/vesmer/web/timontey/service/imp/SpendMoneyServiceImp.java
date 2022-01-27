@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,6 +50,15 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 		spendMoneyRepository.update(mSpendExpense);
 		patchSpendExpense(mSpendExpense);
 		return mSpendExpense;
+	}
+
+	@Override
+	public void delete(long spendExpeseId) {
+		try {
+			spendMoneyRepository.delete(spendExpeseId);
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("Data not found: " + e.getMessage());
+		}
 	}
 	
 	private void patch(MoneySpend moneySpend) {
