@@ -35,3 +35,30 @@ var workTypeHoursArray = [];
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+setOrdersToSelect(parseInt(hEmployeeId.value), parseInt(hYear.value),
+				  parseInt(hNumMonth.value));
+
+function setOrdersToSelect(employeeId, year, numMonth){
+	console.log(numMonth);
+	$.ajax({
+		type: "GET",
+		url: URL_REST_QUOTA_TIME + "/employee/" + employeeId + "/month/" + numMonth 
+								 + "/year/" + year,
+		data: null,
+		success: function(resp) {
+			QUOTA_TIME_ARRAY = resp;
+			
+			console.log(resp);
+			
+			for(let i = 0; i < QUOTA_TIME_ARRAY.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = QUOTA_TIME_ARRAY[i].id;
+				opt.innerHTML = QUOTA_TIME_ARRAY[i].order.name;
+				selectOrder.appendChild(opt);
+			}
+			
+			setHoursSpend(employeeId, year, numMonth);
+		}
+	});
+}
