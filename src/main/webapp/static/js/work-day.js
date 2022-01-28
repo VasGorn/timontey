@@ -74,3 +74,18 @@ function getSpendedTimeArray(employeeId, year, numMonth){
 		}
 	});
 }
+
+function addWorkDayListToQuota(hoursSpendArray){
+	for(let i = 0; i < QUOTA_TIME_ARRAY.length; ++i){
+		let workTypeHoursArray = QUOTA_TIME_ARRAY[i].workTypeHours;
+		for(let j = 0; j < workTypeHoursArray.length; ++j){
+			let workTypeHours = workTypeHoursArray[j];
+				
+			for(let k = 0; k < hoursSpendArray.length; ++k){
+				if(hoursSpendArray[k].workTypeHours.id === workTypeHours.id){
+					workTypeHours.workDayList = hoursSpendArray[k].workDayList;
+				}	
+			}
+		}
+	}
+}
