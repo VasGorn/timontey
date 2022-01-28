@@ -33,3 +33,5 @@ var QUOTA_TIME_ARRAY = [];
 
 var workTypeHoursArray = [];
 var checkedRows = [];
+
+$table.bootstrapTable({ data: [] });
