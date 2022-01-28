@@ -58,7 +58,19 @@ function setOrdersToSelect(employeeId, year, numMonth){
 				selectOrder.appendChild(opt);
 			}
 			
-			setHoursSpend(employeeId, year, numMonth);
+			getSpendedTimeArray(employeeId, year, numMonth);
+		}
+	});
+}
+
+function getSpendedTimeArray(employeeId, year, numMonth){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_WORK_DAY + "/employee/" + employeeId + "/month/" + numMonth 
+								 + "/year/" + year,
+		data: null,
+		success: function(workDayList) {
+			addWorkDayListToQuota(workDayList);
 		}
 	});
 }
