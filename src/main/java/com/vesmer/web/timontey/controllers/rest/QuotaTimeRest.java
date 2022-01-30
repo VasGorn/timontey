@@ -31,6 +31,14 @@ public class QuotaTimeRest {
 		return quotaTimeService.getQuotaTimeListForOrder(orderId, numMonth, year);
 	}
 		
+	@GetMapping("/employee/{employeeId}/month/{numMonth}/year/{year}")
+	public List<QuotaTime> getQuotaTimeListForEmployee(
+			@PathVariable("employeeId") long employeeId,
+			@PathVariable("numMonth") short numMonth,
+			@PathVariable("year") short year){
+		return quotaTimeService.getQuotaTimeListForEmployee(employeeId, numMonth, year);
+	}
+		
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public QuotaTime postQuotaTime(@RequestBody QuotaTime quotaTime) {
