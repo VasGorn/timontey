@@ -15,4 +15,6 @@ public interface QuotaTimeRepository {
 
 	void delete(long workHoursId);
 
+	List<QuotaTime> getQuotaTimeListForEmployee(long employeeId, short numMonth, short year);
+
 }
