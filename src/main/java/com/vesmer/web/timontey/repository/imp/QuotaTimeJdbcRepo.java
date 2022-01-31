@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.repository.imp;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -33,6 +34,8 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			+ " AND year=?;";
 	private static final String SELECT_QUOTA_TIME_LIST_FOR_EMPLOYEE_SQL =
 			"SELECT * FROM quota_time WHERE employee_id=? AND year=?;";
+	private static final String SELECT_WORKTIME_HOURS_SQL =
+			"SELECT * FROM worktype_hours WHERE id = ?;";
 	private static final String INSERT_QUOTA_TIME_SQL =
 			"INSERT INTO quota_time (order_id, employee_id, year)"
 			+ " VALUES (?, ?, ?);";
@@ -88,6 +91,16 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 	@Override
 	public void delete(long workHoursId) {
 		jdbcTemplate.update(DELETE_WORKTYPE_HOURS_SQL, workHoursId);
+	}
+		
+	@Override
+	public Optional<WorkTypeHours> findWorkTypeQuotaById(long id) {
+		try {
+			return Optional.of(jdbcTemplate.queryForObject(SELECT_WORKTIME_HOURS_SQL, 
+				new WorkTypeHoursRowMapper(), id));
+		} catch (EmptyResultDataAccessException ex){
+			return Optional.empty();
+		}
 	}
 	
 	private List<QuotaTime> getQuotaTimeList(String sql, long paramerId, 
