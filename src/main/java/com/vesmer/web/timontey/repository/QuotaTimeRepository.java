@@ -1,8 +1,10 @@
 package com.vesmer.web.timontey.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.vesmer.web.timontey.domain.QuotaTime;
+import com.vesmer.web.timontey.domain.WorkTypeHours;
 
 public interface QuotaTimeRepository {
 
@@ -16,5 +18,7 @@ public interface QuotaTimeRepository {
 	void delete(long workHoursId);
 
 	List<QuotaTime> getQuotaTimeListForEmployee(long employeeId, short numMonth, short year);
+
+	Optional<WorkTypeHours> findWorkTypeQuotaById(long id);
 
 }
