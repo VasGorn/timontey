@@ -6,8 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vesmer.web.timontey.domain.Employee;
 import com.vesmer.web.timontey.domain.HoursSpend;
+import com.vesmer.web.timontey.domain.WorkDay;
+import com.vesmer.web.timontey.domain.WorkType;
+import com.vesmer.web.timontey.domain.WorkTypeHours;
+import com.vesmer.web.timontey.repository.QuotaTimeRepository;
+import com.vesmer.web.timontey.repository.StaffRepository;
 import com.vesmer.web.timontey.repository.WorkDayRepository;
+import com.vesmer.web.timontey.repository.WorkTypeRepository;
 import com.vesmer.web.timontey.service.WorkDayService;
 
 
@@ -16,6 +23,15 @@ import com.vesmer.web.timontey.service.WorkDayService;
 public class WorkDayServiceImp implements WorkDayService {
 	@Autowired
 	private WorkDayRepository workDayRepository;
+		
+	@Autowired
+	private QuotaTimeRepository quotaTimeRepository;
+
+	@Autowired
+	private WorkTypeRepository workTypeRepository;
+	
+	@Autowired
+	private StaffRepository staffRepository;
 
 	@Override
 	public List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year) {
@@ -24,5 +40,20 @@ public class WorkDayServiceImp implements WorkDayService {
 			 patchWorkTimeSpend(spendTime);
 		 }
 		 return spendTimeList;
+	}
+	
+	private void patchWorkTimeSpend(HoursSpend hoursSpend) {
+		WorkTypeHours workHours = 
+			quotaTimeRepository.findWorkTypeQuotaById(hoursSpend.getWorkTypeHours().getId()).get();
+		WorkType workType = workTypeRepository.findById(workHours.getWorkType().getId()).get();
+		workHours.setWorkType(workType);
+		hoursSpend.setWorkTypeHours(workHours);
+		
+		List<WorkDay> workDayList = hoursSpend.getWorkDayList();
+		for(int i = 0; i < workDayList.size(); ++i) {
+			WorkDay workDay = hoursSpend.getWorkDayList().get(i);
+			Employee employee = staffRepository.findById(workDay.getEmployee().getId()).get();
+			workDay.setEmployee(employee);
+		}
 	}
 }
