@@ -14,5 +14,15 @@ import com.vesmer.web.timontey.service.WorkDayService;
 @Service
 @Transactional
 public class WorkDayServiceImp implements WorkDayService {
+	@Autowired
+	private WorkDayRepository workDayRepository;
 
+	@Override
+	public List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year) {
+		 List<HoursSpend> spendTimeList = workDayRepository.getWorkTypeTimeSpend(masterId, numMonth, year);
+		 for(HoursSpend spendTime: spendTimeList) {
+			 patchWorkTimeSpend(spendTime);
+		 }
+		 return spendTimeList;
+	}
 }
