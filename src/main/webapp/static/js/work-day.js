@@ -198,6 +198,16 @@ function updateOrderHours(){
 	numOrderBalanceTime.value = orderHoursBalance;
 }
 
+function updateWorkTypeHours(workHoursId){
+	for(let i = 0; i < workTypeHoursArray.length; ++i){
+		if(workHoursId === workTypeHoursArray[i].id){
+			numWorkTypeLimitTime.value = workTypeHoursArray[i].hours;
+			numWorkTypeBalanceTime.value = getSumSpendHoursOnWorkType(workTypeHoursArray[i]);
+			break;
+		}
+	}
+}
+
 function getSumSpendHoursOnWorkType(workTypeHours){
 	let workDayArray = workTypeHours.workDayList;
 	let hoursSpend = 0;
