@@ -130,3 +130,27 @@ function addWorkDayListToQuota(hoursSpendArray){
 		}
 	}
 }
+
+function getDataFromForm(){
+	let workTypeHours = new Object();
+	workTypeHours.id = parseInt(selectWorkType.value);
+	
+	let employee = new Object();
+	employee.id = parseInt(selectEmployee.value);
+
+	let workDay = new Object();
+	workDay.employee = employee;
+	workDay.numDay = parseInt(selectDayOfMonth.value);
+	workDay.workHours = parseInt(selectWorkHour.value);
+	workDay.overtime = parseInt(selectOvertime.value);
+	workDay.isApprove = false;
+	
+	let workDayArray = [];
+	workDayArray.push(workDay);
+
+	let hoursSpend = new Object();
+	hoursSpend.workTypeHours = workTypeHours;
+	hoursSpend.workDayList = workDayArray;
+	
+	return hoursSpend;
+}
