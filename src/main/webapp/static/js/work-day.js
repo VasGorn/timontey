@@ -104,6 +104,28 @@ function btnAddClicked(){
 	postDataToServer(hoursSpend);
 }
 
+function postDataToServer(hoursSpend){
+	$.ajax({
+		type: "POST",
+		url: URL_REST_WORK_DAY,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(hoursSpend),
+		success: function(resp) {
+			addWordDayToArray(resp);
+			updateOrderHours();
+			updateWorkTypeHours(parseInt(selectWorkType.value));
+
+			let workTypeQuota = resp.workTypeHours;
+			let workDay = resp.workDayList[0];
+			let workDayRow = workDayToRow(workTypeQuota, workDay);
+
+			$table.bootstrapTable('append', workDayRow);
+			$table.bootstrapTable('scrollTo', 'bottom');
+		}
+	});
+}
+
 function getSpendedTimeArray(employeeId, year, numMonth){
 	$.ajax({
 		type: "GET",
