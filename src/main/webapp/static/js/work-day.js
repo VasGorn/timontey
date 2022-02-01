@@ -38,6 +38,7 @@ $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect(parseInt(hEmployeeId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
+setEmployeesToSelect(parseInt(hEmployeeId.value));
 
 function setOrdersToSelect(employeeId, year, numMonth){
 	console.log(numMonth);
@@ -59,6 +60,29 @@ function setOrdersToSelect(employeeId, year, numMonth){
 			}
 			
 			getSpendedTimeArray(employeeId, year, numMonth);
+		}
+	});
+}
+
+function setEmployeesToSelect(masterId){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_TEAM + "/performer/" + masterId,
+		data: null,
+		success: function(team) {
+			let employeeArray = team.employeeList;	
+			for(let i = 0; i < employeeArray.length; ++i){
+				let employee = employeeArray[i];
+				const opt = document.createElement("option");
+				opt.value = employee.id;
+				opt.innerHTML = employee.lastName + " " + employee.firstName
+								+ " " + employee.middleName;
+				selectEmployee.appendChild(opt);
+
+				if(employee.id === parseInt(hEmployeeId.value)){
+					selectEmployee.value = employee.id;
+				}
+			}
 		}
 	});
 }
