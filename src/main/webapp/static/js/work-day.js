@@ -36,6 +36,8 @@ var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 setOrdersToSelect(parseInt(hEmployeeId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
 setEmployeesToSelect(parseInt(hEmployeeId.value));
@@ -85,6 +87,21 @@ function setEmployeesToSelect(masterId){
 			}
 		}
 	});
+}
+
+function btnAddClicked(){
+	let hoursSpend = getDataFromForm();
+	
+	let tableData = $table.bootstrapTable('getData');
+	for(let i = 0; i < tableData.length; ++i) {
+		let row = tableData[i];
+		if (hoursSpend.workTypeHours.id === row.workTypeQuotaId &&
+				hoursSpend.workDayList[0].employee.id === row.employeeId) {
+			alert("Double record!");
+			return;
+		}
+	}
+	postDataToServer(hoursSpend);
 }
 
 function getSpendedTimeArray(employeeId, year, numMonth){
