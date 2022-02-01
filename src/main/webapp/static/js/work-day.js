@@ -176,3 +176,13 @@ function getDataFromForm(){
 	
 	return hoursSpend;
 }
+
+function addWordDayToArray(hoursSpend){
+	let workTypeQuota = hoursSpend.workTypeHours;
+	let workDay = hoursSpend.workDayList[0];
+	for(let i = 0; i < workTypeHoursArray.length; ++i){
+		if(workTypeQuota.id === workTypeHoursArray[i].id){
+			workTypeHoursArray[i].workDayList.push(workDay);
+		}
+	}
+}
