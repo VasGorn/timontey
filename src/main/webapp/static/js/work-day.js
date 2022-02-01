@@ -186,3 +186,14 @@ function addWordDayToArray(hoursSpend){
 		}
 	}
 }
+
+function updateOrderHours(){
+	let orderHoursLimit = 0;
+	let orderHoursBalance = 0;
+	for(let j = 0; j < workTypeHoursArray.length; ++j){
+		orderHoursLimit += workTypeHoursArray[j].hours;
+		orderHoursBalance += getSumSpendHoursOnWorkType(workTypeHoursArray[j]);
+	}
+	numOrderLimitTime.value = orderHoursLimit;
+	numOrderBalanceTime.value = orderHoursBalance;
+}
