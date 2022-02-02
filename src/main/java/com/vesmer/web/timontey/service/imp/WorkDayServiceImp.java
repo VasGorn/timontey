@@ -42,6 +42,13 @@ public class WorkDayServiceImp implements WorkDayService {
 		 return spendTimeList;
 	}
 	
+	@Override
+	public HoursSpend save(HoursSpend hoursSpend) {
+		workDayRepository.save(hoursSpend);
+		patchWorkTimeSpend(hoursSpend);
+		return hoursSpend;
+	}
+	
 	private void patchWorkTimeSpend(HoursSpend hoursSpend) {
 		WorkTypeHours workHours = 
 			quotaTimeRepository.findWorkTypeQuotaById(hoursSpend.getWorkTypeHours().getId()).get();
