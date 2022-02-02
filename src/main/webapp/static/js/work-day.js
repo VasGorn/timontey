@@ -146,6 +146,36 @@ function postDataToServer(hoursSpend){
 	});
 }
 
+function putDataToServer(newHoursSpend, index){
+	let workDayId = newHoursSpend.workDayList[0].id;
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_WORK_DAY + '/' + workDayId,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(newHoursSpend),
+		success: function(resp) {
+			console.log(resp);
+			let workTypeQuota = resp.workTypeHours;
+			let workDay = resp.workDayList[0];
+			
+			let workDayRow = workDayToRow(workTypeQuota, workDay);
+			updateWorkTypeQuotaArray(workTypeQuota, workDay);
+			
+			updateOrderHours();
+			updateWorkTypeHours(workTypeQuota.id);
+			
+			$table.bootstrapTable('uncheckAll');
+			checkedRows = [];
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: workDayRow 
+			});
+		}
+	});
+}
+
 function getSpendedTimeArray(employeeId, year, numMonth){
 	$.ajax({
 		type: "GET",
