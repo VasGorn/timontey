@@ -237,6 +237,30 @@ function addWordDayToArray(hoursSpend){
 	}
 }
 
+function updateWorkTypeQuotaArray(newWorkTypeQuota, newWorkDay){
+	for(let i = 0; i < workTypeHoursArray.length; ++i){
+		let oldWorkTypeQuota = workTypeHoursArray[i];
+		let workDayArray = workTypeHoursArray[i].workDayList;
+		let isUpdate = false;	
+
+		for(let j = 0; j < workDayArray.length; ++j){
+			let oldWorkDay = workDayArray[j];
+			if(oldWorkDay.id === newWorkDay.id && 
+				oldWorkTypeQuota.id === newWorkTypeQuota.id){
+				workDayArray[j] = newWorkDay;
+				isUpdate = true;
+			} else if (oldWorkDay.id === newWorkDay.id && 
+						oldWorkTypeQuota.id != newWorkTypeQuota.id){
+				workDayArray.splice(j, 1);
+			}
+		}
+		
+		if(isUpdate === false && oldWorkTypeQuota.id === newWorkTypeQuota.id){
+			workDayArray.push(newWorkDay);
+		}
+	}
+}
+
 function updateOrderHours(){
 	let orderHoursLimit = 0;
 	let orderHoursBalance = 0;
