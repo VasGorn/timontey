@@ -1,10 +1,14 @@
 package com.vesmer.web.timontey.repository.imp;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.vesmer.web.timontey.domain.HoursSpend;
@@ -25,6 +29,9 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 	
 	private static final String SELECT_WORK_DAY_SQL =
 		"SELECT * FROM work_day WHERE worktype_quota_id = ?;";
+	private static final String INSERT_WORK_DAY_SQL = 
+		"INSERT INTO work_day (worktype_quota_id, employee_id, num_day, "
+		+ "hours_spend, overtime) VALUES (?, ?, ?, ?, ?);";
 
 	@Override
 	public List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year) {
@@ -57,5 +64,29 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 		WorkDay workDay = hoursSpend.getWorkDayList().get(0);
 		long workDayId = saveWorkDay(workDay, workTypeQuotaId);
 		workDay.setId(workDayId);
+	}
+	
+	private long saveWorkDay(WorkDay workDay, long workTypeQuotaId) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(INSERT_WORK_DAY_SQL, Statement.RETURN_GENERATED_KEYS);
+	          ps.setLong(1, workTypeQuotaId);
+	          ps.setLong(2, workDay.getEmployee().getId());
+	          ps.setShort(3, workDay.getNumDay());
+	          ps.setShort(4, workDay.getWorkHours());
+	          ps.setShort(5, workDay.getOvertime());
+	          return ps;
+	        }, keyHolder);
+	    
+	    long newId;
+	    if (keyHolder.getKeys().size() > 1) {
+	        newId = ((Number) keyHolder.getKeys().get("id")).longValue();
+	    } else {
+	        newId= keyHolder.getKey().longValue();
+	    }
+
+        return newId;
 	}
 }
