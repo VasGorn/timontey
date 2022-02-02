@@ -37,6 +37,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 setOrdersToSelect(parseInt(hEmployeeId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
@@ -102,6 +103,25 @@ function btnAddClicked(){
 		}
 	}
 	postDataToServer(hoursSpend);
+}
+
+function btnUpdateClicked(){
+	let newHoursSpend = getDataFromForm();
+	let oldWorkDayRow = checkedRows[0];
+	newHoursSpend.workDayList[0].id = oldWorkDayRow.id;
+	
+	let tableData = $table.bootstrapTable('getData');
+	for(let i = 0; i < tableData.length; ++i) {
+		let row = tableData[i];
+		if (newHoursSpend.workTypeHours.id === row.workTypeQuotaId &&
+				newHoursSpend.workDayList[0].employee.id === row.employeeId) {
+			alert("Double record!");
+			return;
+		}
+	}
+	
+	let index = findIndexInTable(oldWorkDayRow);
+	putDataToServer(newHoursSpend, index);
 }
 
 function postDataToServer(hoursSpend){
