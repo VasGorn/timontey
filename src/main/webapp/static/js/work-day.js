@@ -279,3 +279,20 @@ function findIndexInTable(row) {
 	}
 	return index;
 }
+
+function workDayToRow(workTypeQuota, workDay){
+	let row = new Object();
+
+	row.workType = workTypeQuota.workType.workTypeName;
+	row.workTypeQuotaId = workTypeQuota.id;
+	let employee = workDay.employee;
+	row.id = workDay.id;
+	row.employee = employee.lastName + " " + employee.firstName 
+				+ " " + employee.middleName;
+	row.employeeId = employee.id;
+	row.workHours = workDay.workHours;
+	row.overtime = workDay.overtime;
+	row.approve = workDay.approve;
+	
+	return row;
+}
