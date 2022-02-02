@@ -8,4 +8,6 @@ public interface WorkDayService {
 
 	List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year);
 
+	HoursSpend save(HoursSpend hoursSpend);
+
 }
