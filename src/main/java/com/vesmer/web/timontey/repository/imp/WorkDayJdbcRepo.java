@@ -49,4 +49,13 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 		
 		return workTypeTimeSpendList;
 	}
+	
+	@Override
+	public void save(HoursSpend hoursSpend) {
+		long workTypeQuotaId = hoursSpend.getWorkTypeHours().getId();
+		
+		WorkDay workDay = hoursSpend.getWorkDayList().get(0);
+		long workDayId = saveWorkDay(workDay, workTypeQuotaId);
+		workDay.setId(workDayId);
+	}
 }
