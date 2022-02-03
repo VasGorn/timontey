@@ -32,6 +32,10 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 	private static final String INSERT_WORK_DAY_SQL = 
 		"INSERT INTO work_day (worktype_quota_id, employee_id, num_day, "
 		+ "hours_spend, overtime) VALUES (?, ?, ?, ?, ?);";
+	private static final String UPDATE_WORK_DAY_SQL = 
+			"UPDATE work_day SET worktype_quota_id = ?, employee_id = ?, "
+			+ "hours_spend = ?, overtime = ?, approve = FALSE "
+			+ "WHERE id = ?;";
 
 	@Override
 	public List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year) {
@@ -64,6 +68,16 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 		WorkDay workDay = hoursSpend.getWorkDayList().get(0);
 		long workDayId = saveWorkDay(workDay, workTypeQuotaId);
 		workDay.setId(workDayId);
+	}
+		
+	@Override
+	public int update(HoursSpend hoursSpend) {
+		long workTypeQuotaId = hoursSpend.getWorkTypeHours().getId();
+		WorkDay workDay = hoursSpend.getWorkDayList().get(0);
+
+		return jdbcTemplate.update(UPDATE_WORK_DAY_SQL, workTypeQuotaId,
+				workDay.getEmployee().getId(), workDay.getWorkHours(),
+				workDay.getOvertime(), workDay.getId());
 	}
 	
 	private long saveWorkDay(WorkDay workDay, long workTypeQuotaId) {
