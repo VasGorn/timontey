@@ -187,6 +187,37 @@ function putDataToServer(newHoursSpend, index){
 	});
 }
 
+function deleteDataOnServer(workDayId) {
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_WORK_DAY + '/' + workDayId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(workDayId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			console.log(workDayId);
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if(workDayId === checkedRows[i].id){
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			deleteWorkTypeQuotaArray(workDayId);
+			updateOrderHours();
+			updateWorkTypeHours(parseInt(selectWorkType.value));
+			
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function getSpendedTimeArray(employeeId, year, numMonth){
 	$.ajax({
 		type: "GET",
