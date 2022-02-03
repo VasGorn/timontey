@@ -10,4 +10,6 @@ public interface WorkDayRepository {
 
 	void save(HoursSpend hoursSpend);
 
+	int update(HoursSpend hoursSpend);
+
 }
