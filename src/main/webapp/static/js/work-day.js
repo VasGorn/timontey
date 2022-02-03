@@ -38,6 +38,7 @@ $table.bootstrapTable({ data: [] });
 
 btnAdd.addEventListener("click", btnAddClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setOrdersToSelect(parseInt(hEmployeeId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
@@ -122,6 +123,16 @@ function btnUpdateClicked(){
 	
 	let index = findIndexInTable(oldWorkDayRow);
 	putDataToServer(newHoursSpend, index);
+}
+
+function btnDeleteClicked(){
+	let workDayIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < workDayIds.length; ++i) {
+		deleteDataOnServer(workDayIds[i]);
+	}
 }
 
 function postDataToServer(hoursSpend){
