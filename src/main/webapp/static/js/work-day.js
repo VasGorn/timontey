@@ -394,3 +394,13 @@ function setButtonsState(numRowSelected){
 		btnDelete.disabled = false;
 	}
 }
+
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonsState(checkedRows.length);
+	
+	setSelectValue(row);
+	updateWorkTypeHours(row.workTypeQuotaId);
+
+	console.log(checkedRows);
+});
