@@ -48,6 +48,13 @@ public class WorkDayServiceImp implements WorkDayService {
 		patchWorkTimeSpend(hoursSpend);
 		return hoursSpend;
 	}
+		
+	@Override
+	public HoursSpend update(HoursSpend hoursSpend) {
+		workDayRepository.update(hoursSpend);
+		patchWorkTimeSpend(hoursSpend);
+		return hoursSpend;
+	}
 	
 	private void patchWorkTimeSpend(HoursSpend hoursSpend) {
 		WorkTypeHours workHours = 
