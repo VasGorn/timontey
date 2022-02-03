@@ -303,6 +303,18 @@ function updateWorkTypeQuotaArray(newWorkTypeQuota, newWorkDay){
 	}
 }
 
+function deleteWorkTypeQuotaArray(workDayId){
+	for(let i = 0; i < workTypeHoursArray.length; ++i){
+		let workDayArray = workTypeHoursArray[i].workDayList;
+
+		for(let j = 0; j < workDayArray.length; ++j){
+			if(workDayId === workDayArray[j].id){
+				workDayArray.splice(j, 1);
+			}
+		}
+	}
+}
+
 function updateOrderHours(){
 	let orderHoursLimit = 0;
 	let orderHoursBalance = 0;
