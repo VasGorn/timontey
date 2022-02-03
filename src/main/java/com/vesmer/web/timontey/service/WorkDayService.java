@@ -10,4 +10,6 @@ public interface WorkDayService {
 
 	HoursSpend save(HoursSpend hoursSpend);
 
+	HoursSpend update(HoursSpend hoursSpend);
+
 }
