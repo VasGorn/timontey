@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +55,15 @@ public class WorkDayServiceImp implements WorkDayService {
 		workDayRepository.update(hoursSpend);
 		patchWorkTimeSpend(hoursSpend);
 		return hoursSpend;
+	}
+		
+	@Override
+	public void delete(long workDayId) {
+		try {
+			workDayRepository.delete(workDayId);
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("Data not found: " + e.getMessage());
+		}
 	}
 	
 	private void patchWorkTimeSpend(HoursSpend hoursSpend) {
