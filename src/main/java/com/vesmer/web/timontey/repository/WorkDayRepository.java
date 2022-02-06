@@ -12,4 +12,6 @@ public interface WorkDayRepository {
 
 	int update(HoursSpend hoursSpend);
 
+	void delete(long workDayId);
+
 }
