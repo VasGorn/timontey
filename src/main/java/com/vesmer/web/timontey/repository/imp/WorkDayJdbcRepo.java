@@ -36,6 +36,8 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 			"UPDATE work_day SET worktype_quota_id = ?, employee_id = ?, "
 			+ "hours_spend = ?, overtime = ?, approve = FALSE "
 			+ "WHERE id = ?;";
+	private static final String DELETE_WOKR_DAY_SQL = 
+			"DELETE FROM work_day WHERE id = ?;";
 
 	@Override
 	public List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year) {
@@ -78,6 +80,11 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 		return jdbcTemplate.update(UPDATE_WORK_DAY_SQL, workTypeQuotaId,
 				workDay.getEmployee().getId(), workDay.getWorkHours(),
 				workDay.getOvertime(), workDay.getId());
+	}
+		
+	@Override
+	public void delete(long workDayId) {
+		jdbcTemplate.update(DELETE_WOKR_DAY_SQL, workDayId);
 	}
 	
 	private long saveWorkDay(WorkDay workDay, long workTypeQuotaId) {
