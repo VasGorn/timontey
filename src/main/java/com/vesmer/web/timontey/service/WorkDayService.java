@@ -12,4 +12,6 @@ public interface WorkDayService {
 
 	HoursSpend update(HoursSpend hoursSpend);
 
+	void delete(long workDayId);
+
 }
