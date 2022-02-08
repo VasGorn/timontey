@@ -34,6 +34,8 @@ public class NavigationController {
 				Const.BASE_URL+"spend-money/", "layers");
 		NavigationLink navLink10 = new NavigationLink("Work day", 
 				Const.BASE_URL+"work-day/", "layers");
+		NavigationLink navLink11 = new NavigationLink("Work day", 
+				Const.BASE_URL+"team/", "layers");
 
 		list.add(navLink1);
 		list.add(navLink2);
@@ -44,6 +46,7 @@ public class NavigationController {
 		list.add(navLink8);
 		list.add(navLink9);
 		list.add(navLink10);
+		list.add(navLink11);
 
         ModelAndView model = new ModelAndView("main");
 		model.addObject("navList", list);
