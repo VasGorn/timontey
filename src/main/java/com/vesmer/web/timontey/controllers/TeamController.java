@@ -12,4 +12,18 @@ import com.vesmer.web.timontey.service.StaffService;
 public class TeamController {
 	@Autowired
 	private StaffService staffService;
+		
+	@RequestMapping("/team")
+	public ModelAndView getTeamView() {
+		long performerId = 12;
+		Employee performer = staffService.getEmployeeById(performerId).get();
+		String fullName = performer.getLastName() + " " 
+							+ performer.getFirstName() + " " 
+							+ performer.getMiddleName();
+		
+		ModelAndView model = new ModelAndView("team");
+		model.addObject("performerId", performer.getId());
+		model.addObject("performerName", fullName);
+		return model;
+	}
 }
