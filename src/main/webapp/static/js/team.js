@@ -9,3 +9,5 @@ var URL_REST_STAFF = "/timontey/rest/staff";
 
 var $table = $('#table');
 var checkedRows = [];
+
+$table.bootstrapTable({ data: [] });
