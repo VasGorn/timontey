@@ -71,4 +71,13 @@ function btnAddClicked() {
 	postRequest(team);
 }
 
-
+function isExist(employeeId) {
+	let tableData = $table.bootstrapTable('getData');
+	let isExist = false;
+	tableData.forEach((element, index) => {
+		if (element.id === employeeId) {
+			isExist = true;
+		}
+	});
+	return isExist;
+}
