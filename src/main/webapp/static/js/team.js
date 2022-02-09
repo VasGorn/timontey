@@ -15,6 +15,8 @@ $table.bootstrapTable({ data: [] });
 setEmployeesToSelect();
 loadTeamToTable(parseInt(hPerformerId.value));
 
+btnAdd.addEventListener("click", btnAddClicked, false);
+
 selectEmployee.addEventListener("change", (event) => {
 	setButtonsState(checkedRows.length);
 });
@@ -50,3 +52,23 @@ function loadTeamToTable(performerId) {
 		}
 	});
 }
+
+function btnAddClicked() {
+	let employeeId = parseInt(selectEmployee.value);
+	let performerId = parseInt(hPerformerId.value);
+	
+	if (isExist(employeeId)) {
+		alert("Employee already in team!");
+		return;
+	}
+	
+	if (employeeId <= 0) {
+		return;
+	}
+
+	let team = getTeamObject(performerId, employeeId);
+	
+	postRequest(team);
+}
+
+
