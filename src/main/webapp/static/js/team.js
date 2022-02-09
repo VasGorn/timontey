@@ -15,6 +15,10 @@ $table.bootstrapTable({ data: [] });
 setEmployeesToSelect();
 loadTeamToTable(parseInt(hPerformerId.value));
 
+selectEmployee.addEventListener("change", (event) => {
+	setButtonsState(checkedRows.length);
+});
+
 function setEmployeesToSelect() {
 	$.ajax({
 		type: "GET",
