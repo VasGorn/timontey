@@ -81,3 +81,19 @@ function isExist(employeeId) {
 	});
 	return isExist;
 }
+
+function getTeamObject(performerId, employeeId) {
+	let performer = new Object();
+	performer.id = performerId;
+	
+	let employeeList = [];
+	let employee = new Object();
+	employee.id = employeeId;
+	employeeList.push(employee);
+	
+	let team = new Object();
+	team.performer = performer;
+	team.employeeList = employeeList;
+
+	return team;
+}
