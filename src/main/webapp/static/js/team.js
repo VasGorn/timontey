@@ -71,6 +71,20 @@ function btnAddClicked() {
 	postRequest(team);
 }
 
+function postRequest(newTeam) {
+	$.ajax({
+		type: "POST",
+		url: URL_REST_TEAM,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(newTeam),
+		success: function(team) {
+			let employeeArray = team.employeeList;
+			$table.bootstrapTable('load', employeeArray);
+		}
+	});
+}
+
 function isExist(employeeId) {
 	let tableData = $table.bootstrapTable('getData');
 	let isExist = false;
