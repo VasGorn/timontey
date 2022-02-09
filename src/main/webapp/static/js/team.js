@@ -11,3 +11,25 @@ var $table = $('#table');
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+setEmployeesToSelect();
+
+function setEmployeesToSelect() {
+	$.ajax({
+		type: "GET",
+		url: URL_REST_STAFF + "/all",
+		data: null,
+		success: function(employeeArray) {
+			console.log(employeeArray);
+			
+			for(let i = 0; i < employeeArray.length; ++i){
+				let employee = employeeArray[i];
+				const opt = document.createElement("option");
+				opt.value = employee.id;
+				opt.innerHTML = employee.lastName + " " + employee.firstName
+								+ " " + employee.middleName;
+				selectEmployee.appendChild(opt);
+			}
+		}
+	});
+}
