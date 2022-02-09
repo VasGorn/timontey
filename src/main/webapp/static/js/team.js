@@ -13,6 +13,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 setEmployeesToSelect();
+loadTeamToTable(parseInt(hPerformerId.value));
 
 function setEmployeesToSelect() {
 	$.ajax({
@@ -30,6 +31,18 @@ function setEmployeesToSelect() {
 								+ " " + employee.middleName;
 				selectEmployee.appendChild(opt);
 			}
+		}
+	});
+}
+
+function loadTeamToTable(performerId) {
+	$.ajax({
+		type: "GET",
+		url: URL_REST_TEAM + "/performer/" + performerId,
+		data: null,
+		success: function(team) {
+			let employeeArray = team.employeeList;
+			$table.bootstrapTable('load', employeeArray);
 		}
 	});
 }
