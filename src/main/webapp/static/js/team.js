@@ -16,6 +16,7 @@ setEmployeesToSelect();
 loadTeamToTable(parseInt(hPerformerId.value));
 
 btnAdd.addEventListener("click", btnAddClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 selectEmployee.addEventListener("change", (event) => {
 	setButtonsState(checkedRows.length);
@@ -69,6 +70,18 @@ function btnAddClicked() {
 	let team = getTeamObject(performerId, employeeId);
 	
 	postRequest(team);
+}
+
+function btnDeleteClicked() {
+	let performerId = parseInt(hPerformerId.value);
+	let employeeIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id
+	});
+
+	for (let i = 0; i < employeeIds.length; ++i) {
+		console.log(employeeIds[i]);
+		deleteRequest(performerId, employeeIds[i]);
+	}
 }
 
 function postRequest(newTeam) {
