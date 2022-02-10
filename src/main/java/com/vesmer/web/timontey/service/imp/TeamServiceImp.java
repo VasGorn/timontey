@@ -24,4 +24,13 @@ public class TeamServiceImp implements TeamService {
 		long employeeId = team.getEmployeeList().get(0).getId();
 		return teamRepository.saveEmployeeToPerformer(performerId, employeeId);
 	}
+	
+	@Override
+	public void delete(long performerId, long employeeId) {
+		try {
+			teamRepository.delete(performerId, employeeId);
+		} catch (EmptyResultDataAccessException ex) {
+			System.out.println("Delete failing: " + ex.getMessage());
+		}
+	}
 }
