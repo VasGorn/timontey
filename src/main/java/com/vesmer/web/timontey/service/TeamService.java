@@ -6,4 +6,6 @@ public interface TeamService {
 
 	Team getTeam(long performerId);
 
+	Team save(Team team);
+
 }
