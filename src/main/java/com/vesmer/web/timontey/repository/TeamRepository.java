@@ -8,4 +8,6 @@ public interface TeamRepository {
 
 	Team saveEmployeeToPerformer(long performerId, long employeeId);
 
+	int delete(long performerId, long employeeId);
+
 }
