@@ -27,6 +27,8 @@ public class TeamJdbcRepo implements TeamRepository {
 	private static final String INSERT_EMPLOYEE_TO_PERFORMER_SQL = 
 		"INSERT INTO master_employees (master_id, employee_id) "
 		+ "VALUES (?, ?);";
+	private static final String DELETE_EMPLOYEE_FROM_PERFORMER_SQL = 
+		"DELETE FROM master_employees WHERE master_id = ? AND employee_id = ?;";
 
 	@Override
 	public Team getTeam(long performerId) {
@@ -54,5 +56,11 @@ public class TeamJdbcRepo implements TeamRepository {
 		team.setPerformer(performer);
 		team.setEmployeeList(teamList);
 		return team;
+	}
+	
+	@Override
+	public int delete(long performerId, long employeeId) {
+		return jdbcTemplate.update(DELETE_EMPLOYEE_FROM_PERFORMER_SQL, performerId,
+				employeeId);
 	}
 }
