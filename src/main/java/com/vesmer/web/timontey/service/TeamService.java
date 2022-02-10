@@ -8,4 +8,6 @@ public interface TeamService {
 
 	Team save(Team team);
 
+	void delete(long performerId, long employeeId);
+
 }
