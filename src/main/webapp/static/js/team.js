@@ -98,6 +98,26 @@ function postRequest(newTeam) {
 	});
 }
 
+function deleteRequest(performerId, employeeId){
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_TEAM + "/performer/" + performerId + "/employee/" + employeeId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(employeeId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			deleteCheckedRow(employeeId, checkedRows);
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function isExist(employeeId) {
 	let tableData = $table.bootstrapTable('getData');
 	let isExist = false;
