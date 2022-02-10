@@ -172,3 +172,11 @@ function deleteCheckedRow(id, checkedRows){
 		}
 	}
 }
+
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonsState(checkedRows.length);
+	
+	selectEmployee.value = row.id;
+	console.log(checkedRows);
+});
