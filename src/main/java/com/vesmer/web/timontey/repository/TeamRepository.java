@@ -6,4 +6,6 @@ public interface TeamRepository {
 
 	Team getTeam(long performerId);
 
+	Team saveEmployeeToPerformer(long performerId, long employeeId);
+
 }
