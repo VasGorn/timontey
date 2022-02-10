@@ -180,3 +180,14 @@ $table.on('check.bs.table', function(e, row) {
 	selectEmployee.value = row.id;
 	console.log(checkedRows);
 });
+
+$table.on('uncheck.bs.table', function(e, row) {
+	checkedRows.forEach((element, index) => {
+		if (element.id === row.id) {
+			checkedRows.splice(index, 1);
+		}
+	});
+	setButtonsState(checkedRows.length);
+	
+	console.log(checkedRows);
+});
