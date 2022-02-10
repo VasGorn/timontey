@@ -17,4 +17,11 @@ public class TeamServiceImp implements TeamService {
 	public Team getTeam(long performerId) {
 		return teamRepository.getTeam(performerId);
 	}
+	
+	@Override
+	public Team save(Team team) {
+		long performerId = team.getPerformer().getId();
+		long employeeId = team.getEmployeeList().get(0).getId();
+		return teamRepository.saveEmployeeToPerformer(performerId, employeeId);
+	}
 }
