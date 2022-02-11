@@ -465,3 +465,12 @@ function setOrderInfo(order){
 	txtDescription.value = order.description;
 	txtAddress.value = order.address;
 }
+
+function removeOptionsFromSelect(select){
+	const length = select.options.length;
+	select.value = 0;
+	
+	for(let i = 1; i < length; ++i){
+		select.removeChild(select.options[1]);
+	}
+}
