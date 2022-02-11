@@ -456,3 +456,12 @@ function setSelectValue(row){
 	selectWorkHour.value = time;
 	selectOvertime.value = overtime;
 }
+
+function setOrderInfo(order){
+	let manager = order.manager;
+
+	txtManagerName.value = manager.lastName + ' ' + manager.firstName + ' ' 
+						   + manager.middleName;
+	txtDescription.value = order.description;
+	txtAddress.value = order.address;
+}
