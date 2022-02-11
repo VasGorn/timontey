@@ -63,7 +63,7 @@ selectOrder.addEventListener("change", (event) => {
 	numWorkTypeLimitTime.value = "";
 	
 	removeOptionsFromSelect(selectWorkType);
-	setObjectsToSelect(workTypeHoursArray, selectWorkType);
+	setWorkTypeToSelect(workTypeHoursArray, selectWorkType);
 	selectWorkType.disabled = false;
 
 	let numDay = parseInt(selectDayOfMonth.value);
@@ -472,5 +472,14 @@ function removeOptionsFromSelect(select){
 	
 	for(let i = 1; i < length; ++i){
 		select.removeChild(select.options[1]);
+	}
+}
+
+function setWorkTypeToSelect(workTypeArray, select){
+	for(let i = 0; i < workTypeArray.length; ++i){
+		const opt = document.createElement("option");
+		opt.value = workTypeArray[i].id;
+		opt.innerHTML = workTypeArray[i].workType.workTypeName;
+		select.appendChild(opt);
 	}
 }
