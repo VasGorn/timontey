@@ -1,5 +1,6 @@
 package com.vesmer.web.timontey.service.imp;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,14 @@ public class QuotaTimeServiceImp implements QuotaTimeService {
 		
 		for(QuotaTime quotaTime: quotaTimeList) {
 			patchQuotaTime(quotaTime);
+		}
+		
+		Iterator<QuotaTime> iterator = quotaTimeList.iterator();
+		while(iterator.hasNext()) {
+			QuotaTime quotaTime = iterator.next();
+			if(quotaTime.getWorkTypeHours().size() < 1) {
+				iterator.remove();
+			}
 		}
 		
 		return quotaTimeList;
