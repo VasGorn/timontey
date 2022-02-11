@@ -34,7 +34,7 @@ public class NavigationController {
 				Const.BASE_URL+"spend-money/", "layers");
 		NavigationLink navLink10 = new NavigationLink("Work day", 
 				Const.BASE_URL+"work-day/", "layers");
-		NavigationLink navLink11 = new NavigationLink("Work day", 
+		NavigationLink navLink11 = new NavigationLink("Team", 
 				Const.BASE_URL+"team/", "layers");
 
 		list.add(navLink1);
