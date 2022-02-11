@@ -43,6 +43,34 @@ btnDelete.addEventListener("click", btnDeleteClicked, false);
 setOrdersToSelect(parseInt(hEmployeeId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
 setEmployeesToSelect(parseInt(hEmployeeId.value));
+	
+selectOrder.addEventListener("change", (event) => {
+	let quotaTimeId = parseInt(event.target.value);
+	
+	let order;
+	
+	for(let i = 0; i < QUOTA_TIME_ARRAY.length; ++i){
+		if(quotaTimeId === QUOTA_TIME_ARRAY[i].id){
+			order = QUOTA_TIME_ARRAY[i].order;
+			workTypeHoursArray = QUOTA_TIME_ARRAY[i].workTypeHours;
+			updateOrderHours();
+			break;
+		}
+	}
+
+	setOrderInfo(order);
+	numWorkTypeBalanceTime.value = "";
+	numWorkTypeLimitTime.value = "";
+	
+	removeOptionsFromSelect(selectWorkType);
+	setObjectsToSelect(workTypeHoursArray, selectWorkType);
+	selectWorkType.disabled = false;
+
+	let numDay = parseInt(selectDayOfMonth.value);
+	loadWorkDayToTable(numDay);
+	
+	checkedRows = [];
+});
 
 function setOrdersToSelect(employeeId, year, numMonth){
 	console.log(numMonth);
