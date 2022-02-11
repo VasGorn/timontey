@@ -80,6 +80,12 @@ selectWorkType.addEventListener("change", (event) => {
 	btnAdd.disabled = false;
 });
 
+selectDayOfMonth.addEventListener("change", (event) => {
+	let numDay = parseInt(event.target.value);
+	loadWorkDayToTable(numDay);
+	checkedRows = [];
+});
+
 function setOrdersToSelect(employeeId, year, numMonth){
 	console.log(numMonth);
 	$.ajax({
