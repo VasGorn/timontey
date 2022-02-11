@@ -43,4 +43,10 @@ public class QuotaTime {
 		this.workTypeHours = workTypeHours;
 	}
 
+	@Override
+	public String toString() {
+		return "QuotaTime [id=" + id + ", order=" + order + ", employee=" + employee + ", year=" + year
+				+ ", workTypeHours=" + workTypeHours + "]";
+	}
+
 }
