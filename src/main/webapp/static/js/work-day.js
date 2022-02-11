@@ -483,3 +483,21 @@ function setWorkTypeToSelect(workTypeArray, select){
 		select.appendChild(opt);
 	}
 }
+
+function loadWorkDayToTable(numDay){
+	let rowArray = [];
+	
+	for(let i = 0; i < workTypeHoursArray.length; ++i){
+		let workTypeQuota = workTypeHoursArray[i];
+		let workDayArray = workTypeHoursArray[i].workDayList;
+		for(let j = 0; j < workDayArray.length; ++j){
+			let workDay = workDayArray[j];
+			if(workDay.numDay === numDay){
+				let workDayRow = workDayToRow(workTypeQuota, workDay);
+				rowArray.push(workDayRow);
+			}
+		}
+	}
+	
+	$table.bootstrapTable('load', rowArray);
+}
