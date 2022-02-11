@@ -72,6 +72,14 @@ selectOrder.addEventListener("change", (event) => {
 	checkedRows = [];
 });
 
+selectWorkType.addEventListener("change", (event) => {
+	let workHoursId = parseInt(event.target.value);
+	
+	updateWorkTypeHours(workHoursId);
+	
+	btnAdd.disabled = false;
+});
+
 function setOrdersToSelect(employeeId, year, numMonth){
 	console.log(numMonth);
 	$.ajax({
