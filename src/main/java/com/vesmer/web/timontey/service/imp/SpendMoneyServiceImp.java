@@ -37,6 +37,16 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 		}
 		return moneySpendList;
 	}
+		
+	@Override
+	public List<MoneySpend> getMoneySpendListForManager(long managerId) {
+		List<MoneySpend> moneySpendList = 
+				spendMoneyRepository.getMoneySpendListForManager(managerId);
+		for(MoneySpend moneySpend: moneySpendList) {
+			patch(moneySpend);
+		}
+		return moneySpendList;
+	}
 	
 	@Override
 	public MoneySpend save(MoneySpend moneySpend) {
