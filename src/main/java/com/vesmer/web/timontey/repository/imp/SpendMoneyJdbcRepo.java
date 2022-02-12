@@ -66,6 +66,24 @@ public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
 						new MoneySpendExpenseRowMapper(), quotaId);
 		return moneyExpenseList;
 	}
+		
+	@Override
+	public List<MoneySpend> getMoneySpendListForManager(long managerId) {
+		List<MoneySpend> moneySpendList = new LinkedList<MoneySpend>();
+		List<QuotaMoney> quotaMoneyList =
+				quotaMoneyRepository.getQuotaMoneysForManager(managerId);
+		for(QuotaMoney quotaMoney: quotaMoneyList) {
+			long quotaId = quotaMoney.getId();
+			List<MoneySpendExpense> moneyExpenseList = 
+					getMoneyExpenseListByQuota(quotaId);
+
+			MoneySpend moneySpend = new MoneySpend();
+			moneySpend.setQuotaMoney(quotaMoney);
+			moneySpend.setMoneyExpenseList(moneyExpenseList);
+			moneySpendList.add(moneySpend);
+		}
+		return moneySpendList;
+	}
 
 	@Override
 	public Optional<MoneySpendExpense> findMoneyExpenseById(long id) {
