@@ -29,6 +29,12 @@ public class SpendMoneyRest {
 			@PathVariable("employeeId") long employeeId){
 		return spendMoneyService.getMoneySpendListForEmployee(employeeId);
 	}
+		
+	@GetMapping("/manager/{managerId}")
+	public List<MoneySpend> getMoneySpendListForManager(
+			@PathVariable("managerId") long managerId){
+		return spendMoneyService.getMoneySpendListForManager(managerId);
+	}
 	
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
