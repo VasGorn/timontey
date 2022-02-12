@@ -20,4 +20,6 @@ public interface SpendMoneyRepository {
 
 	void delete(long spendExpeseId);
 
+	List<MoneySpend> getMoneySpendListForManager(long managerId);
+
 }
