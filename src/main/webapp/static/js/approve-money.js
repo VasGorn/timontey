@@ -26,3 +26,26 @@ var BALANCE_MONEY = 0.0;
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+setOrdersToSelect(parseInt(hManagerId.value));
+
+function setOrdersToSelect(managerId){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_SPEND_MONEY + "/manager/" + managerId,
+		data: null,
+		success: function(resp) {
+			ORDER_MONEY_ARRAY = toSpendOrderMoney(resp);
+			
+			console.log(resp);
+			console.log(ORDER_MONEY_ARRAY);
+			
+			for(let i = 0; i < ORDER_MONEY_ARRAY.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = ORDER_MONEY_ARRAY[i].order.id;
+				opt.innerHTML = ORDER_MONEY_ARRAY[i].order.name;
+				selectOrder.appendChild(opt);
+			}
+		}
+	});
+}
