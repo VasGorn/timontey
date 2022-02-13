@@ -70,6 +70,11 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 			System.out.println("Data not found: " + e.getMessage());
 		}
 	}
+		
+	@Override
+	public void approve(long spendId) {
+		spendMoneyRepository.approve(spendId);
+	}
 	
 	private void patch(MoneySpend moneySpend) {
 		QuotaMoney quotaMoney = 
