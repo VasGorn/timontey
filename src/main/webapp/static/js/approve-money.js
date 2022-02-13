@@ -86,3 +86,13 @@ function setExpensesToSelect(){
 		}
 	});
 }
+
+function updateOrderMoney(spendOrderMoney){
+	LIMIT_MONEY = spendOrderMoney.moneyLimit;
+	BALANCE_MONEY = 0.0;
+	for(let i = 0; i < spendOrderMoney.spendList.length; ++i){
+		BALANCE_MONEY += parseFloat(spendOrderMoney.spendList[i].money);
+	}
+	numOrderLimitMoney.value = roundTwoDigit(LIMIT_MONEY);
+	numOrderBalanceMoney.value = roundTwoDigit(BALANCE_MONEY);
+}
