@@ -96,3 +96,8 @@ function updateOrderMoney(spendOrderMoney){
 	numOrderLimitMoney.value = roundTwoDigit(LIMIT_MONEY);
 	numOrderBalanceMoney.value = roundTwoDigit(BALANCE_MONEY);
 }
+
+function setOrderInfo(order){
+	txtDescription.value = order.description;
+	txtAddress.value = order.address;
+}
