@@ -48,6 +48,12 @@ public class SpendMoneyRest {
 		return spendMoneyService.update(mSpendExpense);
 	}
 		
+	@PutMapping(path = "/approve/{moneySpendExpenseId}")
+	public void approveMoneySpendExpense(
+			@PathVariable("moneySpendExpenseId") long spendId) {
+		spendMoneyService.approve(spendId);
+	}
+		
 	@DeleteMapping("/{moneySpendExpenseId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteMoneySpendExpense(
