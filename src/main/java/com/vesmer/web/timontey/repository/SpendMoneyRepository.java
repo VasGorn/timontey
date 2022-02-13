@@ -22,4 +22,6 @@ public interface SpendMoneyRepository {
 
 	List<MoneySpend> getMoneySpendListForManager(long managerId);
 
+	void approve(long spendId);
+
 }
