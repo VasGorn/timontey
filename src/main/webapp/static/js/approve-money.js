@@ -27,6 +27,8 @@ var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
 
+btnApprove.addEventListener("click", btnApproveClicked, false);
+
 setOrdersToSelect(parseInt(hManagerId.value));
 setExpensesToSelect();
 
@@ -47,6 +49,16 @@ selectOrder.addEventListener("change", (event) => {
 	setOrderInfo(order);
 	loadSpendMoneyToTable(spendList);
 });
+
+function btnApproveClicked(){
+	let spendeMoneyIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < spendeMoneyIds.length; ++i) {
+		approveRequest(spendeMoneyIds[i]);
+	}
+}
 
 function setOrdersToSelect(managerId){
 	$.ajax({
