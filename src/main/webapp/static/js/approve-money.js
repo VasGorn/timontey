@@ -171,3 +171,11 @@ function approveRowInTable(id) {
 	}
 	return index;
 }
+
+function deleteCheckedRow(spendId, checkedRows){
+	for(let i = 0; i < checkedRows.length; ++i){
+		if(spendId === checkedRows[i].id){
+			checkedRows.splice(i,1);
+		}
+	}
+}
