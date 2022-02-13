@@ -30,6 +30,24 @@ $table.bootstrapTable({ data: [] });
 setOrdersToSelect(parseInt(hManagerId.value));
 setExpensesToSelect();
 
+selectOrder.addEventListener("change", (event) => {
+	let orderId = parseInt(event.target.value);
+	let order;
+	let spendList;
+	
+	for(let i = 0; i < ORDER_MONEY_ARRAY.length; ++i){
+		if(orderId === ORDER_MONEY_ARRAY[i].order.id){
+			order = ORDER_MONEY_ARRAY[i].order;
+			spendList = ORDER_MONEY_ARRAY[i].spendList;
+			updateOrderMoney(ORDER_MONEY_ARRAY[i]);
+			break;
+		}
+	}
+
+	setOrderInfo(order);
+	loadSpendMoneyToTable(spendList);
+});
+
 function setOrdersToSelect(managerId){
 	$.ajax({
 		type: "GET",
