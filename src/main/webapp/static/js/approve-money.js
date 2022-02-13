@@ -144,3 +144,16 @@ function loadSpendMoneyToTable(spendList){
 	
 	$table.bootstrapTable('load', rowArray);
 }
+
+function approveSpendInArray(orderId, spendId){
+	for(let i = 0; i < ORDER_MONEY_ARRAY.length; ++i){
+		if(orderId === ORDER_MONEY_ARRAY[i].order.id){
+			let spendList = ORDER_MONEY_ARRAY[i].spendList;
+			for(let j = 0; j < spendList.length; ++j){
+				if (spendId === spendList[j].id) {
+					spendList[j].approve = true;
+				}
+			}
+		}
+	}
+}
