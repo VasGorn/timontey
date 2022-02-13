@@ -28,6 +28,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect(parseInt(hManagerId.value));
+setExpensesToSelect();
 
 function setOrdersToSelect(managerId){
 	$.ajax({
@@ -45,6 +46,24 @@ function setOrdersToSelect(managerId){
 				opt.value = ORDER_MONEY_ARRAY[i].order.id;
 				opt.innerHTML = ORDER_MONEY_ARRAY[i].order.name;
 				selectOrder.appendChild(opt);
+			}
+		}
+	});
+}
+
+function setExpensesToSelect(){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_EXPENSES + "/all" ,
+		data: null,
+		success: function(resp) {
+			
+			for(let i = 0; i < resp.length; ++i){
+				let expenses = resp[i];
+				const opt = document.createElement("option");
+				opt.value = expenses.id;
+				opt.innerHTML = expenses.name ;
+				selectExpenses.appendChild(opt);
 			}
 		}
 	});
