@@ -233,3 +233,26 @@ function roundTwoDigit(number){
 	let newValue = Math.round(number * 100.0) / 100.0;
 	return newValue;
 }
+
+function getDataFromForm(employeeId){
+	let quotaMoney = new Object();
+	let employee = new Object();
+	employee.id = employeeId;
+	quotaMoney.employee = employee;
+
+	let moneySpendExpense = new Object();
+	let expenses = new Object();
+	expenses.id = parseInt(selectExpenses.value);
+	moneySpendExpense.expenses = expenses;
+	moneySpendExpense.money = parseFloat(numMoneySpend.value);
+	moneySpendExpense.approve = false;
+	
+	let moneyExpenseList = [];
+	moneyExpenseList.push(moneySpendExpense);
+	
+	let moneySpend = new Object();
+	moneySpend.quotaMoney = quotaMoney;
+	moneySpend.moneyExpenseList = moneyExpenseList;
+	
+	return moneySpend;
+}
