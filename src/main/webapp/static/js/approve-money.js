@@ -28,6 +28,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 btnApprove.addEventListener("click", btnApproveClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 setOrdersToSelect(parseInt(hManagerId.value));
 setExpensesToSelect();
@@ -58,6 +59,34 @@ function btnApproveClicked(){
 	for (let i = 0; i < spendeMoneyIds.length; ++i) {
 		approveRequest(spendeMoneyIds[i]);
 	}
+}
+
+function btnUpdateClicked(){
+	let oldSpendMoneyRow = checkedRows[0];
+
+	let newMoneyValue = roundTwoDigit(parseFloat(numMoneySpend.value));
+	let oldMoneyValue = oldSpendMoneyRow.money;
+	
+	if(newMoneyValue <= 0.0){
+		alert("Amount of money must be positive number!");
+		return;
+	}
+	
+	if(newMoneyValue + (BALANCE_MONEY - oldMoneyValue) > LIMIT_MONEY){
+		alert("Amount of money is above limit!");
+		return;
+	}
+
+	numMoneySpend.value = newMoneyValue;
+	btnUpdate.disabled = true;
+
+	let newMoneySpend = getDataFromForm(oldSpendMoneyRow.employeeId);
+	newMoneySpend.quotaMoney.id = oldSpendMoneyRow.quotaId;
+	let newMoneySpendExpense = newMoneySpend.moneyExpenseList[0];
+	newMoneySpendExpense.id = oldSpendMoneyRow.id;
+	
+	let index = findIndexInTable(oldSpendMoneyRow);
+	putRequest(newMoneySpendExpense, index);
 }
 
 function approveRequest(spendId){
