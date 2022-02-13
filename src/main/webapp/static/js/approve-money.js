@@ -101,3 +101,13 @@ function setOrderInfo(order){
 	txtDescription.value = order.description;
 	txtAddress.value = order.address;
 }
+
+function loadSpendMoneyToTable(spendList){
+	let rowArray = [];
+	for(let i = 0; i < spendList.length; ++i){
+		let row = spendToRow(spendList[i]);
+		rowArray.push(row);
+	}
+	
+	$table.bootstrapTable('load', rowArray);
+}
