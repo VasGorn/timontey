@@ -228,3 +228,8 @@ function setButtonsState(numRowSelected) {
 		btnDelete.disabled = false;
 	}
 }
+
+function roundTwoDigit(number){
+	let newValue = Math.round(number * 100.0) / 100.0;
+	return newValue;
+}
