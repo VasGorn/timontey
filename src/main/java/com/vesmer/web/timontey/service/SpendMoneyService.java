@@ -17,4 +17,6 @@ public interface SpendMoneyService {
 
 	List<MoneySpend> getMoneySpendListForManager(long managerId);
 
+	void approve(long spendId);
+
 }
