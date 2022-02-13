@@ -60,6 +60,27 @@ function btnApproveClicked(){
 	}
 }
 
+function approveRequest(spendId){
+	let orderId = parseInt(selectOrder.value);
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_SPEND_MONEY + '/approve/' + spendId,
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			
+			approveSpendInArray(orderId, spendId);
+			let index = approveRowInTable(spendId);
+			
+			$table.bootstrapTable('uncheck', index);
+			
+			deleteCheckedRow(spendId, checkedRows);
+
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function setOrdersToSelect(managerId){
 	$.ajax({
 		type: "GET",
