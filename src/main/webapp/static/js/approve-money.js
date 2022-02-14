@@ -182,6 +182,23 @@ function setExpensesToSelect(){
 	});
 }
 
+function updateSpendInArray(spend, orderId){
+	for(let i = 0; i < ORDER_MONEY_ARRAY.length; ++i){
+		if(orderId === ORDER_MONEY_ARRAY[i].order.id){
+			let spendList = ORDER_MONEY_ARRAY[i].spendList;
+			for(let j = 0; j < spendList.length; ++j){
+				if (spend.id === spendList[j].id) {
+					spendList[j].expenses = spend.expenses;
+					spendList[j].money = spend.money;
+					spendList[j].approve = spend.approve;
+				}
+			}
+			updateOrderMoney(ORDER_MONEY_ARRAY[i]);
+			break;
+		}
+	}
+}
+
 function updateOrderMoney(spendOrderMoney){
 	LIMIT_MONEY = spendOrderMoney.moneyLimit;
 	BALANCE_MONEY = 0.0;
