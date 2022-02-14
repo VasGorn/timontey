@@ -374,3 +374,12 @@ function findIndexInTable(row) {
 	}
 	return index;
 }
+
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+
+	setSelectValue(row);
+	setButtonsState(checkedRows.length);
+
+	console.log(checkedRows);
+});
