@@ -29,6 +29,7 @@ $table.bootstrapTable({ data: [] });
 
 btnApprove.addEventListener("click", btnApproveClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setOrdersToSelect(parseInt(hManagerId.value));
 setExpensesToSelect();
@@ -87,6 +88,16 @@ function btnUpdateClicked(){
 	
 	let index = findIndexInTable(oldSpendMoneyRow);
 	putRequest(newMoneySpendExpense, index);
+}
+
+function btnDeleteClicked(){
+	let spendExpenseIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < spendExpenseIds.length; ++i) {
+		deleteRequest(spendExpenseIds[i]);
+	}
 }
 
 function approveRequest(spendId){
