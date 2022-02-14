@@ -110,6 +110,39 @@ function approveRequest(spendId){
 	});
 }
 
+function putRequest(newSpendMoney, index){
+	let spendId = newSpendMoney.id;
+	let orderId = parseInt(selectOrder.value);
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_SPEND_MONEY + '/' + spendId,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(newSpendMoney),
+		success: function(resp) {
+			console.log(resp);
+			let spendExpense = resp;
+			
+			updateSpendInArray(spendExpense, orderId);
+
+			let newRow = checkedRows[0];
+			checkedRows = [];
+			setButtonsState(checkedRows.length);
+			$table.bootstrapTable('uncheckAll');
+			
+			newRow.expenses = spendExpense.expenses.name;
+			newRow.expensesId = spendExpense.expenses.id;
+			newRow.money = spendExpense.money;
+			newRow.approve = spendExpense.approve;
+			
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: newRow 
+			});
+		}
+	});
+}
+
 function setOrdersToSelect(managerId){
 	$.ajax({
 		type: "GET",
