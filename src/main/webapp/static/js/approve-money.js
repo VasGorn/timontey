@@ -254,6 +254,34 @@ function deleteSpendInArray(orderId, spendId){
 	}
 }
 
+function toSpendOrderMoney(spendMoneyArray){
+	let spendOrderMoneyArray = [];
+	for(let i = 0; i < spendMoneyArray.length; ++i){
+		let order = spendMoneyArray[i].quotaMoney.order;
+		let length = spendOrderMoneyArray.length;
+		let matchOrder = false;
+		for(let j = 0; j < length; ++j){
+			if (order.id === spendOrderMoneyArray[j].order.id) {
+				matchOrder = true;
+				let spendOrder = spendOrderMoneyArray[j];
+				spendOrder.moneyLimit += spendMoneyArray[i].quotaMoney.moneyLimit;
+				let newSpendList = toSpendList(spendMoneyArray[i]);
+				let oldSpendList = spendOrder.spendList;
+				let mergeSpendList = oldSpendList.concat(newSpendList);
+				spendOrder.spendList = mergeSpendList;
+			}
+		}
+		if (!matchOrder) {
+			let spendOrder = new Object();
+			spendOrder.order = order;
+			spendOrder.moneyLimit = spendMoneyArray[i].quotaMoney.moneyLimit;
+			spendOrder.spendList = toSpendList(spendMoneyArray[i]);
+			spendOrderMoneyArray.push(spendOrder);
+		}
+	}
+	return spendOrderMoneyArray;
+}
+
 function updateOrderMoney(spendOrderMoney){
 	LIMIT_MONEY = spendOrderMoney.moneyLimit;
 	BALANCE_MONEY = 0.0;
