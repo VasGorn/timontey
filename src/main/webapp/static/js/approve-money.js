@@ -154,6 +154,35 @@ function putRequest(newSpendMoney, index){
 	});
 }
 
+function deleteRequest (spendId) {
+	let orderId = parseInt(selectOrder.value);
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_SPEND_MONEY + '/' + spendId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [];
+			array.push(spendId);
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			
+			console.log(spendId);
+			
+			for(let i = 0; i < checkedRows.length; ++i){
+				if (spendId === checkedRows[i].id) {
+					checkedRows.splice(i,1);
+				}
+			}
+			
+			deleteSpendInArray(orderId, spendId);
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function setOrdersToSelect(managerId){
 	$.ajax({
 		type: "GET",
