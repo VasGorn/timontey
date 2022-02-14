@@ -324,6 +324,20 @@ function loadSpendMoneyToTable(spendList){
 	$table.bootstrapTable('load', rowArray);
 }
 
+function spendToRow(spend){
+	let row = new Object();
+	row.id = spend.id;
+	row.employeeId = spend.employee.id;
+	row.employee = spend.employee.lastName + ' ' + spend.employee.firstName
+				   + ' ' + spend.employee.middleName;
+	row.expenses = spend.expenses.name;
+	row.expensesId = spend.expenses.id;
+	row.date = spend.date;
+	row.money = spend.money;
+	row.approve = spend.approve;
+	return row;
+}
+
 function approveSpendInArray(orderId, spendId){
 	for(let i = 0; i < ORDER_MONEY_ARRAY.length; ++i){
 		if(orderId === ORDER_MONEY_ARRAY[i].order.id){
