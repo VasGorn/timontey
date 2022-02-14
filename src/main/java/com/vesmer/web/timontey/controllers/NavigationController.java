@@ -37,7 +37,7 @@ public class NavigationController {
 		NavigationLink navLink11 = new NavigationLink("Team", 
 				Const.BASE_URL+"team/", "layers");
 		NavigationLink navLink12 = new NavigationLink("Money record approve", 
-				Const.BASE_URL+"team/", "layers");
+				Const.BASE_URL+"approve-money/", "layers");
 
 		list.add(navLink1);
 		list.add(navLink2);
