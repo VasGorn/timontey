@@ -239,6 +239,21 @@ function updateSpendInArray(spend, orderId){
 	}
 }
 
+function deleteSpendInArray(orderId, spendId){
+	for(let i = 0; i < ORDER_MONEY_ARRAY.length; ++i){
+		if(orderId === ORDER_MONEY_ARRAY[i].order.id){
+			let spendList = ORDER_MONEY_ARRAY[i].spendList;
+			for(let j = 0; j < spendList.length; ++j){
+				if (spendId === spendList[j].id) {
+					spendList.splice(j, 1);
+				}
+			}
+			updateOrderMoney(ORDER_MONEY_ARRAY[i]);
+			break;
+		}
+	}
+}
+
 function updateOrderMoney(spendOrderMoney){
 	LIMIT_MONEY = spendOrderMoney.moneyLimit;
 	BALANCE_MONEY = 0.0;
