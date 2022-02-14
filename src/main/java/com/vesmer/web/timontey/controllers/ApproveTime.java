@@ -1,5 +1,6 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -34,5 +35,14 @@ public class ApproveTime {
 		return model;
 	}
 	
-
+	private List<String> getStringList(int minValue, int maxValue){
+		List<String> stringList = new ArrayList<String>();
+		int number = maxValue;
+		while(number >= minValue) {
+			String str = String.valueOf(number);
+			stringList.add(str);
+			number--;
+		}
+		return stringList;
+	}
 }
