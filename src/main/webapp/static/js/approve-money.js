@@ -282,6 +282,23 @@ function toSpendOrderMoney(spendMoneyArray){
 	return spendOrderMoneyArray;
 }
 
+function toSpendList(spendMoney){
+	let spendList = [];
+	let moneyExpenseList = spendMoney.moneyExpenseList;
+	for(let k = 0; k < moneyExpenseList.length; ++k){
+		let spend = new Object();
+		spend.id = moneyExpenseList[k].id;
+		spend.quotaId = spendMoney.quotaMoney.id;
+		spend.employee = spendMoney.quotaMoney.employee;
+		spend.expenses = moneyExpenseList[k].expenses;
+		spend.date = moneyExpenseList[k].date;
+		spend.money = moneyExpenseList[k].money;
+		spend.approve = moneyExpenseList[k].approve;
+		spendList.push(spend);
+	}
+	return spendList;
+}
+
 function updateOrderMoney(spendOrderMoney){
 	LIMIT_MONEY = spendOrderMoney.moneyLimit;
 	BALANCE_MONEY = 0.0;
