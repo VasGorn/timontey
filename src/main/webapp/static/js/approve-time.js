@@ -33,3 +33,35 @@ var QUOTA_TIME_ARRAY = [];
 var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
+
+setOrdersToSelect(parseInt(hManagerId.value), parseInt(hYear.value),
+				  parseInt(hNumMonth.value));
+	
+function setOrdersToSelect(managerId, year, numMonth){
+	console.log(numMonth);
+	$.ajax({
+		type: "GET",
+		url: URL_REST_QUOTA_TIME + "/manager/" + managerId + "/month/" + numMonth 
+								 + "/year/" + year,
+		data: null,
+		success: function(quotaTimeArray) {
+			QUOTA_TIME_ARRAY = quotaTimeArray;
+			
+			let ordersArray = getUniqueOrders(quotaTimeArray);
+			let employeeArray = getUniqueEmployees(quotaTimeArray);
+			
+			for (let i = 0; i < ordersArray.length; ++i) {
+				const opt = document.createElement("option");
+				opt.value = ordersArray[i].id;
+				opt.innerHTML = ordersArray[i].name;
+				selectOrder.appendChild(opt);
+			}
+			
+			for (let j = 0; j < employeeArray.length; ++j) {
+				let employeeId = employeeArray[j].id;
+				setHoursSpend(employeeId, year, numMonth);
+			}
+			console.log(QUOTA_TIME_ARRAY);
+		}
+	});
+}
