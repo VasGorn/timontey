@@ -117,3 +117,14 @@ function removeOptionsFromSelect(select){
 		select.removeChild(select.options[1]);
 	}
 }
+
+function setEmployeesToSelect(objectArray, select){
+	for(let i = 0; i < objectArray.length; ++i){
+		const opt = document.createElement("option");
+		opt.value = objectArray[i].id;
+		opt.innerHTML = objectArray[i].lastName + ' ' 
+						+ objectArray[i].firstName + ' '
+						+ objectArray[i].middleName;
+		select.appendChild(opt);
+	}
+}
