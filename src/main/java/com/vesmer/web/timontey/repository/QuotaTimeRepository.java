@@ -21,4 +21,6 @@ public interface QuotaTimeRepository {
 
 	Optional<WorkTypeHours> findWorkTypeQuotaById(long id);
 
+	List<QuotaTime> getQuotaTimeListForManager(long managerId, short numMonth, short year);
+
 }
