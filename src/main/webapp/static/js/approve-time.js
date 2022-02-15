@@ -36,6 +36,26 @@ $table.bootstrapTable({ data: [] });
 
 setOrdersToSelect(parseInt(hManagerId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
+
+selectOrder.addEventListener("change", (event) => {
+	let orderId = parseInt(event.target.value);
+	let employeeArray = getEmployeeArray(QUOTA_TIME_ARRAY, orderId);
+	
+	setOrderInfo(QUOTA_TIME_ARRAY, orderId);
+	
+	removeOptionsFromSelect(selectEmployee);
+	setEmployeesToSelect(employeeArray, selectEmployee);
+	
+	selectEmployee.disabled = false;
+
+	updateOrderHours(QUOTA_TIME_ARRAY, orderId);
+
+	resetNumWorkTypeHours();
+	removeOptionsFromSelect(selectWorkType);
+	removeOptionsFromSelect(selectDayOfMonth);
+	
+	$table.bootstrapTable('removeAll');
+});
 	
 function setOrdersToSelect(managerId, year, numMonth){
 	console.log(numMonth);
