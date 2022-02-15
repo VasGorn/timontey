@@ -116,6 +116,18 @@ function getEmployeeArray(quotaTimeArray, orderId){
 	return array;
 }
 
+function getWorkTypeQuotaArray(quotaTimeArray, orderId, employeeId){
+	for (let i = 0; i < quotaTimeArray.length; ++i) {
+		if (orderId === quotaTimeArray[i].order.id 
+			&& employeeId === quotaTimeArray[i].employee.id) {
+				
+			let workTypeQuotaList = quotaTimeArray[i].workTypeHours;
+			return workTypeQuotaList;
+			
+		}
+	}
+}
+
 function setOrderInfo(quotaTimeArray, orderId){
 	let order;
 	for(let i = 0; i < quotaTimeArray.length; ++i){
