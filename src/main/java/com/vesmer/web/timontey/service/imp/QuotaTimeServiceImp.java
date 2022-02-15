@@ -68,6 +68,18 @@ public class QuotaTimeServiceImp implements QuotaTimeService {
 		
 		return quotaTimeList;
 	}
+		
+	@Override
+	public List<QuotaTime> getQuotaTimeListForManager(long managerId, short numMonth, short year) {
+		List<QuotaTime> quotaTimeList = 
+				quotaTimeRepository.getQuotaTimeListForManager(managerId, numMonth, year);
+		
+		for(QuotaTime quotaTime: quotaTimeList) {
+			patchQuotaTime(quotaTime);
+		}
+		
+		return quotaTimeList;
+	}
 	
 	@Override
 	public QuotaTime save(QuotaTime quotaTime) {
