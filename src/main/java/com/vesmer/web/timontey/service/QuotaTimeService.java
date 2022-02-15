@@ -17,4 +17,7 @@ public interface QuotaTimeService {
 
 	List<QuotaTime> getQuotaTimeListForEmployee(long employeeId, short numMonth, short year);
 
+	List<QuotaTime> getQuotaTimeListForManager(long managerId, short numMonth, 
+			short year);
+
 }
