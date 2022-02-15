@@ -34,6 +34,10 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			+ " AND year=?;";
 	private static final String SELECT_QUOTA_TIME_LIST_FOR_EMPLOYEE_SQL =
 			"SELECT * FROM quota_time WHERE employee_id=? AND year=?;";
+	private static final String SELECT_QUOTA_TIME_LIST_FOR_MANAGER_SQL =
+			"SELECT qt.id, qt.order_id, qt.employee_id, qt.year"
+			+ " FROM quota_time AS qt, orders AS o"
+			+ " WHERE qt.order_id = o.id AND o.manager_id = ? AND qt.year = ?;";
 	private static final String SELECT_WORKTIME_HOURS_SQL =
 			"SELECT * FROM worktype_hours WHERE id = ?;";
 	private static final String INSERT_QUOTA_TIME_SQL =
@@ -65,6 +69,13 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 			short numMonth, short year) {
 		return getQuotaTimeList(SELECT_QUOTA_TIME_LIST_FOR_EMPLOYEE_SQL,
 				employeeId, numMonth, year);
+	}
+		
+	@Override
+	public List<QuotaTime> getQuotaTimeListForManager(long managerId,
+			short numMonth, short year) {
+		return getQuotaTimeList(SELECT_QUOTA_TIME_LIST_FOR_MANAGER_SQL,
+				managerId, numMonth, year);
 	}
 	
 	@Override
