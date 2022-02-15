@@ -128,6 +128,19 @@ function getWorkTypeQuotaArray(quotaTimeArray, orderId, employeeId){
 	}
 }
 
+function getNumDayArray(workTypeQuotaList){
+	let numDaySet = new Set();
+	for (let j = 0; j < workTypeQuotaList.length; ++j) {
+		let workDayList = workTypeQuotaList[j].workDayList;
+		for (let k = 0; k < workDayList.length; ++k) {
+			if (workDayList[k].approve === false) {
+				numDaySet.add(workDayList[k].numDay);
+			}
+		}
+	}
+	return [...numDaySet];
+}
+
 function setOrderInfo(quotaTimeArray, orderId){
 	let order;
 	for(let i = 0; i < quotaTimeArray.length; ++i){
