@@ -160,6 +160,15 @@ function setEmployeesToSelect(objectArray, select){
 	}
 }
 
+function setWorkTypeToSelect(objectArray, select) {
+	for(let i = 0; i < objectArray.length; ++i){
+		const opt = document.createElement("option");
+		opt.value = objectArray[i].id;
+		opt.innerHTML = objectArray[i].workType.workTypeName;
+		select.appendChild(opt);
+	}
+}
+
 function updateOrderHours(quotaTimeArray, orderId) {
 	let orderHoursLimit = 0;
 	let orderHoursBalance = 0;
