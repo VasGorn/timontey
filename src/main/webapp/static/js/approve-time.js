@@ -96,3 +96,15 @@ function getEmployeeArray(quotaTimeArray, orderId){
 	}
 	return array;
 }
+
+function setOrderInfo(quotaTimeArray, orderId){
+	let order;
+	for(let i = 0; i < quotaTimeArray.length; ++i){
+		if(orderId === quotaTimeArray[i].order.id){
+			order = quotaTimeArray[i].order;
+			break;
+		}
+	}
+	txtDescription.value = order.description;
+	txtAddress.value = order.address;
+}
