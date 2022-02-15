@@ -56,6 +56,25 @@ selectOrder.addEventListener("change", (event) => {
 	
 	$table.bootstrapTable('removeAll');
 });
+
+selectEmployee.addEventListener("change", (event) => {
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(event.target.value);
+	let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+	
+	removeOptionsFromSelect(selectWorkType);
+	setWorkTypeToSelect(workTypeQuotaArray, selectWorkType);
+	
+	let numDayArray = getNumDayArray(workTypeQuotaArray);
+	numDayArray.sort();
+
+	removeOptionsFromSelect(selectDayOfMonth);
+	if (numDayArray.length >= 1){
+		setNumDayToSelect(numDayArray, selectDayOfMonth);
+		selectDayOfMonth.value = numDayArray[0];
+		loadWorkDayToTable(workTypeQuotaArray, numDayArray[0]);
+	}
+});
 	
 function setOrdersToSelect(managerId, year, numMonth){
 	console.log(numMonth);
