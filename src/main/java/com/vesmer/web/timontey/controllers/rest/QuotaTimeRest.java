@@ -38,6 +38,14 @@ public class QuotaTimeRest {
 			@PathVariable("year") short year){
 		return quotaTimeService.getQuotaTimeListForEmployee(employeeId, numMonth, year);
 	}
+	
+	@GetMapping("/manager/{managerId}/month/{numMonth}/year/{year}")
+	public List<QuotaTime> getQuotaTimeListForManager(
+			@PathVariable("managerId") long managerId,
+			@PathVariable("numMonth") short numMonth, 
+			@PathVariable("year") short year){
+		return quotaTimeService.getQuotaTimeListForManager(managerId, numMonth, year);
+	}
 		
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -56,5 +64,4 @@ public class QuotaTimeRest {
 	public void deleteWorkHours(@PathVariable("workHoursId") long workHoursId) {
 		quotaTimeService.delete(workHoursId);
 	}
-
 }
