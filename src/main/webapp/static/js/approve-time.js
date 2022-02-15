@@ -31,3 +31,5 @@ var URL_REST_WORK_DAY = "/timontey/rest/work-day";
 var QUOTA_TIME_ARRAY = [];
 
 var checkedRows = [];
+
+$table.bootstrapTable({ data: [] });
