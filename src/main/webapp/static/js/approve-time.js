@@ -145,3 +145,12 @@ function updateOrderHours(quotaTimeArray, orderId) {
 	numOrderLimitTime.value = orderHoursLimit;
 	numOrderBalanceTime.value = orderHoursBalance;
 }
+
+function getSumSpendHoursOnWorkType(workTypeQuota){
+	let workDayArray = workTypeQuota.workDayList;
+	let hoursSpend = 0;
+	for(let i = 0; i < workDayArray.length; ++i){
+		hoursSpend += (workDayArray[i].workHours + workDayArray[i].overtime);
+	}
+	return hoursSpend;
+}
