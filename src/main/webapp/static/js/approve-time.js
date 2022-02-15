@@ -154,3 +154,8 @@ function getSumSpendHoursOnWorkType(workTypeQuota){
 	}
 	return hoursSpend;
 }
+
+function resetNumWorkTypeHours(){
+	numWorkTypeLimitTime.value = "";
+	numWorkTypeBalanceTime.value = "";
+}
