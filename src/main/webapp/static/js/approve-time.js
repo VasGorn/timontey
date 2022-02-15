@@ -85,3 +85,14 @@ function setOrdersToSelect(managerId, year, numMonth){
 		}
 	});
 }
+
+function getEmployeeArray(quotaTimeArray, orderId){
+	let array = [];
+	for (let i = 0; i < quotaTimeArray.length; ++i) {
+		if (orderId === quotaTimeArray[i].order.id){
+			let employee = quotaTimeArray[i].employee;
+			array.push(employee);
+		}
+	}
+	return array;
+}
