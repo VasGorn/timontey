@@ -128,3 +128,20 @@ function setEmployeesToSelect(objectArray, select){
 		select.appendChild(opt);
 	}
 }
+
+function updateOrderHours(quotaTimeArray, orderId) {
+	let orderHoursLimit = 0;
+	let orderHoursBalance = 0;
+	for (let i = 0; i < quotaTimeArray.length; ++i) {
+		if (orderId != quotaTimeArray[i].order.id) {
+			continue;
+		}
+		let workTypeQuotaArray = quotaTimeArray[i].workTypeHours;
+		for(let j = 0; j < workTypeQuotaArray.length; ++j){
+			orderHoursLimit += workTypeQuotaArray[j].hours;
+			orderHoursBalance += getSumSpendHoursOnWorkType(workTypeQuotaArray[j]);
+		}
+	}
+	numOrderLimitTime.value = orderHoursLimit;
+	numOrderBalanceTime.value = orderHoursBalance;
+}
