@@ -370,3 +370,16 @@ function setButtonsState(numRowSelected){
 		btnDelete.disabled = false;
 	}
 }
+
+$table.on('check.bs.table', function(e, row) {
+	checkedRows.push(row);
+	setButtonsState(checkedRows.length);
+	setSelectValue(row);
+	
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+	updateWorkTypeHours(workTypeQuotaArray, row.workTypeQuotaId);
+
+	console.log(checkedRows);
+});
