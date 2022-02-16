@@ -342,3 +342,11 @@ function workDayToRow(workTypeQuota, workDay){
 	
 	return row;
 }
+
+function deleteCheckedRow(id, checkedRows){
+	for(let i = 0; i < checkedRows.length; ++i){
+		if(id === checkedRows[i].id){
+			checkedRows.splice(i,1);
+		}
+	}
+}
