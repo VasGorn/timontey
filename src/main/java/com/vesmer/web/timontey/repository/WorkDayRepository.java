@@ -14,4 +14,6 @@ public interface WorkDayRepository {
 
 	void delete(long workDayId);
 
+	void approve(long workDayId);
+
 }
