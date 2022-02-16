@@ -221,3 +221,19 @@ function resetNumWorkTypeHours(){
 	numWorkTypeLimitTime.value = "";
 	numWorkTypeBalanceTime.value = "";
 }
+
+function loadWorkDayToTable(workTypeQuotaList, numDay) {
+	let rowArray = [];
+	for(let i = 0; i < workTypeQuotaList.length; ++i){
+		let workTypeQuota = workTypeQuotaList[i];
+		let workDayArray = workTypeQuotaList[i].workDayList;
+		for(let j = 0; j < workDayArray.length; ++j){
+			let workDay = workDayArray[j];
+			if(workDay.numDay === numDay){
+				let workDayRow = workDayToRow(workTypeQuota, workDay);
+				rowArray.push(workDayRow);
+			}
+		}
+	}
+	$table.bootstrapTable('load', rowArray);
+}
