@@ -383,3 +383,14 @@ $table.on('check.bs.table', function(e, row) {
 
 	console.log(checkedRows);
 });
+
+function setSelectValue(row){
+	let workTypeQuotaId = row.workTypeQuotaId;
+	
+	let time = row.workHours;
+	let overtime = row.overtime;
+	
+	selectWorkType.value = workTypeQuotaId;
+	selectWorkHour.value = time;
+	selectOvertime.value = overtime;
+}
