@@ -192,6 +192,20 @@ function approveInArray(workTypeQuotaArray, workDayId){
 	}
 }
 
+function approveRowInTable(id) {
+	let tableData = $table.bootstrapTable('getData');
+	let index = 0;
+
+	for (let i = 0; i < tableData.length; ++i) {
+		if (id === tableData[i].id) {
+			$table.bootstrapTable('updateCell', {index: i, field: 'approve', value: 'true'})
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
+
 function getNumDayArray(workTypeQuotaList){
 	let numDaySet = new Set();
 	for (let j = 0; j < workTypeQuotaList.length; ++j) {
