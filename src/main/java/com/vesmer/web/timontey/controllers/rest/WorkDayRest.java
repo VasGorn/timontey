@@ -42,6 +42,12 @@ public class WorkDayRest {
 		return workDayService.update(hoursSpend);
 	}
 		
+	@PutMapping(path = "/approve/{workDayId}")
+	public void approveMoneySpendExpense(
+			@PathVariable("workDayId") long workDayId) {
+		workDayService.approve(workDayId);
+	}
+		
 	@DeleteMapping("/{workDayId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteWorkDay(@PathVariable("workDayId") long workDayId) {
