@@ -181,6 +181,17 @@ function getWorkTypeQuotaArray(quotaTimeArray, orderId, employeeId){
 	}
 }
 
+function approveInArray(workTypeQuotaArray, workDayId){
+	for (let i = 0; i < workTypeQuotaArray.length; ++i) {
+		let workDayList = workTypeQuotaArray[i].workDayList;
+		for (let j = 0; j < workDayList.length; ++j) {
+			if (workDayId === workDayList[j].id) {
+				workDayList[j].approve = true;
+			}
+		}
+	}
+}
+
 function getNumDayArray(workTypeQuotaList){
 	let numDaySet = new Set();
 	for (let j = 0; j < workTypeQuotaList.length; ++j) {
