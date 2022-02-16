@@ -34,6 +34,8 @@ var checkedRows = [];
 
 $table.bootstrapTable({ data: [] });
 
+btnApprove.addEventListener("click", btnApproveClicked, false);
+
 setOrdersToSelect(parseInt(hManagerId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
 
@@ -94,6 +96,16 @@ selectWorkType.addEventListener("change", (event) => {
 	
 	updateWorkTypeHours(workTypeQuotaArray, workTypeQuotaId);
 });
+
+function btnApproveClicked() {
+	let workDayIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < workDayIds.length; ++i) {
+		requestToApprove(workDayIds[i]);
+	}
+}
 	
 function setOrdersToSelect(managerId, year, numMonth){
 	console.log(numMonth);
