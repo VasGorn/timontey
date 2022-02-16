@@ -182,6 +182,15 @@ function setWorkTypeToSelect(objectArray, select) {
 	}
 }
 
+function setNumDayToSelect(objectArray, select){
+	for(let i = 0; i < objectArray.length; ++i){
+		const opt = document.createElement("option");
+		opt.value = objectArray[i];
+		opt.innerHTML = objectArray[i];
+		select.appendChild(opt);
+	}
+}
+
 function updateOrderHours(quotaTimeArray, orderId) {
 	let orderHoursLimit = 0;
 	let orderHoursBalance = 0;
