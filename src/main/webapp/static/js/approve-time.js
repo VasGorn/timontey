@@ -75,6 +75,15 @@ selectEmployee.addEventListener("change", (event) => {
 		loadWorkDayToTable(workTypeQuotaArray, numDayArray[0]);
 	}
 });
+
+selectDayOfMonth.addEventListener("change", (event) => {
+	let numDay = parseInt(event.target.value);
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	
+	let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+	loadWorkDayToTable(workTypeQuotaArray, numDay);
+});
 	
 function setOrdersToSelect(managerId, year, numMonth){
 	console.log(numMonth);
