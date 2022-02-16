@@ -136,6 +136,28 @@ function setOrdersToSelect(managerId, year, numMonth){
 	});
 }
 
+function requestToApprove(workDayId){
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_WORK_DAY + '/approve/' + workDayId,
+		data: null,
+		success: function(resp) {
+			console.log(resp);
+			
+			let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+			approveInArray(workTypeQuotaArray, workDayId);
+			
+			let index = approveRowInTable(workDayId);
+			$table.bootstrapTable('uncheck', index);
+			
+			deleteCheckedRow(workDayId, checkedRows);
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function getEmployeeArray(quotaTimeArray, orderId){
 	let array = [];
 	for (let i = 0; i < quotaTimeArray.length; ++i) {
