@@ -350,3 +350,23 @@ function deleteCheckedRow(id, checkedRows){
 		}
 	}
 }
+
+function setButtonsState(numRowSelected){
+	if (numRowSelected < 1) {
+		btnApprove.disabled = true;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = true;
+		return;
+	}
+	if (numRowSelected === 1) {
+		btnApprove.disabled = false;
+		btnUpdate.disabled = false;
+		btnDelete.disabled = false;
+		return;
+	}
+	if (numRowSelected > 1) {
+		btnApprove.disabled = false;
+		btnUpdate.disabled = true;
+		btnDelete.disabled = false;
+	}
+}
