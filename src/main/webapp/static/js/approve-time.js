@@ -227,6 +227,16 @@ function updateOrderHours(quotaTimeArray, orderId) {
 	numOrderBalanceTime.value = orderHoursBalance;
 }
 
+function updateWorkTypeHours(workTypeQuotaArray, workTypeQuotaId){
+	for(let i = 0; i < workTypeQuotaArray.length; ++i){
+		if(workTypeQuotaId === workTypeQuotaArray[i].id){
+			numWorkTypeLimitTime.value = workTypeQuotaArray[i].hours;
+			numWorkTypeBalanceTime.value = getSumSpendHoursOnWorkType(workTypeQuotaArray[i]);
+			break;
+		}
+	}
+}
+
 function getSumSpendHoursOnWorkType(workTypeQuota){
 	let workDayArray = workTypeQuota.workDayList;
 	let hoursSpend = 0;
