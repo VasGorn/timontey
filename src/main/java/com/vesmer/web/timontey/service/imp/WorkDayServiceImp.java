@@ -65,6 +65,11 @@ public class WorkDayServiceImp implements WorkDayService {
 			System.out.println("Data not found: " + e.getMessage());
 		}
 	}
+			
+	@Override
+	public void approve(long workDayId) {
+		workDayRepository.approve(workDayId);
+	}
 	
 	private void patchWorkTimeSpend(HoursSpend hoursSpend) {
 		WorkTypeHours workHours = 
