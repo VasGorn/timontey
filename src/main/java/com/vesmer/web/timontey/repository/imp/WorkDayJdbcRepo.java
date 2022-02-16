@@ -36,6 +36,8 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 			"UPDATE work_day SET worktype_quota_id = ?, employee_id = ?, "
 			+ "hours_spend = ?, overtime = ?, approve = FALSE "
 			+ "WHERE id = ?;";
+	private static final String APPROVE_WORK_DAY_SQL =
+			"UPDATE work_day SET approve = TRUE WHERE id = ?;";
 	private static final String DELETE_WOKR_DAY_SQL = 
 			"DELETE FROM work_day WHERE id = ?;";
 
@@ -85,6 +87,11 @@ public class WorkDayJdbcRepo implements WorkDayRepository{
 	@Override
 	public void delete(long workDayId) {
 		jdbcTemplate.update(DELETE_WOKR_DAY_SQL, workDayId);
+	}
+		
+	@Override
+	public void approve(long workDayId) {
+		jdbcTemplate.update(APPROVE_WORK_DAY_SQL, workDayId);
 	}
 	
 	private long saveWorkDay(WorkDay workDay, long workTypeQuotaId) {
