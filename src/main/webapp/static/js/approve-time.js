@@ -335,6 +335,17 @@ function updateWorkTypeQuotaArray(workTypeQuotaArray, newWorkTypeQuota, newWorkD
 	}
 }
 
+function deleteInArray(workTypeQuotaArray, workDayId) {
+	for (let i = 0; i < workTypeQuotaArray.length; ++i) {
+		let workDayList = workTypeQuotaArray[i].workDayList;
+		for (let j = 0; j < workDayList.length; ++j) {
+			if (workDayId === workDayList[j].id) {
+				workDayList.splice(j, 1);
+			}
+		}
+	}
+}
+
 function approveRowInTable(id) {
 	let tableData = $table.bootstrapTable('getData');
 	let index = 0;
