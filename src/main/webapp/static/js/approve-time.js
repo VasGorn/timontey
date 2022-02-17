@@ -247,6 +247,36 @@ function putRequest(newHoursSpend, index) {
 	});
 }
 
+function deleteRequest(workDayId) {
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	let workTypeQuotaId = parseInt(selectWorkType.value);
+	
+	$.ajax({
+		type: "DELETE",
+		url: URL_REST_WORK_DAY + '/' + workDayId,
+		async: true,
+		data: null,
+		success: function() {
+			let array = [workDayId];
+			$table.bootstrapTable('remove', {
+				field: 'id',
+				values: array 
+			});
+			console.log(workDayId);
+			
+			let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+			deleteInArray(workTypeQuotaArray, workDayId);
+			
+			updateOrderHours(QUOTA_TIME_ARRAY, orderId);
+			updateWorkTypeHours(workTypeQuotaArray, workTypeQuotaId)
+			
+			deleteCheckedRow(workDayId, checkedRows);
+			setButtonsState(checkedRows.length);
+		}
+	});
+}
+
 function getEmployeeArray(quotaTimeArray, orderId){
 	let array = [];
 	for (let i = 0; i < quotaTimeArray.length; ++i) {
