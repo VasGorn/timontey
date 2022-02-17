@@ -270,6 +270,30 @@ function approveInArray(workTypeQuotaArray, workDayId){
 	}
 }
 
+function updateWorkTypeQuotaArray(workTypeQuotaArray, newWorkTypeQuota, newWorkDay){
+	for(let i = 0; i < workTypeQuotaArray.length; ++i){
+		let oldWorkTypeQuota = workTypeQuotaArray[i];
+		let workDayArray = workTypeQuotaArray[i].workDayList;
+		let isUpdate = false;	
+
+		for(let j = 0; j < workDayArray.length; ++j){
+			let oldWorkDay = workDayArray[j];
+			if(oldWorkDay.id === newWorkDay.id && 
+				oldWorkTypeQuota.id === newWorkTypeQuota.id){
+				workDayArray[j] = newWorkDay;
+				isUpdate = true;
+			} else if (oldWorkDay.id === newWorkDay.id && 
+						oldWorkTypeQuota.id != newWorkTypeQuota.id){
+				workDayArray.splice(j, 1);
+			}
+		}
+		
+		if(isUpdate === false && oldWorkTypeQuota.id === newWorkTypeQuota.id){
+			workDayArray.push(newWorkDay);
+		}
+	}
+}
+
 function approveRowInTable(id) {
 	let tableData = $table.bootstrapTable('getData');
 	let index = 0;
