@@ -463,3 +463,27 @@ function setSelectValue(row){
 	selectWorkHour.value = time;
 	selectOvertime.value = overtime;
 }
+
+function getDataFromForm(employeeId, numDay){
+	let hoursSpend = new Object();
+	let workTypeHours = new Object();
+	let workDay = new Object();
+	let workDayArray = [];
+	
+	workTypeHours.id = parseInt(selectWorkType.value);
+	
+	let employee = new Object();
+	employee.id = employeeId;
+	workDay.employee = employee;
+	workDay.numDay = numDay;
+	workDay.workHours = parseInt(selectWorkHour.value);
+	workDay.overtime = parseInt(selectOvertime.value);
+	workDay.isApprove = false;
+	
+	workDayArray.push(workDay);
+	
+	hoursSpend.workTypeHours = workTypeHours;
+	hoursSpend.workDayList = workDayArray;
+	
+	return hoursSpend;
+}
