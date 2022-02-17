@@ -35,6 +35,7 @@ var checkedRows = [];
 $table.bootstrapTable({ data: [] });
 
 btnApprove.addEventListener("click", btnApproveClicked, false);
+btnUpdate.addEventListener("click", btnUpdateClicked, false);
 
 setOrdersToSelect(parseInt(hManagerId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
@@ -105,6 +106,47 @@ function btnApproveClicked() {
 	for (let i = 0; i < workDayIds.length; ++i) {
 		requestToApprove(workDayIds[i]);
 	}
+}
+
+function btnUpdateClicked() {
+	let oldWorkDayRow = checkedRows[0];
+	let oldSumHours = oldWorkDayRow.workHours + oldWorkDayRow.overtime;
+	
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+	let workTypeQuotaId = parseInt(selectWorkType.value);
+	let limitHours = getLimitOnType(workTypeQuotaArray, workTypeQuotaId);
+	let balanceHours = getBalanceOnType(workTypeQuotaArray, workTypeQuotaId);
+	
+	let newSumHours = parseInt(selectWorkHour.value) + parseInt(selectOvertime.value);
+	
+	if (workTypeQuotaId === oldWorkDayRow.workTypeQuotaId) {
+		if (balanceHours  + newSumHours > limitHours) {
+			alert("New value is above limit!");
+			return;
+		}
+	} else {
+		if (balanceHours - oldSumHours + newSumHours > limitHours) {
+			alert("New value is above limit!");
+			return;
+		}
+	}
+	
+	if (parseInt(selectWorkHour.value) <= 0 || parseInt(selectOvertime.value) < 0) {
+		alert("Wrong values of hours!");
+		return
+	}
+
+	btnUpdate.disabled = true;
+
+	let newHoursSpend = getDataFromForm(oldWorkDayRow.employeeId, oldWorkDayRow.numDay);
+	newHoursSpend.workTypeHours.id = workTypeQuotaId;
+	newHoursSpend.workDayList[0].id = oldWorkDayRow.id;
+	
+	let index = findIndexInTable(oldWorkDayRow);
+	
+	putRequest(newHoursSpend, index);
 }
 	
 function setOrdersToSelect(managerId, year, numMonth){
