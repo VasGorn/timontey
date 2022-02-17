@@ -200,6 +200,42 @@ function requestToApprove(workDayId){
 	});
 }
 
+function putRequest(newHoursSpend, index) {
+	let workDayId = newHoursSpend.workDayList[0].id;
+	let orderId = parseInt(selectOrder.value);
+	let employeeId = parseInt(selectEmployee.value);
+	$.ajax({
+		type: "PUT",
+		url: URL_REST_WORK_DAY + '/' + workDayId,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify(newHoursSpend),
+		success: function(resp) {
+			console.log(resp);
+			
+			let workTypeQuota = resp.workTypeHours;
+			let workDay = resp.workDayList[0];
+			let workDayRow = workDayToRow(workTypeQuota, workDay);
+			
+			let workTypeQuotaArray = getWorkTypeQuotaArray(QUOTA_TIME_ARRAY, orderId, employeeId);
+			
+			updateWorkTypeQuotaArray(workTypeQuotaArray, workTypeQuota, workDay);
+			
+			updateOrderHours(QUOTA_TIME_ARRAY, orderId);
+			updateWorkTypeHours(workTypeQuotaArray, workTypeQuota.id);
+			
+			$table.bootstrapTable('uncheckAll');
+			checkedRows = [];
+			setButtonsState(checkedRows.length);
+
+			$table.bootstrapTable('updateRow', {
+				index: index,
+				row: workDayRow 
+			});
+		}
+	});
+}
+
 function getEmployeeArray(quotaTimeArray, orderId){
 	let array = [];
 	for (let i = 0; i < quotaTimeArray.length; ++i) {
