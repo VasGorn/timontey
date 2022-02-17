@@ -355,6 +355,14 @@ function getLimitOnType(workTypeQuotaArray, workTypeQuotaId) {
 	}
 }
 
+function getBalanceOnType(workTypeQuotaArray, workTypeQuotaId) {
+	for(let j = 0; j < workTypeQuotaArray.length; ++j){
+		if (workTypeQuotaId === workTypeQuotaArray[j].id) {
+			return getSumSpendHoursOnWorkType(workTypeQuotaArray[j])	
+		}
+	}
+}
+
 function resetNumWorkTypeHours(){
 	numWorkTypeLimitTime.value = "";
 	numWorkTypeBalanceTime.value = "";
