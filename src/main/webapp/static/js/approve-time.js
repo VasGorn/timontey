@@ -36,6 +36,7 @@ $table.bootstrapTable({ data: [] });
 
 btnApprove.addEventListener("click", btnApproveClicked, false);
 btnUpdate.addEventListener("click", btnUpdateClicked, false);
+btnDelete.addEventListener("click", btnDeleteClicked, false);
 
 setOrdersToSelect(parseInt(hManagerId.value), parseInt(hYear.value),
 				  parseInt(hNumMonth.value));
@@ -147,6 +148,16 @@ function btnUpdateClicked() {
 	let index = findIndexInTable(oldWorkDayRow);
 	
 	putRequest(newHoursSpend, index);
+}
+
+function btnDeleteClicked() {
+	let workDayIds = $.map($table.bootstrapTable('getSelections'), function(row) {
+		return row.id;
+	});
+	
+	for (let i = 0; i < workDayIds.length; ++i) {
+		deleteRequest(workDayIds[i]);
+	}
 }
 	
 function setOrdersToSelect(managerId, year, numMonth){
