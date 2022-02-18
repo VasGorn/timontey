@@ -318,6 +318,24 @@ function getUniqueOrders(quotaTimeArray){
 	return orders;
 }
 
+function getUniqueEmployees(quotaTimeArray){
+	let array = [];
+	for (let i = 0; i < quotaTimeArray.length; ++i) {
+		let employee = quotaTimeArray[i].employee;
+		let isUnique = true;
+		for (let j = 0; j < array.length; ++j) {
+			if(array[j].id === employee.id) {
+				isUnique = false;	
+				break;
+			}
+		}
+		if (isUnique) {
+			array.push(employee);
+		}
+	}
+	return array;
+}
+
 function approveInArray(workTypeQuotaArray, workDayId){
 	for (let i = 0; i < workTypeQuotaArray.length; ++i) {
 		let workDayList = workTypeQuotaArray[i].workDayList;
