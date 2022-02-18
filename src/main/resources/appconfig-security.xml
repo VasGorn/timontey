@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+		 xmlns:b="http://www.springframework.org/schema/beans"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="
+		 http://www.springframework.org/schema/beans 
+		 https://www.springframework.org/schema/beans/spring-beans.xsd
+		 http://www.springframework.org/schema/security 
+		 https://www.springframework.org/schema/security/spring-security.xsd">
+		 
+	<http use-expressions="true">
+		<intercept-url pattern="/login*" access="permitAll" />
+		<intercept-url pattern="/static/**" access="permitAll" />
+		<intercept-url pattern="/" access="isAuthenticated()" />
+		<intercept-url pattern="/logout*" access="isAuthenticated()" />
+    	
+		<form-login login-page="/login" login-processing-url="/login"
+		 default-target-url="/" always-use-default-target="true"
+		username-parameter="username" password-parameter="password"
+		authentication-failure-url="/login?error=true" />
+		
+		<logout logout-success-url="/login" logout-url="/logout" 
+			delete-cookies="JSESSIONID"/>
+	</http>
+	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsServiceImp">
+			<password-encoder ref="passwordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+		 
+	<b:bean id="userDetailsServiceImp" 
+		class="com.vesmer.web.timontey.service.imp.UserDetailsServiceImp">
+	</b:bean>
+	<b:bean id="passwordEncoder" 
+        class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<b:constructor-arg name="strength" value="11"/>
+   </b:bean> 
+
+</b:beans>
