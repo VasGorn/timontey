@@ -300,6 +300,24 @@ function getWorkTypeQuotaArray(quotaTimeArray, orderId, employeeId){
 	}
 }
 
+function getUniqueOrders(quotaTimeArray){
+	let orders = [];
+	for (let i = 0; i < quotaTimeArray.length; ++i) {
+		let order = quotaTimeArray[i].order;
+		let isUnique = true;
+		for (let j = 0; j < orders.length; ++j) {
+			if(orders[j].id === order.id) {
+				isUnique = false;	
+				break;
+			}
+		}
+		if (isUnique) {
+			orders.push(order);
+		}
+	}
+	return orders;
+}
+
 function approveInArray(workTypeQuotaArray, workDayId){
 	for (let i = 0; i < workTypeQuotaArray.length; ++i) {
 		let workDayList = workTypeQuotaArray[i].workDayList;
