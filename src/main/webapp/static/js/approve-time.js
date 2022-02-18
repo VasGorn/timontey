@@ -277,6 +277,18 @@ function deleteRequest(workDayId) {
 	});
 }
 
+function setHoursSpend(employeeId, year, numMonth){
+	$.ajax({
+		type: "GET",
+		url: URL_REST_WORK_DAY + "/employee/" + employeeId + "/month/" + numMonth 
+								 + "/year/" + year,
+		data: null,
+		success: function(hoursSpendArray) {
+			addWorkDayListToQuota(hoursSpendArray);
+		}
+	});
+}
+
 function getEmployeeArray(quotaTimeArray, orderId){
 	let array = [];
 	for (let i = 0; i < quotaTimeArray.length; ++i) {
