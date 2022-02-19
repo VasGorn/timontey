@@ -1,6 +1,7 @@
 package com.vesmer.web.timontey.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Role {
 	private long id;
@@ -31,6 +32,24 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", roleName=" + roleName + "]";
+		return "Role [id=" + id + ", roleName=" + roleName + ", authorities=" + authorities + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(authorities, id, roleName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		return Objects.equals(authorities, other.authorities) && id == other.id
+				&& Objects.equals(roleName, other.roleName);
 	}
 }
