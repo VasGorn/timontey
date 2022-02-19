@@ -1,61 +1,55 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.security.Principal;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vesmer.web.timontey.domain.Const;
 import com.vesmer.web.timontey.domain.NavigationLink;
+import com.vesmer.web.timontey.domain.Role;
+import com.vesmer.web.timontey.domain.User;
+import com.vesmer.web.timontey.service.NavigationLinkService;
+import com.vesmer.web.timontey.service.UserService;
 
 @Controller
 public class NavigationController {
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private NavigationLinkService navigationService;
+	
 	@RequestMapping("/")
-	public ModelAndView main() {
-		List<NavigationLink> list = new LinkedList<>();
+	public ModelAndView main(Principal principal) {
+		String username = principal.getName();
+		System.out.println(String.format("Login user - '%s'", principal.getName()));
+		User user = userService.getUserByUsername(username).get();
 		
-		NavigationLink navLink1 = new NavigationLink("Users", 
-				Const.BASE_URL+"users/", "home");
-		NavigationLink navLink2 = new NavigationLink("Staff", 
-				Const.BASE_URL+"staff/", "file");
-		NavigationLink navLink4 = new NavigationLink("Work type", 
-				Const.BASE_URL+"work-type/", "bar-chart-2");
-		NavigationLink navLink5 = new NavigationLink("Expenses", 
-				Const.BASE_URL+"expenses/", "layers");
-		NavigationLink navLink6 = new NavigationLink("Orders", 
-				Const.BASE_URL+"orders/", "layers");
-		NavigationLink navLink7 = new NavigationLink("Quota of money", 
-				Const.BASE_URL+"quota-money/", "layers");
-		NavigationLink navLink8 = new NavigationLink("Quota of time", 
-				Const.BASE_URL+"quota-time/", "layers");
-		NavigationLink navLink9 = new NavigationLink("Spending money", 
-				Const.BASE_URL+"spend-money/", "layers");
-		NavigationLink navLink10 = new NavigationLink("Work day", 
-				Const.BASE_URL+"work-day/", "layers");
-		NavigationLink navLink11 = new NavigationLink("Team", 
-				Const.BASE_URL+"team/", "layers");
-		NavigationLink navLink12 = new NavigationLink("Money record approve", 
-				Const.BASE_URL+"approve-money/", "layers");
-		NavigationLink navLink13 = new NavigationLink("Time record approve", 
-				Const.BASE_URL+"approve-time/", "layers");
+		Set<NavigationLink> navSet = new HashSet<NavigationLink>();
+		for(Role role: user.getRoles()) {
+			List<NavigationLink> navList = navigationService.getNavigationByRole(role);
+			for(NavigationLink navLink: navList) {
+				navSet.add(navLink);
+			}
+		}
+		
+		List<NavigationLink> navSortList = navSet.stream()
+				.sorted(Comparator.comparing(NavigationLink::getName))
+				.collect(Collectors.toList());
 
-		list.add(navLink1);
-		list.add(navLink2);
-		list.add(navLink4);
-		list.add(navLink5);
-		list.add(navLink6);
-		list.add(navLink7);
-		list.add(navLink8);
-		list.add(navLink9);
-		list.add(navLink10);
-		list.add(navLink11);
-		list.add(navLink12);
-		list.add(navLink13);
+		System.out.println("Navigation set: " + navSortList);
 
         ModelAndView model = new ModelAndView("main");
-		model.addObject("navList", list);
+		model.addObject("navList", navSortList);
 
         return model;
 	}
