@@ -1,6 +1,7 @@
 package com.vesmer.web.timontey.domain;
 
 public class NavigationLink {
+	private long id;
 	private String name;
 	private String url;
 	private String icon;
@@ -11,6 +12,12 @@ public class NavigationLink {
 		this.icon = icon;
 	}
 
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -29,5 +36,4 @@ public class NavigationLink {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-
 }
