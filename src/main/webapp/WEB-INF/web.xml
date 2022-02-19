@@ -11,6 +11,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:appconfig-root.xml</param-value>
 	</context-param>
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
 
 	<servlet>
 		<servlet-name>SpringDispatcher</servlet-name>
