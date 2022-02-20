@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.vesmer.web.timontey.domain.Authority;
 import com.vesmer.web.timontey.domain.Role;
 import com.vesmer.web.timontey.domain.User;
+import com.vesmer.web.timontey.repository.AuthorityRepository;
 import com.vesmer.web.timontey.repository.RoleRepository;
 import com.vesmer.web.timontey.rowmapper.RoleRowMapper;
 
@@ -15,6 +17,9 @@ import com.vesmer.web.timontey.rowmapper.RoleRowMapper;
 public class RoleJdbcRepo implements RoleRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private AuthorityRepository authorityRepository;
 
 	private static final String SELECT_ALL_SQL	= "SELECT * FROM roles;";
 	private static final String SELECT_ROLES_FOR_USER_SQL =
@@ -39,6 +44,11 @@ public class RoleJdbcRepo implements RoleRepository {
 	public List<Role> getRolesForUser(User user) {
 		List<Role> list = (List<Role>) jdbcTemplate.query(SELECT_ROLES_FOR_USER_SQL,
 				new RoleRowMapper(), user.getUsername());
+		for(Role role: list) {
+			List<Authority> authorities = authorityRepository.getAuthoritiesForRole(role);
+			role.setAuthorities(authorities);
+		}
+	
 		return list;
 	}
 
@@ -51,5 +61,4 @@ public class RoleJdbcRepo implements RoleRepository {
 	public void deleteRolesFromUser(String username) {
 		jdbcTemplate.update(DELETE_ROLE_FROM_USER_SQL, username);
 	}
-
 }
