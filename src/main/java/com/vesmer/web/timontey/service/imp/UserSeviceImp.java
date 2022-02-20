@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,9 @@ public class UserSeviceImp implements UserService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+		
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public List<User> getAll() {
@@ -52,6 +56,7 @@ public class UserSeviceImp implements UserService {
 
 	@Override
 	public User save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 
 		saveRolesToUser(user, user.getRoles());
