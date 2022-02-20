@@ -6,6 +6,9 @@ public class NavigationLink {
 	private String url;
 	private String icon;
 	
+	public NavigationLink() {
+	}
+	
 	public NavigationLink(String name, String url, String icon) {
 		this.name = name;
 		this.url = url;
