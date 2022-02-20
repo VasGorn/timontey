@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.vesmer.web.timontey.domain.User;
+import com.vesmer.web.timontey.domain.enumeration.UserStatus;
 
 public class UserRowMapper implements RowMapper<User> {
 
@@ -15,6 +16,11 @@ public class UserRowMapper implements RowMapper<User> {
 		user.setUsername(rs.getString("username"));
 		user.setPassword(rs.getString("password"));
 		user.setId(rs.getLong("employee_id"));
+			
+		String strUserStatus = rs.getString("status");
+		UserStatus userStatus = UserStatus.valueOf(strUserStatus);
+		user.setStatus(userStatus);
+		
 		return user;
 	}
 
