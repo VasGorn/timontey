@@ -9,5 +9,10 @@
 		aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
+	
+	<form class="form-inline my-2 my-lg-0" method="post" action="logout">
+      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+	</form>
 </header>
 
