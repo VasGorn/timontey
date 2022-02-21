@@ -9,12 +9,11 @@ import com.vesmer.web.timontey.domain.Employee;
 import com.vesmer.web.timontey.service.StaffService;
 
 @Controller
-@RequestMapping("/quota-money")
 public class QuotaMoneyController {
 	@Autowired
 	private StaffService staffService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/quota-money")
 	public ModelAndView getQuotaMoney() {
 		long managerId = 3;
 		Employee manager = staffService.getEmployeeById(managerId).get();
