@@ -1,5 +1,7 @@
 package com.vesmer.web.timontey.domain;
 
+import java.util.Objects;
+
 public class NavigationLink {
 	private long id;
 	private String name;
@@ -38,5 +40,28 @@ public class NavigationLink {
 	}
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+	
+	@Override
+	public String toString() {
+		return "NavigationLink [id=" + id + ", name=" + name + ", url=" + url + ", icon=" + icon + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(icon, id, name, url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NavigationLink other = (NavigationLink) obj;
+		return Objects.equals(icon, other.icon) && id == other.id && Objects.equals(name, other.name)
+				&& Objects.equals(url, other.url);
 	}
 }
