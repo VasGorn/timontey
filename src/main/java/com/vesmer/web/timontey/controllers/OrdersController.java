@@ -9,12 +9,11 @@ import com.vesmer.web.timontey.domain.Employee;
 import com.vesmer.web.timontey.service.StaffService;
 
 @Controller
-@RequestMapping("/orders")
 public class OrdersController {
 	@Autowired
 	private StaffService staffService;
 
-	@RequestMapping("/")
+	@RequestMapping("/orders")
 	public ModelAndView getOrders() {
 		long managerId = 3;
 		Employee manager = staffService.getEmployeeById(managerId).get();
