@@ -5,10 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("expenses")
 public class ExpensesController {
 	
-	@RequestMapping("/")
+	@RequestMapping("/expenses")
 	public String getExpensesPage(Model model) {
 		return "expenses";
 	}
