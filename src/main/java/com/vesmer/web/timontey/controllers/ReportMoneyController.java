@@ -32,7 +32,7 @@ public class ReportMoneyController {
 		String fullName = manager.getLastName() + " " + manager.getFirstName() 
 							+ " " + manager.getMiddleName();
 		
-		List<String> years = yearsList();
+		List<String> years = getYearsList();
 		HashMap<Integer, String> months = getMonthsMap();
 		
 		ModelAndView model = new ModelAndView("report-money");
@@ -43,7 +43,7 @@ public class ReportMoneyController {
 		return model;
 	}
 	
-	private List<String> yearsList() {
+	private List<String> getYearsList() {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		List<String> years = new ArrayList<String>(YEARS_RANGE);
 		for(int i = 0; i < YEARS_RANGE; ++i) {
