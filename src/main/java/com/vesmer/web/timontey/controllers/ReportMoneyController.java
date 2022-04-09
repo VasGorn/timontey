@@ -1,5 +1,7 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +17,8 @@ import com.vesmer.web.timontey.service.StaffService;
 @Controller
 @RequestMapping("/report-money")
 public class ReportMoneyController {
+	private static final int YEARS_RANGE = 2;
+	
 	@Autowired
 	private ReportMoneyService reportMoneyService;
 	
@@ -28,7 +32,7 @@ public class ReportMoneyController {
 		String fullName = manager.getLastName() + " " + manager.getFirstName() 
 							+ " " + manager.getMiddleName();
 		
-		List<String> years = getYearsList();
+		List<String> years = yearsList();
 		HashMap<Integer, String> months = getMonthsMap();
 		
 		ModelAndView model = new ModelAndView("report-money");
@@ -37,5 +41,14 @@ public class ReportMoneyController {
 		model.addObject("years", years);
 		model.addObject("months", months);
 		return model;
+	}
+	
+	private List<String> yearsList() {
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		List<String> years = new ArrayList<String>(YEARS_RANGE);
+		for(int i = 0; i < YEARS_RANGE; ++i) {
+			years.add(Integer.toString(year - i));
+		}
+		return years;
 	}
 }
