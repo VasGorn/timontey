@@ -11,9 +11,12 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vesmer.web.timontey.domain.Employee;
+import com.vesmer.web.timontey.domain.ReportMoney;
 import com.vesmer.web.timontey.service.ReportMoneyService;
 import com.vesmer.web.timontey.service.StaffService;
 
@@ -44,6 +47,17 @@ public class ReportMoneyController {
 		model.addObject("years", years);
 		model.addObject("months", months);
 		return model;
+	}
+		
+	@RequestMapping(value = "/excelReportMoney", method = RequestMethod.GET)
+	public ModelAndView getExcel(@RequestParam long orderId,
+			@RequestParam short year,
+			@RequestParam short numMonth,
+			@RequestParam String filename){
+		ReportMoney reportMoney = reportMoneyService.getReportMoney(orderId,
+				year, numMonth);
+		reportMoney.setName(filename);
+		return new ModelAndView("ExcelMoneyView", "reportMoney", reportMoney);
 	}
 	
 	private List<String> getYearsList() {
