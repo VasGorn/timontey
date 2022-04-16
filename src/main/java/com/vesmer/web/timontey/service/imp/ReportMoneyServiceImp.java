@@ -1,5 +1,7 @@
 package com.vesmer.web.timontey.service.imp;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,5 +44,22 @@ public class ReportMoneyServiceImp implements ReportMoneyService {
 		reportMoney.setYear(year);
 		reportMoney.setNumMonth(numMonth);
 		return reportMoney;
+	}
+		
+	private List<MoneySpendExpense> getMoneyExpenseListOnDate(
+			List<MoneySpendExpense> list, short year, short numMonth){
+		
+		List<MoneySpendExpense> mSpendExpenseOnDate = 
+				new LinkedList<MoneySpendExpense>();
+		for(MoneySpendExpense mExpense: list) {
+			Date dateExpense = mExpense.getDate();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(dateExpense);
+			if(calendar.get(Calendar.MONTH) == numMonth &&
+					calendar.get(Calendar.YEAR) == year) {
+				mSpendExpenseOnDate.add(mExpense);
+			}
+		}
+		return mSpendExpenseOnDate;
 	}
 }
