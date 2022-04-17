@@ -16,6 +16,8 @@ public interface SpendMoneyService {
 	void delete(long spendExpeseId);
 
 	List<MoneySpend> getMoneySpendListForManager(long managerId);
+	
+	List<MoneySpend> getMoneySpendListForOrder(long orderId);
 
 	void approve(long spendId);
 
