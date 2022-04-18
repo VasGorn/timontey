@@ -1,5 +1,6 @@
 package com.vesmer.web.timontey.service.imp;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,26 @@ public class SpendMoneyServiceImp implements SpendMoneyService {
 	public List<MoneySpend> getMoneySpendListForManager(long managerId) {
 		List<MoneySpend> moneySpendList = 
 				spendMoneyRepository.getMoneySpendListForManager(managerId);
+		for(MoneySpend moneySpend: moneySpendList) {
+			patch(moneySpend);
+		}
+		return moneySpendList;
+	}
+		
+	@Override
+	public List<MoneySpend> getMoneySpendListForOrder(long orderId) {
+		List<QuotaMoney> qMoneyList = 
+				quotaMoneyService.getQuotaMoneysForOrder(orderId);
+		
+		List<MoneySpend> moneySpendList = new LinkedList<MoneySpend>();
+		for(QuotaMoney qMoney: qMoneyList) {
+			List<MoneySpendExpense> moneyExpenseList
+				= spendMoneyRepository.getMoneyExpenseListByQuota(qMoney.getId());
+			MoneySpend mSpend = new MoneySpend();
+			mSpend.setQuotaMoney(qMoney);
+			mSpend.setMoneyExpenseList(moneyExpenseList);
+			moneySpendList.add(mSpend);
+		}
 		for(MoneySpend moneySpend: moneySpendList) {
 			patch(moneySpend);
 		}
