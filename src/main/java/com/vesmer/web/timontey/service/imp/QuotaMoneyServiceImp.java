@@ -36,6 +36,15 @@ public class QuotaMoneyServiceImp implements QuotaMoneyService{
 		}
 		return quotaMoneyList;
 	}
+		
+	@Override
+	public List<QuotaMoney> getQuotaMoneysForOrder(long orderId) {
+		List<QuotaMoney> quotaMoneyList = quotaMoneyRepository.getQuotaMoneysForOrder(orderId);
+		for(QuotaMoney qMoney: quotaMoneyList) {
+			patch(qMoney);
+		}
+		return quotaMoneyList;
+	}
 	
 	@Override
 	public QuotaMoney save(QuotaMoney quotaMoney) {
