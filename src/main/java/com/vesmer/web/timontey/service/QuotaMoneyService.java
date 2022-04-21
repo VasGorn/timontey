@@ -16,5 +16,7 @@ public interface QuotaMoneyService {
 	void delete(long quotaMoneyId);
 
 	Optional<QuotaMoney> getQuotaMoneyById(long id);
+	
+	List<QuotaMoney> getQuotaMoneysForOrder(long orderId);
 
 }
