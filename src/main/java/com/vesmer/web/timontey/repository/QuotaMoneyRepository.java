@@ -19,4 +19,6 @@ public interface QuotaMoneyRepository {
 
 	List<QuotaMoney> getQuotaMoneysForEmployee(long employeeId);
 
+	List<QuotaMoney> getQuotaMoneysForOrder(long orderId);
+
 }
