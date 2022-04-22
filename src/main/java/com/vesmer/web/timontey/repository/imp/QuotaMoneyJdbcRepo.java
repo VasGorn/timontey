@@ -27,6 +27,9 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 		+ "orders AS o "
 		+ "WHERE o.id=q.order_id AND "
 		+ "o.manager_id=?;";
+	private static final String SELECT_QUOTA_MONEY_BY_ORDER_ID_SQL = 
+			"SELECT * FROM quota_money  "
+			+ "WHERE order_id = ?;";
 	private static final String INSERT_QUOTA_MONEY_SQL	= 
 			"INSERT INTO quota_money (order_id, employee_id, "
 			+ "money_limit) VALUES (?, ?, ?);";
@@ -95,6 +98,12 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 	public List<QuotaMoney> getQuotaMoneysForEmployee(long employeeId) {
 		return jdbcTemplate.query(SELECT_QUOTA_MONEY_BY_EMPLOYEE_ID_SQL,
 				new QuotaMoneyRowMapper(), employeeId);
+	}
+	
+	@Override
+	public List<QuotaMoney> getQuotaMoneysForOrder(long orderId) {
+		return jdbcTemplate.query(SELECT_QUOTA_MONEY_BY_ORDER_ID_SQL,
+				new QuotaMoneyRowMapper(), orderId);
 	}
 
 }
