@@ -6,11 +6,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
 import com.vesmer.web.timontey.domain.MoneySpend;
+import com.vesmer.web.timontey.domain.QuotaMoney;
 import com.vesmer.web.timontey.domain.ReportMoney;
 import com.vesmer.web.timontey.utilities.ExcelStyleCell;
 
@@ -42,6 +44,43 @@ public class ExcelMoneyView extends AbstractXlsView {
         	writeTableHeader(sheet, year, numMonth, styleCell);
         	writeData(sheet, mSpend, styleCell);
         }
+	}
+		
+	private void writeOrderInformation(Sheet sheet, QuotaMoney quotaMoney, ExcelStyleCell style) {
+		Row row;
+		
+		row = sheet.createRow(1);
+		writeToCell(row, 0, Header.ORDER.getString(), style.getHeaderGreen());
+		writeToCell(row, 1, quotaMoney.getOrder().getName(), style.getMain());
+
+		row = sheet.createRow(2);
+		writeToCell(row, 0, Header.ADDRESS.getString(), style.getHeaderGreen());
+		writeToCell(row, 1, quotaMoney.getOrder().getAddress(), style.getMain());
+
+		row = sheet.createRow(3);
+		writeToCell(row, 0, Header.DESCRIPTION.getString(), style.getHeaderGreen());
+		writeToCell(row, 1, quotaMoney.getOrder().getDescription(), style.getMain());
+
+		row = sheet.createRow(4);
+		writeToCell(row, 0, Header.PERFORMER.getString(), style.getHeaderGreen());
+		writeToCell(row, 1, quotaMoney.getEmployee().toString(), style.getMain());
+	}
+	
+	private enum Header{
+		ORDER("ORDER"),
+		ADDRESS("ADDRESS"),
+		DESCRIPTION("DESCRIPTION"),
+		PERFORMER("PERFORMER");
+		
+		private String str;
+		
+		Header(String str) {
+			this.str = str;
+		}
+		
+		public String getString() {
+			return str;
+		}
 	}
 
 }
