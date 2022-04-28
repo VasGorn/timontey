@@ -1,14 +1,19 @@
 package com.vesmer.web.timontey.view;
 
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
 import com.vesmer.web.timontey.domain.MoneySpend;
@@ -64,6 +69,30 @@ public class ExcelMoneyView extends AbstractXlsView {
 		row = sheet.createRow(4);
 		writeToCell(row, 0, Header.PERFORMER.getString(), style.getHeaderGreen());
 		writeToCell(row, 1, quotaMoney.getEmployee().toString(), style.getMain());
+	}
+	
+		
+	private void writeTableHeader(Sheet sheet, short year, short numMonth, ExcelStyleCell style) {
+		CellStyle headerBlackCenter = style.getHeaderBlackCenter();
+       	int daysInMonth = getDaysInMonth(numMonth, year);
+       	String month = Month.values()[numMonth - 1].getDisplayName(TextStyle.FULL, Locale.getDefault());
+		Row tableHeaderRow = sheet.createRow(6);
+		
+		sheet.addMergedRegion(new CellRangeAddress(6, 7, 0, 0));
+        sheet.addMergedRegion(new CellRangeAddress(6, 6, 1, daysInMonth));
+        
+        setStyleInRow(tableHeaderRow, daysInMonth, headerBlackCenter);
+        writeToCell(tableHeaderRow, 0, "Expenses", headerBlackCenter);
+        writeToCell(tableHeaderRow, 1, month, headerBlackCenter);
+        
+        Row daysRow = sheet.createRow(7);
+        setStyleInRow(daysRow, daysInMonth, headerBlackCenter);
+		int columnCount = 1;
+		for(int i = 1; i <= daysInMonth; ++i) {
+			writeToCell(daysRow, columnCount, i, headerBlackCenter);
+			sheet.setColumnWidth(columnCount, 2000);
+            ++columnCount;
+		}
 	}
 	
 	private enum Header{
