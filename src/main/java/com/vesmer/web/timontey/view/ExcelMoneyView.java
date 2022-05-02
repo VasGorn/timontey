@@ -6,6 +6,7 @@ import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
 
+import com.vesmer.web.timontey.domain.Expenses;
 import com.vesmer.web.timontey.domain.MoneySpend;
 import com.vesmer.web.timontey.domain.QuotaMoney;
 import com.vesmer.web.timontey.domain.ReportMoney;
@@ -93,6 +95,30 @@ public class ExcelMoneyView extends AbstractXlsView {
 			writeToCell(daysRow, columnCount, i, headerBlackCenter);
 			sheet.setColumnWidth(columnCount, 2000);
             ++columnCount;
+		}
+	}
+		
+	private void writeData(Sheet sheet, MoneySpend mSpend, 
+			ExcelStyleCell style) {
+		int rowNum = 8;
+		Set<Short> daySet = mSpend.getUniqueDays();
+		Set<Expenses> expensesSet = mSpend.getUniqueExpense();
+		for(Expenses e: expensesSet) {
+			Row expenseRow = sheet.createRow(rowNum);
+			writeToCell(expenseRow, 0, e.getName(), style.getMain());
+			for(Short numDay: daySet) {
+				float moneySum = mSpend.getSumMoney(e, numDay);
+				if(moneySum < 0.01f) {
+					continue;
+				}
+
+				if(mSpend.isSumApprove(e, numDay)) {
+					writeToCell(expenseRow, numDay, moneySum, style.getFillGreen());
+				} else {
+					writeToCell(expenseRow, numDay, moneySum, style.getBlackCenter());
+				}
+			}
+			++rowNum;
 		}
 	}
 		
