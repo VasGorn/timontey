@@ -1,6 +1,7 @@
 package com.vesmer.web.timontey.view;
 
 import java.time.Month;
+import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
@@ -93,6 +94,11 @@ public class ExcelMoneyView extends AbstractXlsView {
 			sheet.setColumnWidth(columnCount, 2000);
             ++columnCount;
 		}
+	}
+		
+	private int getDaysInMonth(short numMonth, short year) {
+		YearMonth yearMonth = YearMonth.of(year, numMonth);
+		return yearMonth.lengthOfMonth();
 	}
 	
 	private enum Header{
