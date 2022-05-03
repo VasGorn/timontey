@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -121,6 +122,13 @@ public class ExcelMoneyView extends AbstractXlsView {
 			++rowNum;
 		}
 	}
+	
+	private void setStyleInRow(Row row, int maxNumColumn, CellStyle cellStyle){
+        for(int i = 0; i <= maxNumColumn; ++i){
+            Cell cell = row.createCell(i);
+            cell.setCellStyle(cellStyle);
+        }
+    }
 		
 	private int getDaysInMonth(short numMonth, short year) {
 		YearMonth yearMonth = YearMonth.of(year, numMonth);
