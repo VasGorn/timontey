@@ -122,6 +122,24 @@ public class ExcelMoneyView extends AbstractXlsView {
 			++rowNum;
 		}
 	}
+		
+	private void writeToCell(Row row, int numColumn, String value, CellStyle style) {
+		Cell cell = row.createCell(numColumn);
+		cell.setCellStyle(style);
+		cell.setCellValue(value);
+	}
+	
+	private void writeToCell(Row row, int numColumn, double value, CellStyle style) {
+		Cell cell = row.createCell(numColumn);
+		cell.setCellStyle(style);
+		cell.setCellValue(value);
+	}
+	
+	private void writeToCell(Row row, int numColumn, int value, CellStyle style) {
+		Cell cell = row.createCell(numColumn);
+		cell.setCellStyle(style);
+		cell.setCellValue(value);
+	}
 	
 	private void setStyleInRow(Row row, int maxNumColumn, CellStyle cellStyle){
         for(int i = 0; i <= maxNumColumn; ++i){
