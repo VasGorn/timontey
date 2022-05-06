@@ -16,5 +16,13 @@ public class ExcelStyleCell {
 	public ExcelStyleCell(Workbook workbook) {
 		this.workbook = workbook;
 	}
+		
+	public CellStyle getMain() {
+		if (main != null) {
+			return main;
+		}
+        main = workbook.createCellStyle();
+        return main;
+	}
 
 }
