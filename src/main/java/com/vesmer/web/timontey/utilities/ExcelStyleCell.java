@@ -1,6 +1,8 @@
 package com.vesmer.web.timontey.utilities;
 
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class ExcelStyleCell {
@@ -23,6 +25,23 @@ public class ExcelStyleCell {
 		}
         main = workbook.createCellStyle();
         return main;
+	}
+		
+	public CellStyle getHeaderGreen() {
+		if (headerGreen != null) {
+			return headerGreen;
+		}
+        headerGreen = workbook.createCellStyle();
+        headerGreen.setFont(getHeaderFontGreen());
+        return headerGreen;
+	}
+		
+	private Font getHeaderFontGreen() {
+		Font headerFontGreen = workbook.createFont();
+        headerFontGreen.setBold(true);
+        headerFontGreen.setFontHeightInPoints((short) 12);
+        headerFontGreen.setColor(IndexedColors.GREEN.getIndex());
+        return headerFontGreen;
 	}
 
 }
