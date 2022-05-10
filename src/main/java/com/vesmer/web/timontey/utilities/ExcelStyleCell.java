@@ -1,5 +1,6 @@
 package com.vesmer.web.timontey.utilities;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -65,5 +66,12 @@ public class ExcelStyleCell {
         headerFontBlack.setColor(IndexedColors.BLACK.getIndex());
         return headerFontBlack;
 	}
+		
+	private void setAllBorder(CellStyle cellStyle, BorderStyle borderStyle){
+        cellStyle.setBorderBottom(borderStyle);
+        cellStyle.setBorderTop(borderStyle);
+        cellStyle.setBorderRight(borderStyle);
+        cellStyle.setBorderLeft(borderStyle);
+    }
 
 }
