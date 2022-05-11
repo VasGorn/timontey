@@ -67,6 +67,17 @@ public class ExcelStyleCell {
         return headerFontBlack;
 	}
 		
+	public CellStyle getBlackCenter() {
+		if (blackCenter != null) {
+			return blackCenter;
+		}
+		blackCenter =  workbook.createCellStyle();
+        blackCenter.setAlignment(HorizontalAlignment.CENTER);
+        blackCenter.setVerticalAlignment(VerticalAlignment.CENTER);
+        setAllBorder(blackCenter, BorderStyle.THIN);
+        return blackCenter;
+	}
+		
 	private void setAllBorder(CellStyle cellStyle, BorderStyle borderStyle){
         cellStyle.setBorderBottom(borderStyle);
         cellStyle.setBorderTop(borderStyle);
