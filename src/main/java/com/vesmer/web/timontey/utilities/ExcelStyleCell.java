@@ -51,6 +51,19 @@ public class ExcelStyleCell {
         return headerBlackCenter;
 	}
 		
+	public CellStyle getBlackBoldLeft() {
+		if (blackBoldLeft != null) {
+			return blackBoldLeft;
+		}
+		blackBoldLeft =  workbook.createCellStyle();
+        blackBoldLeft.setAlignment(HorizontalAlignment.LEFT);
+        blackBoldLeft.setVerticalAlignment(VerticalAlignment.CENTER);
+        blackBoldLeft.setWrapText(true);
+        blackBoldLeft.setFont(getHeaderFontBlack());
+        setAllBorder(blackBoldLeft, BorderStyle.THIN);
+        return blackBoldLeft;
+	}
+		
 	private Font getHeaderFontGreen() {
 		Font headerFontGreen = workbook.createFont();
         headerFontGreen.setBold(true);
