@@ -2,6 +2,7 @@ package com.vesmer.web.timontey.utilities;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -62,6 +63,19 @@ public class ExcelStyleCell {
         blackBoldLeft.setFont(getHeaderFontBlack());
         setAllBorder(blackBoldLeft, BorderStyle.THIN);
         return blackBoldLeft;
+	}
+		
+	public CellStyle getFillGreen() {
+		if (fillGreen != null) {
+			return fillGreen;
+		}
+		fillGreen = workbook.createCellStyle();
+        fillGreen.setAlignment(HorizontalAlignment.CENTER);
+        fillGreen.setVerticalAlignment(VerticalAlignment.CENTER);
+        fillGreen.setFillForegroundColor(IndexedColors.BRIGHT_GREEN.getIndex());
+        fillGreen.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        setAllBorder(fillGreen, BorderStyle.THIN);
+        return fillGreen;
 	}
 		
 	private Font getHeaderFontGreen() {
