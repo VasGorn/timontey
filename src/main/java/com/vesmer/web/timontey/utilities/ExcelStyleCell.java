@@ -78,6 +78,20 @@ public class ExcelStyleCell {
         return fillGreen;
 	}
 		
+	public CellStyle getFillGreenBold() {
+		if (fillGreenBold != null) {
+			return fillGreenBold;
+		}
+		fillGreenBold = workbook.createCellStyle();
+        fillGreenBold.setAlignment(HorizontalAlignment.CENTER);
+        fillGreenBold.setVerticalAlignment(VerticalAlignment.CENTER);
+        fillGreenBold.setFillForegroundColor(IndexedColors.BRIGHT_GREEN.getIndex());
+        fillGreenBold.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        fillGreenBold.setFont(getHeaderFontBlack());
+        setAllBorder(fillGreenBold, BorderStyle.THIN);
+        return fillGreenBold;
+	}
+		
 	private Font getHeaderFontGreen() {
 		Font headerFontGreen = workbook.createFont();
         headerFontGreen.setBold(true);
