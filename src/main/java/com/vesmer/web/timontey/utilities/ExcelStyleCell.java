@@ -91,6 +91,17 @@ public class ExcelStyleCell {
         setAllBorder(fillGreenBold, BorderStyle.THIN);
         return fillGreenBold;
 	}
+	
+	public CellStyle getBlackCenter() {
+		if (blackCenter != null) {
+			return blackCenter;
+		}
+		blackCenter =  workbook.createCellStyle();
+        blackCenter.setAlignment(HorizontalAlignment.CENTER);
+        blackCenter.setVerticalAlignment(VerticalAlignment.CENTER);
+        setAllBorder(blackCenter, BorderStyle.THIN);
+        return blackCenter;
+	}
 		
 	private Font getHeaderFontGreen() {
 		Font headerFontGreen = workbook.createFont();
@@ -106,17 +117,6 @@ public class ExcelStyleCell {
         headerFontBlack.setFontHeightInPoints((short) 12);
         headerFontBlack.setColor(IndexedColors.BLACK.getIndex());
         return headerFontBlack;
-	}
-		
-	public CellStyle getBlackCenter() {
-		if (blackCenter != null) {
-			return blackCenter;
-		}
-		blackCenter =  workbook.createCellStyle();
-        blackCenter.setAlignment(HorizontalAlignment.CENTER);
-        blackCenter.setVerticalAlignment(VerticalAlignment.CENTER);
-        setAllBorder(blackCenter, BorderStyle.THIN);
-        return blackCenter;
 	}
 		
 	private void setAllBorder(CellStyle cellStyle, BorderStyle borderStyle){
