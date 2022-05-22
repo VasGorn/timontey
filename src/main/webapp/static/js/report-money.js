@@ -16,3 +16,24 @@ var btnCreateReport = document.getElementById("btn_create_report");
 var ORDERS = [];
 
 var URL_REST_ORDER = "/timontey/rest/orders";
+
+setOrdersToSelect();
+
+function setOrdersToSelect(){
+	let managerId = hiddenManagerId.value;
+	
+	$.ajax({
+		type: "GET",
+		url: URL_REST_ORDER + "/" + managerId,
+		data: null,
+		success: function(orders) {
+			for(let i = 0; i < orders.length; ++i){
+				const opt = document.createElement("option");
+				opt.value = orders[i].id;
+				opt.innerHTML = orders[i].name;
+				selectOrder.appendChild(opt);
+			}
+			ORDERS = orders;
+		}
+	});
+}
