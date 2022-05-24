@@ -51,3 +51,14 @@ selectOrder.addEventListener("change", (event) => {
 	btnCreateReport.disabled = false;
 });
 
+function setOrderInfo(orderId){
+	let order;
+	for(let i = 0; i < ORDERS.length; ++i){
+		if(orderId === ORDERS[i].id){
+			order = ORDERS[i];
+			break;
+		}
+	}
+	txtDescription.value = order.description;
+	txtAddress.value = order.address;
+}
