@@ -43,3 +43,11 @@ function setSelectedMonth(){
 	const date = new Date();
 	selectMonth.value = date.getMonth();
 }
+
+selectOrder.addEventListener("change", (event) => {
+	let orderId = parseInt(event.target.value);
+	setOrderInfo(orderId);
+	txtFilename.value = getFilename();
+	btnCreateReport.disabled = false;
+});
+
