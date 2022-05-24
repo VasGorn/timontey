@@ -18,6 +18,7 @@ var ORDERS = [];
 var URL_REST_ORDER = "/timontey/rest/orders";
 
 setOrdersToSelect();
+setSelectedMonth();
 
 function setOrdersToSelect(){
 	let managerId = hiddenManagerId.value;
@@ -36,4 +37,9 @@ function setOrdersToSelect(){
 			ORDERS = orders;
 		}
 	});
+}
+
+function setSelectedMonth(){
+	const date = new Date();
+	selectMonth.value = date.getMonth();
 }
