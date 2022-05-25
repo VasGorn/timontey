@@ -62,3 +62,10 @@ function setOrderInfo(orderId){
 	txtDescription.value = order.description;
 	txtAddress.value = order.address;
 }
+
+function getFilename() {
+	let orderName = selectOrder.options[selectOrder.selectedIndex].text;
+	let year = selectYear.value;
+	let month = parseInt(selectMonth.value) + 1;  
+	return (orderName + '-' + year + '-' + month);
+}
