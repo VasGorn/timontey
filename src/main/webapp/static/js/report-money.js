@@ -65,6 +65,13 @@ selectMonth.addEventListener("change", (event) => {
 	txtFilename.value = getFilename();
 });
 
+function formSubmit(event) {
+	if (txtFilename.value.trim().length < 1) {
+		event.preventDefault();
+		alert("Enter file name!");
+	}
+}
+
 function setOrderInfo(orderId){
 	let order;
 	for(let i = 0; i < ORDERS.length; ++i){
