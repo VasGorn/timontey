@@ -51,6 +51,13 @@ selectOrder.addEventListener("change", (event) => {
 	btnCreateReport.disabled = false;
 });
 
+selectYear.addEventListener("change", (event) => {
+	if (selectOrder.value < 1){
+		return;
+	}
+	txtFilename.value = getFilename();
+});
+
 function setOrderInfo(orderId){
 	let order;
 	for(let i = 0; i < ORDERS.length; ++i){
