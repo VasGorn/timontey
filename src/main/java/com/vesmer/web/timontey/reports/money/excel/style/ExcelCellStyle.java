@@ -14,5 +14,12 @@ public abstract class ExcelCellStyle {
 		this.workbook = workbook;
 	}
 	
-	public abstract CellStyle cellStyle();
+	public CellStyle cellStyle() {
+		if(this.cachedStyle.isEmpty()) {
+			this.cachedStyle.add(createCellStyle()); 
+		}
+		return this.cachedStyle.get(0);
+	}
+
+	protected abstract CellStyle createCellStyle();
 }
