@@ -47,11 +47,9 @@ public class Employee {
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", middleName="
-				+ middleName + "]";
+		return lastName + ' ' + firstName + ' ' + middleName;
 	}
-
 }
