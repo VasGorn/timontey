@@ -10,12 +10,7 @@ public final class DefaultCellStyle extends ExcelCellStyle{
 	}
 
 	@Override
-	public CellStyle cellStyle() {
-		if(this.cachedStyle.isEmpty()) {
-			CellStyle main = this.workbook.createCellStyle();
-			this.cachedStyle.add(main);
-			return main;
-		}
-		return this.cachedStyle.get(0);
+	protected CellStyle createCellStyle() {
+		return this.workbook.createCellStyle();
 	}
 }
