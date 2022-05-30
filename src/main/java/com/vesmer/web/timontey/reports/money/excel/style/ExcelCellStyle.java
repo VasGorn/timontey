@@ -3,6 +3,7 @@ package com.vesmer.web.timontey.reports.money.excel.style;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -22,4 +23,12 @@ public abstract class ExcelCellStyle {
 	}
 
 	protected abstract CellStyle createCellStyle();
+		
+	protected void setAllBorder(CellStyle cellStyle, BorderStyle borderStyle){
+        cellStyle.setBorderBottom(borderStyle);
+        cellStyle.setBorderTop(borderStyle);
+        cellStyle.setBorderRight(borderStyle);
+        cellStyle.setBorderLeft(borderStyle);
+    }
+
 }
