@@ -17,26 +17,23 @@ import com.vesmer.web.timontey.reports.money.excel.style.ExcelCellStyle;
 import com.vesmer.web.timontey.reports.money.excel.style.GreenBackgroundCellStyle;
 
 public final class ExcelExpensesBaseImpl implements ExcelExpenses{
-	private final MoneySpend moneySpend;
 	private final ExcelCellStyle approveMoneyStyle;
 	private final ExcelCellStyle notApproveMoneyStyle;
 	private final ExcelCellStyle defaultStyle;
 	private final int rowStartIndex;
 	private final int columnStartIndex;
 	
-	public ExcelExpensesBaseImpl(Workbook workbook, MoneySpend moneySpend) {
-		this(moneySpend,
-				new GreenBackgroundCellStyle(workbook),
+	public ExcelExpensesBaseImpl(Workbook workbook) {
+		this(new GreenBackgroundCellStyle(workbook),
 				new DefaultCenterCellStyle(workbook),
 				new DefaultCellStyle(workbook),
 				8, 
 				0);
 	}
 
-	public ExcelExpensesBaseImpl(MoneySpend moneySpend, ExcelCellStyle approveMoneyStyle,
+	public ExcelExpensesBaseImpl(ExcelCellStyle approveMoneyStyle,
 			ExcelCellStyle notApproveMoneyStyle, ExcelCellStyle defaultStyle, 
 			int rowStartIndex, int columnStartIndex) {
-		this.moneySpend = moneySpend;
 		this.approveMoneyStyle = approveMoneyStyle;
 		this.notApproveMoneyStyle = notApproveMoneyStyle;
 		this.defaultStyle = defaultStyle;
@@ -45,7 +42,7 @@ public final class ExcelExpensesBaseImpl implements ExcelExpenses{
 	}
 
 	@Override
-	public void writeExpenses(Sheet sheet) {
+	public void writeExpenses(Sheet sheet, MoneySpend moneySpend) {
 		int rowNum = rowStartIndex;
 		Set<Short> daySet = moneySpend.getUniqueDays();
 		Set<Expenses> expensesSet = moneySpend.getUniqueExpense();

@@ -17,8 +17,6 @@ import com.vesmer.web.timontey.reports.money.excel.style.ExcelCellStyle;
 import com.vesmer.web.timontey.reports.money.excel.style.HeaderBlackCenterCellStyle;
 
 public final class ExcelTableHeaderBaseImpl implements ExcelTableHeader{
-	private final short year;
-	private final short numMonth;
 	private final ExcelCellStyle headerBlackCenter;
 	
 	private final int rowStartIndex;
@@ -26,22 +24,16 @@ public final class ExcelTableHeaderBaseImpl implements ExcelTableHeader{
 	private final int maxColumnWidth;
 	private final String expensesTitle;
 	
-	public ExcelTableHeaderBaseImpl(Workbook workbook, 
-			short year, short numMonth) {
-		this(year, 
-				numMonth, 
-				new HeaderBlackCenterCellStyle(workbook),
+	public ExcelTableHeaderBaseImpl(Workbook workbook) {
+		this(new HeaderBlackCenterCellStyle(workbook),
 				6,
 				1,
 				2000,
 				"Expenses");
 	}
 
-
-	public ExcelTableHeaderBaseImpl(short year, short numMonth, ExcelCellStyle headerBlackCenter, int rowStartIndex,
+	public ExcelTableHeaderBaseImpl(ExcelCellStyle headerBlackCenter, int rowStartIndex,
 			int columnStartIndex, int maxColumnWidth, String expensesTitle) {
-		this.year = year;
-		this.numMonth = numMonth;
 		this.headerBlackCenter = headerBlackCenter;
 		this.rowStartIndex = rowStartIndex;
 		this.columnStartIndex = columnStartIndex;
@@ -49,9 +41,8 @@ public final class ExcelTableHeaderBaseImpl implements ExcelTableHeader{
 		this.expensesTitle = expensesTitle;
 	}
 
-
 	@Override
-	public void writeTableHeader(Sheet sheet) {
+	public void writeTableHeader(Sheet sheet, short numMonth, short year) {
 		CellStyle cellStyle = headerBlackCenter.cellStyle();
 
        	int daysInMonth = getDaysInMonth(numMonth, year);
