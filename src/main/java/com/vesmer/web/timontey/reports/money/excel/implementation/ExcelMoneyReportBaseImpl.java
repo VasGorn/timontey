@@ -34,18 +34,20 @@ public final class ExcelMoneyReportBaseImpl implements ExcelMoneyReport {
 	@Override
 	public Workbook excelReport() {
 		List<MoneySpend> moneySpendList = reportMoney.getMoneySpendList();
+       	short numMonth = (short) (reportMoney.getNumMonth() + 1);
+       	short year = reportMoney.getYear();
         
         for(MoneySpend mSpend: moneySpendList) {
         	QuotaMoney quotaMoney = mSpend.getQuotaMoney();
-   	     	Sheet sheet = workbook.createSheet(quotaMoney.getEmployee().toString());
-
-   	     	excelOrderInformation.writeOrderInformation(sheet);
+        	String performerName = mSpend.getQuotaMoney().getEmployee().toString();
+   	     	Sheet sheet = workbook.createSheet(performerName);
+   	     	excelOrderInformation.writeOrderInformation(sheet, quotaMoney);
         	
         	if (mSpend.getMoneyExpenseList().size() < 1) {
         		continue;
         	}
-        	excelTableHeader.writeTableHeader(sheet);
-        	excelExpenses.writeExpenses(sheet);
+        	excelTableHeader.writeTableHeader(sheet, numMonth, year);
+        	excelExpenses.writeExpenses(sheet, mSpend);
         }
         
         return workbook;
