@@ -45,7 +45,7 @@ public final class ExcelOrderInformationBaseImpl implements ExcelOrderInformatio
 	public void writeOrderInformation(Sheet sheet, QuotaMoney quotaMoney) {
 		sheet.setColumnWidth(columnStartIndex, maxColumnWidth);
 		Map<String, String> headerMap = headerMap(quotaMoney);
-		int i = 1;
+		int i = 0;
 		for (Map.Entry<String, String> element : headerMap.entrySet()) {
 			Row row = sheet.createRow(rowStartIndex + i);
 			writeToCell(row, columnStartIndex, element.getKey(), headerStyle.cellStyle());
@@ -63,7 +63,7 @@ public final class ExcelOrderInformationBaseImpl implements ExcelOrderInformatio
 	private Map<String, String> headerMap(QuotaMoney quotaMoney) {
 		Map<String, String> headerMap = new LinkedHashMap<String, String>(4);
 		Order order = quotaMoney.getOrder();
-		headerMap.put("ORDER", order.toString());
+		headerMap.put("ORDER", order.getName());
 		headerMap.put("ADDRESS", order.getAddress());
 		headerMap.put("DESCRIPTION", order.getDescription());
 		headerMap.put("PERFORMER", quotaMoney.getEmployee().toString());
