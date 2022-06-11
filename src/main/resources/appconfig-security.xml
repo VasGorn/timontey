@@ -9,6 +9,7 @@
 		 https://www.springframework.org/schema/security/spring-security.xsd">
 		 
 	<http use-expressions="true">
+		<csrf disabled="true"/>
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/static/**" access="permitAll" />
 		<intercept-url pattern="/" access="isAuthenticated()" />
