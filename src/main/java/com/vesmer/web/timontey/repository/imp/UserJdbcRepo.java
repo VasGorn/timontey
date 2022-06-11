@@ -22,10 +22,10 @@ public class UserJdbcRepo implements UserRepository {
 	private static final String SELECT_BY_USERNAME_SQL =
 		"SELECT * FROM users WHERE username=?;";
 	private static final String INSERT_SQL = 
-		"INSERT INTO users (username, password, employee_id) "
-		+ "VALUES (?, ?, ?);";
+		"INSERT INTO users (username, password, employee_id, status) "
+		+ "VALUES (?, ?, ?, ?);";
 	private static final String UPDATE_SQL =
-		"UPDATE users SET password=?, employee_id=? WHERE username=?;";
+		"UPDATE users SET password=?, employee_id=?, status=? WHERE username=?;";
 	private static final String DELETE_SQL = 
 		"DELETE FROM users WHERE username=?;";
 
@@ -41,8 +41,9 @@ public class UserJdbcRepo implements UserRepository {
 		String username = user.getUsername();
 		long employeeId = user.getId();
 		String password = user.getPassword();
+		String status = user.getStatus().toString();
 		
-		jdbcTemplate.update(INSERT_SQL, username, password, employeeId);
+		jdbcTemplate.update(INSERT_SQL, username, password, employeeId, status);
 		
 		return user;
 	}
@@ -58,7 +59,8 @@ public class UserJdbcRepo implements UserRepository {
 
 	@Override
 	public int update(User user) {
-		return jdbcTemplate.update(UPDATE_SQL, user.getPassword(), user.getId(), user.getUsername());
+		return jdbcTemplate.update(UPDATE_SQL, user.getPassword(), 
+				user.getId(), user.getStatus(), user.getUsername());
 	}
 
 	@Override
