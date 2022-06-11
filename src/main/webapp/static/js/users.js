@@ -255,6 +255,9 @@ function createUserFromForm(){
 	user.password = password;
 	user.roles = getRoles();
 	
+	//TODO status from form
+	user.status = "ACTIVE";
+	
 	return user;
 }
 
