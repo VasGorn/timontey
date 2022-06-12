@@ -39,7 +39,7 @@
 
 		<hr>
 		
-		<div class="row">
+		<div class="row" style="padding-bottom: 10px;">
     		<div class="form-group col-md-6">
 				<label for="select_year" class="form-label">Year:</label>
 				<select class="form-select" id="select_year" name="year">
