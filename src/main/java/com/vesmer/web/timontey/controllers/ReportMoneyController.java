@@ -1,5 +1,6 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.security.Principal;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -17,23 +18,33 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.vesmer.web.timontey.domain.Employee;
 import com.vesmer.web.timontey.domain.ReportMoney;
+import com.vesmer.web.timontey.domain.User;
 import com.vesmer.web.timontey.service.ReportMoneyService;
 import com.vesmer.web.timontey.service.StaffService;
+import com.vesmer.web.timontey.service.UserService;
 
 @Controller
 @RequestMapping("/report-money")
 public class ReportMoneyController {
+	private final StaffService staffService;
+	private final UserService userService;
+	private final ReportMoneyService reportMoneyService;
+	
 	private static final int YEARS_RANGE = 2;
 	
 	@Autowired
-	private ReportMoneyService reportMoneyService;
-	
-	@Autowired
-	private StaffService staffService;
+	public ReportMoneyController(StaffService staffService, UserService userService,
+			ReportMoneyService reportMoneyService) {
+		this.staffService = staffService;
+		this.userService = userService;
+		this.reportMoneyService = reportMoneyService;
+	}
 
 	@RequestMapping("")
-	public ModelAndView getReportMoneyView() {
-		long managerId = 3;
+	public ModelAndView getReportMoneyView(Principal principal) {
+		User user = userService.getUserByUsername(principal.getName()).get();
+		long managerId = user.getId();
+
 		Employee manager = staffService.getEmployeeById(managerId).get();
 		String fullName = manager.getLastName() + " " + manager.getFirstName() 
 							+ " " + manager.getMiddleName();
@@ -48,7 +59,7 @@ public class ReportMoneyController {
 		model.addObject("months", months);
 		return model;
 	}
-		
+
 	@RequestMapping(value = "/excelReportMoney", method = RequestMethod.GET)
 	public ModelAndView getExcel(@RequestParam long orderId,
 			@RequestParam short year,

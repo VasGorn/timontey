@@ -1,22 +1,35 @@
 package com.vesmer.web.timontey.controllers;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vesmer.web.timontey.domain.User;
+import com.vesmer.web.timontey.service.UserService;
+
 @Controller
 public class WorkDayController {
+	private final UserService userService;
+
 	private final short DAYS = 4;
 	private final short WORK_HOURS = 8;
 	private final short OVERTIME = 12;
 	
+	@Autowired
+	public WorkDayController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@RequestMapping("/work-day")
-	public ModelAndView getWorkDayPage() {
-		long employeeId = 12;
+	public ModelAndView getWorkDayPage(Principal principal) {
+		User user = userService.getUserByUsername(principal.getName()).get();
+		long employeeId = user.getId();
 		
 		Calendar cal = Calendar.getInstance();
 		short year = (short) cal.get(Calendar.YEAR);
