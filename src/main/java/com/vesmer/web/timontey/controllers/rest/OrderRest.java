@@ -20,9 +20,13 @@ import com.vesmer.web.timontey.service.OrderService;
 @RestController
 @RequestMapping(path = "/rest/orders", produces = "application/json")
 public class OrderRest {
-	@Autowired 
-	private OrderService orderService;
+	private final OrderService orderService;
 	
+	@Autowired 
+	public OrderRest(OrderService orderService) {
+		this.orderService = orderService;
+	}
+
 	@GetMapping("/{manager_id}")
 	public List<Order> getOrders(@PathVariable("manager_id") long managerId) {
 		return orderService.getOrders(managerId);
@@ -43,5 +47,4 @@ public class OrderRest {
 	public void deleteOrder(@PathVariable("order_id") long orderId) {
 		orderService.delete(orderId);
 	}
-
 }
