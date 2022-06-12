@@ -2,7 +2,9 @@
 #### Web App for a Company That Provides Electrical Installation Services
 
 The purpose of this app is to simplify and automate the communication between managers, foreman and engineers. This process generates reports that are sent to the accounting department.  
-In this application, each user can have one or a combination of 4 roles: **ADMIN**, **MANAGER**, **ENGINEER** and **MASTER** (foreman).
+In this application, each user can have one or a combination of 4 roles: **ADMIN**, **MANAGER**, **ENGINEER** and **MASTER** (foreman).  
+
+Application are buid on top of the **Spring Framework**. The **Spring MVC** module is used to create the basis for the application's web architecture. The **Spring JDBC** module makes it easy to interact with a **PostgreSQL** database. Authentication and authorization is provided by **Spring Security**. The **Apache POI** library helps in creating Excel reports.
 
 ##### ADMIN
 The duties of the administrator include managing the company's employees (staff), creating a User with a nickname, password and role, as well as managing the list of provided services (work type) and the type of expenses.
