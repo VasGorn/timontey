@@ -39,19 +39,23 @@
 		</div>
 
 		<hr>
+		
+		<div class="row" style="padding-bottom: 10px;">
+    		<div class="form-group col-md-6">
+				<label for="select_role" class="form-label">Role:</label> <select
+					class="form-select" id="select_role">
+					<option selected disabled hidden value="0">Please select role...</option>
+				</select>
+    		</div>
+    		
+    		<div class="form-group col-md-6">
+				<label for="select_employee" class="form-label">Employee:</label> <select
+					class="form-select" id="select_employee">
+					<option value="0" selected disabled hidden>Please select employee...</option>
+				</select>
+    		</div>
+    	</div>	
 
-		<div class="mb-3">
-			<label for="select_role" class="form-label">Role:</label> <select
-				class="form-select" id="select_role">
-				<option selected disabled hidden value="0">Please select role...</option>
-			</select>
-		</div>
-		<div class="mb-3">
-			<label for="select_employee" class="form-label">Employee:</label> <select
-				class="form-select" id="select_employee">
-				<option value="0" selected disabled hidden>Please select employee...</option>
-			</select>
-		</div>
 		<div class="mb-3">
 			<label for="money_limit" class="form-label">Money limit: 
 			</label> <input type="number" name="stepTime" step="0.01" min="0.00"

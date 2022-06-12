@@ -39,48 +39,57 @@
 		</div>
 
 		<hr>
+		
+		<div class="row" style="padding-bottom: 10px;">
+    		<div class="form-group col-md-6">
+				<label for="select_role" class="form-label">Role:</label> <select
+					class="form-select" id="select_role">
+					<option selected disabled hidden value="0">Please select role...</option>
+				</select>
+    		</div>
+    		
+    		<div class="form-group col-md-6">
+				<label for="select_employee" class="form-label">Employee:</label> <select
+					class="form-select" id="select_employee" disabled>
+					<option value="0" selected disabled hidden>Please select employee...</option>
+				</select>
+    		</div>
+		</div>    		
 
-		<div class="mb-3">
-			<label for="select_role" class="form-label">Role:</label> <select
-				class="form-select" id="select_role">
-				<option selected disabled hidden value="0">Please select role...</option>
-			</select>
-		</div>
-		<div class="mb-3">
-			<label for="select_employee" class="form-label">Employee:</label> <select
-				class="form-select" id="select_employee" disabled>
-				<option value="0" selected disabled hidden>Please select employee...</option>
-			</select>
-		</div>
 		<div class="mb-3">
 			<label for="select_work_type" class="form-label">Work type:</label> <select
 				class="form-select" id="select_work_type" disabled>
 				<option value="0" selected disabled hidden>Please select work type...</option>
 			</select>
 		</div>
-		<div class="mb-3">
-			<label for="select_year" class="form-label">Year:</label> <select
-				class="form-select" id="select_year">
-				<c:forEach items="${years}" var="year">
-					<option value="${year}">${year}</option>
-				</c:forEach>
-			</select>
-		</div>
-		<div class="mb-3">
-			<label for="select_month" class="form-label">Month:</label> <select
-				class="form-select" id="select_month">
-				<c:forEach items="${months}" var="month">
-					<option value="${month.key}">${month.value}</option>
-				</c:forEach>
-			</select>
-		</div>
-
-		<div class="mb-3">
-			<label for="hours_limit" class="form-label">Time limit: 
-			</label> <input type="number" name="stepTime" step="1" min="0"
-				max="100000" value="100" class="form-control" id="hours_limit"
-				required>
-		</div>
+	
+		<div class="row" style="padding-bottom: 25px;">
+    		<div class="form-group col-md-4">
+				<label for="select_year" class="form-label">Year:</label> <select
+					class="form-select" id="select_year">
+					<c:forEach items="${years}" var="year">
+						<option value="${year}">${year}</option>
+					</c:forEach>
+				</select>
+    		</div>
+    		
+    		<div class="form-group col-md-4">
+				<label for="select_month" class="form-label">Month:</label> <select
+					class="form-select" id="select_month">
+					<c:forEach items="${months}" var="month">
+						<option value="${month.key}">${month.value}</option>
+					</c:forEach>
+				</select>
+    		</div>
+    		
+    		<div class="form-group col-md-4">
+				<label for="hours_limit" class="form-label">Time limit: 
+				</label> <input type="number" name="stepTime" step="1" min="0"
+					max="100000" value="100" class="form-control" id="hours_limit"
+					required>
+    		</div>
+ 
+  		</div>
 		
 		<button id="add" type="button" class="btn btn-success" disabled>Add</button>
 		<button id="update" type="button" class="btn btn-primary" disabled>Update</button>
