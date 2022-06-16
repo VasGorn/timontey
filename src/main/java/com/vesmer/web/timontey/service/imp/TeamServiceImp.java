@@ -10,8 +10,13 @@ import com.vesmer.web.timontey.service.TeamService;
 
 @Service
 public class TeamServiceImp implements TeamService {
+	private final TeamRepository teamRepository;
+
 	@Autowired
-	private TeamRepository teamRepository;
+	public TeamServiceImp(TeamRepository teamRepository) {
+		super();
+		this.teamRepository = teamRepository;
+	}
 
 	@Override
 	public Team getTeam(long performerId) {

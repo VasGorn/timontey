@@ -14,12 +14,15 @@ import com.vesmer.web.timontey.service.NavigationLinkService;
 @Service
 @Transactional
 public class NavigationLinkServiceImp implements NavigationLinkService {
+	private final NavigationLinkRepository navigationLinkRepository;
+
 	@Autowired
-	private NavigationLinkRepository navigationLinkRepository;
+	public NavigationLinkServiceImp(NavigationLinkRepository navigationLinkRepository) {
+		this.navigationLinkRepository = navigationLinkRepository;
+	}
 
 	@Override
 	public List<NavigationLink> getNavigationByRole(Role role) {
 		return navigationLinkRepository.getNavigationByRole(role);
 	}
-
 }

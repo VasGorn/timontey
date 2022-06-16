@@ -13,8 +13,12 @@ import com.vesmer.web.timontey.domain.User;
 import com.vesmer.web.timontey.service.UserService;
 
 public class UserDetailsServiceImp implements UserDetailsService{
+	private final UserService userService;
+
 	@Autowired
-	private UserService userService;
+	public UserDetailsServiceImp(UserService userService) {
+		this.userService = userService;
+	}
 
 	@Override
 	@Transactional(readOnly = true)

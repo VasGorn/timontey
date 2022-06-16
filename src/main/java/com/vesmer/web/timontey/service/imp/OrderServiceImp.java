@@ -16,11 +16,14 @@ import com.vesmer.web.timontey.service.OrderService;
 @Service
 @Transactional
 public class OrderServiceImp implements OrderService {
+	private final OrderRepository orderRepository;
+	private final StaffRepository staffRepository;
+
 	@Autowired
-	private OrderRepository orderRepository;
-	
-	@Autowired
-	private StaffRepository staffRepository;
+	public OrderServiceImp(OrderRepository orderRepository, StaffRepository staffRepository) {
+		this.orderRepository = orderRepository;
+		this.staffRepository = staffRepository;
+	}
 
 	@Override
 	public List<Order> getOrders(long managerId) {
@@ -55,5 +58,4 @@ public class OrderServiceImp implements OrderService {
 			System.out.println("Data not found: " + e.getMessage());
 		}
 	}
-
 }

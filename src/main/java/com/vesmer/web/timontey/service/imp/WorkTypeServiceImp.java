@@ -14,8 +14,12 @@ import com.vesmer.web.timontey.service.WorkTypeService;
 @Service
 @Transactional
 public class WorkTypeServiceImp implements WorkTypeService {
+	private final WorkTypeRepository workTypeRepository;
+
 	@Autowired
-	private WorkTypeRepository workTypeRepository;
+	public WorkTypeServiceImp(WorkTypeRepository workTypeRepository) {
+		this.workTypeRepository = workTypeRepository;
+	}
 
 	@Override
 	public List<WorkType> getWorkTypesByRole(long roleId) {
@@ -44,5 +48,4 @@ public class WorkTypeServiceImp implements WorkTypeService {
 		workTypeRepository.update(workType);
 		return workType;
 	}
-
 }

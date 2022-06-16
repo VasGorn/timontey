@@ -22,17 +22,19 @@ import com.vesmer.web.timontey.service.WorkDayService;
 @Service
 @Transactional
 public class WorkDayServiceImp implements WorkDayService {
-	@Autowired
-	private WorkDayRepository workDayRepository;
-		
-	@Autowired
-	private QuotaTimeRepository quotaTimeRepository;
+	private final WorkDayRepository workDayRepository;
+	private final QuotaTimeRepository quotaTimeRepository;
+	private final WorkTypeRepository workTypeRepository;
+	private final StaffRepository staffRepository;
 
 	@Autowired
-	private WorkTypeRepository workTypeRepository;
-	
-	@Autowired
-	private StaffRepository staffRepository;
+	public WorkDayServiceImp(WorkDayRepository workDayRepository, QuotaTimeRepository quotaTimeRepository,
+			WorkTypeRepository workTypeRepository, StaffRepository staffRepository) {
+		this.workDayRepository = workDayRepository;
+		this.quotaTimeRepository = quotaTimeRepository;
+		this.workTypeRepository = workTypeRepository;
+		this.staffRepository = staffRepository;
+	}
 
 	@Override
 	public List<HoursSpend> getWorkTypeTimeSpend(long masterId, short numMonth, short year) {

@@ -20,17 +20,19 @@ import com.vesmer.web.timontey.service.UserService;
 @Service
 @Transactional
 public class UserSeviceImp implements UserService {
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
+	private final StaffRepository staffRepository;
+	private final RoleRepository roleRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	private StaffRepository staffRepository;
-
-	@Autowired
-	private RoleRepository roleRepository;
-		
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	public UserSeviceImp(UserRepository userRepository, StaffRepository staffRepository, RoleRepository roleRepository,
+			BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.userRepository = userRepository;
+		this.staffRepository = staffRepository;
+		this.roleRepository = roleRepository;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	@Override
 	public List<User> getAll() {

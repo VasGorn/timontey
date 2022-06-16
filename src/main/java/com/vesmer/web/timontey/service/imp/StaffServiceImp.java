@@ -15,8 +15,12 @@ import com.vesmer.web.timontey.service.StaffService;
 @Service
 @Transactional
 public class StaffServiceImp implements StaffService {
+	private final StaffRepository staffRepository;
+
 	@Autowired
-	private StaffRepository staffRepository;
+	public StaffServiceImp(StaffRepository staffRepository) {
+		this.staffRepository = staffRepository;
+	}
 
 	@Override
 	public List<Employee> getAll() {
@@ -54,5 +58,4 @@ public class StaffServiceImp implements StaffService {
 	public Optional<Employee> getEmployeeById(long id) {
 		return staffRepository.findById(id);
 	}
-
 }

@@ -19,8 +19,12 @@ import com.vesmer.web.timontey.service.SpendMoneyService;
 @Service
 @Transactional
 public class ReportMoneyServiceImp implements ReportMoneyService {
+	private final SpendMoneyService spendMoneyService;
+
 	@Autowired
-	private SpendMoneyService spendMoneyService;
+	public ReportMoneyServiceImp(SpendMoneyService spendMoneyService) {
+		this.spendMoneyService = spendMoneyService;
+	}
 
 	@Override
 	public ReportMoney getReportMoney(long orderId, short year, short numMonth) {

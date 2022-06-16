@@ -24,17 +24,19 @@ import com.vesmer.web.timontey.service.QuotaTimeService;
 @Service
 @Transactional
 public class QuotaTimeServiceImp implements QuotaTimeService {
-	@Autowired
-	private QuotaTimeRepository quotaTimeRepository;
+	private final QuotaTimeRepository quotaTimeRepository;
+	private final StaffRepository staffRepository;
+	private final OrderRepository orderRepository;
+	private final WorkTypeRepository workTypeRepository;
 	
 	@Autowired
-	private StaffRepository staffRepository;
-	
-	@Autowired
-	private OrderRepository orderRepository;
-	
-	@Autowired
-	private WorkTypeRepository workTypeRepository;
+	public QuotaTimeServiceImp(QuotaTimeRepository quotaTimeRepository, StaffRepository staffRepository,
+			OrderRepository orderRepository, WorkTypeRepository workTypeRepository) {
+		this.quotaTimeRepository = quotaTimeRepository;
+		this.staffRepository = staffRepository;
+		this.orderRepository = orderRepository;
+		this.workTypeRepository = workTypeRepository;
+	}
 
 	@Override
 	public List<QuotaTime> getQuotaTimeListForOrder(long orderId, short numMonth, 
@@ -122,5 +124,4 @@ public class QuotaTimeServiceImp implements QuotaTimeService {
 			workHours.setWorkType(workType);
 		}
 	}
-
 }

@@ -13,12 +13,15 @@ import com.vesmer.web.timontey.service.RoleService;
 @Service
 @Transactional
 public class RoleServiceImp implements RoleService {
+	private final RoleRepository roleRepository;
+
 	@Autowired
-	private RoleRepository roleRepository;
+	public RoleServiceImp(RoleRepository roleRepository) {
+		this.roleRepository = roleRepository;
+	}
 
 	@Override
 	public List<Role> getAll() {
 		return roleRepository.getAll();
 	}
-
 }

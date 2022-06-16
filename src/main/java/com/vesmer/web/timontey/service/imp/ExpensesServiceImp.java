@@ -15,8 +15,12 @@ import com.vesmer.web.timontey.service.ExpensesService;
 @Service
 @Transactional
 public class ExpensesServiceImp implements ExpensesService {
+	private final ExpensesRepository expensesRepository;
+	
 	@Autowired
-	private ExpensesRepository expensesRepository;
+	public ExpensesServiceImp(ExpensesRepository expensesRepository) {
+		this.expensesRepository = expensesRepository;
+	}
 
 	@Override
 	public List<Expenses> getAll() {
@@ -49,5 +53,4 @@ public class ExpensesServiceImp implements ExpensesService {
 			System.out.println("Delete failing" + ex.getMessage());
 		}
 	}
-
 }

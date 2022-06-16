@@ -19,14 +19,17 @@ import com.vesmer.web.timontey.service.QuotaMoneyService;
 @Service
 @Transactional
 public class QuotaMoneyServiceImp implements QuotaMoneyService{
-	@Autowired
-	private QuotaMoneyRepository quotaMoneyRepository;
+	private final QuotaMoneyRepository quotaMoneyRepository;
+	private final StaffRepository staffRepository;
+	private final OrderRepository orderRepository;
 	
 	@Autowired
-	private StaffRepository staffRepository;
-	
-	@Autowired
-	private OrderRepository orderRepository;
+	public QuotaMoneyServiceImp(QuotaMoneyRepository quotaMoneyRepository, StaffRepository staffRepository,
+			OrderRepository orderRepository) {
+		this.quotaMoneyRepository = quotaMoneyRepository;
+		this.staffRepository = staffRepository;
+		this.orderRepository = orderRepository;
+	}
 
 	@Override
 	public List<QuotaMoney> getQuotaMoneysForManager(long managerId) {
@@ -89,6 +92,4 @@ public class QuotaMoneyServiceImp implements QuotaMoneyService{
 		}
 		return opt;
 	}
-	
-
 }

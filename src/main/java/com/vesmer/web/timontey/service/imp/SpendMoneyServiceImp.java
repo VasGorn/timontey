@@ -20,14 +20,17 @@ import com.vesmer.web.timontey.service.SpendMoneyService;
 @Service
 @Transactional
 public class SpendMoneyServiceImp implements SpendMoneyService {
-	@Autowired
-	private SpendMoneyRepository spendMoneyRepository;
+	private final SpendMoneyRepository spendMoneyRepository;
+	private final QuotaMoneyService quotaMoneyService;
+	private final ExpensesRepository expensesRepository;
 
 	@Autowired
-	private QuotaMoneyService quotaMoneyService;
-
-	@Autowired
-	private ExpensesRepository expensesRepository;
+	public SpendMoneyServiceImp(SpendMoneyRepository spendMoneyRepository, QuotaMoneyService quotaMoneyService,
+			ExpensesRepository expensesRepository) {
+		this.spendMoneyRepository = spendMoneyRepository;
+		this.quotaMoneyService = quotaMoneyService;
+		this.expensesRepository = expensesRepository;
+	}
 
 	@Override
 	public List<MoneySpend> getMoneySpendListForEmployee(long employeeId) {
