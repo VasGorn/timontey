@@ -19,8 +19,12 @@ import com.vesmer.web.timontey.rowmapper.OrderRowMapper;
 
 @Repository
 public class OrderJdbcRepo implements OrderRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	public OrderJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	private static final String SELECT_ALL_SQL	= 
 			"SELECT * FROM orders WHERE manager_id=?;";
@@ -86,5 +90,4 @@ public class OrderJdbcRepo implements OrderRepository {
 			return Optional.empty();
 		}
 	}
-
 }

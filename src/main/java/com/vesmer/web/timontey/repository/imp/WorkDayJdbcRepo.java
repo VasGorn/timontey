@@ -22,11 +22,15 @@ import com.vesmer.web.timontey.rowmapper.WorkDayRowMapper;
 @Repository
 public class WorkDayJdbcRepo implements WorkDayRepository{
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
+	private final QuotaTimeRepository quotaTimeRepository;
 	
-	@Autowired
-	private QuotaTimeRepository quotaTimeRepository;
-	
+	public WorkDayJdbcRepo(JdbcTemplate jdbcTemplate, 
+			QuotaTimeRepository quotaTimeRepository) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.quotaTimeRepository = quotaTimeRepository;
+	}
+
 	private static final String SELECT_WORK_DAY_SQL =
 		"SELECT * FROM work_day WHERE worktype_quota_id = ?;";
 	private static final String INSERT_WORK_DAY_SQL = 

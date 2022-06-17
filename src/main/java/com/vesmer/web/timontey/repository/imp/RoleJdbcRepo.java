@@ -15,11 +15,14 @@ import com.vesmer.web.timontey.rowmapper.RoleRowMapper;
 
 @Repository
 public class RoleJdbcRepo implements RoleRepository {
+	private final JdbcTemplate jdbcTemplate;
+	private final AuthorityRepository authorityRepository;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	private AuthorityRepository authorityRepository;
+	public RoleJdbcRepo(JdbcTemplate jdbcTemplate, AuthorityRepository authorityRepository) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.authorityRepository = authorityRepository;
+	}
 
 	private static final String SELECT_ALL_SQL	= "SELECT * FROM roles;";
 	private static final String SELECT_ROLES_FOR_USER_SQL =

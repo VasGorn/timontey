@@ -19,9 +19,13 @@ import com.vesmer.web.timontey.rowmapper.EmployeeRowMapper;
 
 @Repository
 public class StaffJdbcRepo implements StaffRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	public StaffJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_ALL_SQL	= "SELECT * FROM staff;";
 	private static final String INSERT_SQL		= "INSERT INTO staff (last_name, first_name, middle_name) "
 												   + "VALUES (?, ?, ?);";
@@ -99,5 +103,4 @@ public class StaffJdbcRepo implements StaffRepository {
 			return Optional.empty();
 		}
 	}
-
 }

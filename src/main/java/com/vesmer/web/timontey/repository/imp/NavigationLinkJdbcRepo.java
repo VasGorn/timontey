@@ -13,9 +13,13 @@ import com.vesmer.web.timontey.rowmapper.NavigationLinkRowMapper;
 
 @Repository
 public class NavigationLinkJdbcRepo implements NavigationLinkRepository{
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-		
+	public NavigationLinkJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_NAVIGATION_BY_ROLE_SQL = 
 		"SELECT n.id, n.name, n.url, n.icon "
 		+ "FROM navigation_link AS n, role_navigation AS rn, roles AS r "

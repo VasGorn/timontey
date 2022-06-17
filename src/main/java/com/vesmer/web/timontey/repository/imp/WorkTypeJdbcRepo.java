@@ -18,9 +18,13 @@ import com.vesmer.web.timontey.rowmapper.WorkTypeRowMapper;
 
 @Repository
 public class WorkTypeJdbcRepo implements WorkTypeRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	public WorkTypeJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_WORKTYPE_BY_ROLE_ID_SQL	= "SELECT w.id, w.work_name "
 																+ "FROM work_types AS w, "
 																+ "roles AS r, "
@@ -92,5 +96,4 @@ public class WorkTypeJdbcRepo implements WorkTypeRepository {
 	public int update(WorkType workType) {
 		return jdbcTemplate.update(UPDATE_SQL, workType.getWorkTypeName(), workType.getId());
 	}
-
 }

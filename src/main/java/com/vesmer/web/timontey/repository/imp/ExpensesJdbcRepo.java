@@ -19,8 +19,12 @@ import com.vesmer.web.timontey.rowmapper.ExpensesRowMapper;
 
 @Repository
 public class ExpensesJdbcRepo implements ExpensesRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	public ExpensesJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	private static final String SELECT_ALL_SQL	= "SELECT * FROM expenses;";
 	private static final String INSERT_SQL		= "INSERT INTO expenses (name) VALUES "
@@ -80,5 +84,4 @@ public class ExpensesJdbcRepo implements ExpensesRepository {
 	public int delete(Long id) {
 		return jdbcTemplate.update(DELETE_SQL, id);
 	}
-
 }

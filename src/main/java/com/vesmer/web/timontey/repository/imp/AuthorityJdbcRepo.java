@@ -13,9 +13,13 @@ import com.vesmer.web.timontey.rowmapper.AuthorityRowMapper;
 
 @Repository
 public class AuthorityJdbcRepo implements AuthorityRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	public AuthorityJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_BY_ROLE_SQL	= 
 		"SELECT a.id, a.name FROM authorities AS a, roles AS r, role_authorities AS ra"
 		+ " WHERE a.id = ra.authorities_id AND r.id = ra.role_id"

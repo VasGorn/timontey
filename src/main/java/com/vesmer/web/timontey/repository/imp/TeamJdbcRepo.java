@@ -14,12 +14,15 @@ import com.vesmer.web.timontey.rowmapper.EmployeeRowMapper;
 
 @Repository
 public class TeamJdbcRepo implements TeamRepository {
+	private final JdbcTemplate jdbcTemplate;
+	private final StaffRepository staffRepository;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-		
-	@Autowired
-	private StaffRepository staffRepository;
-	
+	public TeamJdbcRepo(JdbcTemplate jdbcTemplate, StaffRepository staffRepository) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.staffRepository = staffRepository;
+	}
+
 	private static final String SELECT_EMPLOYEES_BY_MASTER_ID_SQL = 
 		"SELECT s.id, s.last_name, s.first_name, s.middle_name "
 		+ "FROM staff AS s, master_employees AS me "

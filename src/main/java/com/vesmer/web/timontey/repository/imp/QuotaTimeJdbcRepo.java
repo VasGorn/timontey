@@ -20,9 +20,13 @@ import com.vesmer.web.timontey.rowmapper.WorkTypeHoursRowMapper;
 
 @Repository
 public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	public QuotaTimeJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_QUOTA_TIME_LIST_FOR_ORDER_SQL =
 		"SELECT * FROM quota_time WHERE order_id=? AND year=?;";
 	private static final String SELECT_WORKTYPE_HOURS_LIST_SQL =
@@ -203,5 +207,4 @@ public class QuotaTimeJdbcRepo implements QuotaTimeRepository{
 				workHours.getWorkType().getId(), workHours.getNumMonth(),
 				workHours.getHours(), workHours.getId());
 	}
-
 }

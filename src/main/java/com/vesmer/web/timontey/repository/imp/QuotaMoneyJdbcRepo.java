@@ -18,9 +18,13 @@ import com.vesmer.web.timontey.rowmapper.QuotaMoneyRowMapper;
 
 @Repository
 public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	public QuotaMoneyJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_QUOTA_MONEY_BY_MANAGER_ID_SQL = 
 		"SELECT q.id, q.order_id, q.employee_id, "
 		+ "q.money_limit FROM quota_money AS q, "
@@ -105,5 +109,4 @@ public class QuotaMoneyJdbcRepo implements QuotaMoneyRepository {
 		return jdbcTemplate.query(SELECT_QUOTA_MONEY_BY_ORDER_ID_SQL,
 				new QuotaMoneyRowMapper(), orderId);
 	}
-
 }

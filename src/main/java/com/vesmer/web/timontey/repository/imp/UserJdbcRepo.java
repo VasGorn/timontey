@@ -14,9 +14,13 @@ import com.vesmer.web.timontey.rowmapper.UserRowMapper;
 
 @Repository
 public class UserJdbcRepo implements UserRepository {
+	private final JdbcTemplate jdbcTemplate;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
+	public UserJdbcRepo(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private static final String SELECT_ALL_SQL =
 		"SELECT * FROM users;";
 	private static final String SELECT_BY_USERNAME_SQL =
@@ -67,5 +71,4 @@ public class UserJdbcRepo implements UserRepository {
 	public int delete(String username) {
 		return jdbcTemplate.update(DELETE_SQL, username);
 	}
-
 }

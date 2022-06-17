@@ -22,11 +22,14 @@ import com.vesmer.web.timontey.rowmapper.MoneySpendExpenseRowMapper;
 
 @Repository
 public class SpendMoneyJdbcRepo implements SpendMoneyRepository{
+	private final JdbcTemplate jdbcTemplate;
+	private final QuotaMoneyRepository quotaMoneyRepository;
+
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	private QuotaMoneyRepository quotaMoneyRepository;
+	public SpendMoneyJdbcRepo(JdbcTemplate jdbcTemplate, QuotaMoneyRepository quotaMoneyRepository) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.quotaMoneyRepository = quotaMoneyRepository;
+	}
 	
 	private static final String SELECT_MONEY_EXPENSE_BY_QUOTA_ID_SQL =
 		"SELECT * FROM spend_money WHERE quota_money_id = ?;";
