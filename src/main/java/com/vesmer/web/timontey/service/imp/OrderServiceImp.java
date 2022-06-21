@@ -29,9 +29,6 @@ public class OrderServiceImp implements OrderService {
 	public List<Order> getOrders(long managerId) {
 		Employee manager = staffRepository.findById(managerId).get();
 		List<Order> orderList = orderRepository.getOrders(manager);
-		for(Order order: orderList) {
-			order.setManager(manager);
-		}
 		return orderList;
 	}
 

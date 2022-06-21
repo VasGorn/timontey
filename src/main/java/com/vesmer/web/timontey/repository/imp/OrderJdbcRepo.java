@@ -42,6 +42,9 @@ public class OrderJdbcRepo implements OrderRepository {
 	public List<Order> getOrders(Employee manager) {
 		List<Order> orderList = jdbcTemplate.query(SELECT_ALL_SQL,
 				new OrderRowMapper(), manager.getId());
+		for(Order o: orderList) {
+			o.setManager(manager);
+		}
 		return orderList;
 	}
 
